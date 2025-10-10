@@ -21,3 +21,16 @@ export const fetchTopRatedMovies = async (page = 1) => {
         console.error('Top Rated Movies API 호출 실패:', err);
     }
 };
+
+// Popular
+export const fetchPopularMovies = async (page = 1) => {
+    const url = `${BASE_URL}/movie/popular?language=ko&page=${page}`;
+    try {
+        const res = await fetch(url, options);
+        const data = await res.json();
+
+        return data.results;
+    } catch (err) {
+        console.error('Popular Movies API 호출 실패:', err);
+    }
+};

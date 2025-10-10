@@ -12,7 +12,7 @@ const Main = () => {
                 const movies = await fetchTopRatedMovies();
                 setMovies(movies);
             } catch (err) {
-                console.error('영화 데이터 불러오기 실패', err);
+                console.error('Top Rated 영화 데이터 불러오기 실패', err);
             }
         };
         fetchData();
