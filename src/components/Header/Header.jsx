@@ -1,6 +1,7 @@
 import './Header.css';
 
-import hamburger from '../../assets/hamburger.svg';
+import HamburgerMenu from '../../assets/hamburger-menu.svg';
+import SearchBox from './SearchBox';
 import { useState } from 'react';
 
 const Header = () => {
@@ -11,7 +12,7 @@ const Header = () => {
             <div className="header-bar">
                 <nav className="nav">
                     <button className="menu-btn" onClick={() => setMenuOpen((isOpen) => !isOpen)}>
-                        <img src={hamburger} alt="메뉴" />
+                        <img src={HamburgerMenu} alt="메뉴 버튼" />
                     </button>
 
                     <ul className={`menu-list ${menuOpen ? 'open' : ''}`}>
@@ -31,7 +32,7 @@ const Header = () => {
                     <div>ReelYoon</div>
                 </a>
 
-                <div className="search-box">search</div>
+                <SearchBox />
             </div>
 
             <div className="header-slider">{/* Popular 영화 몇 개 슬라이드 */}</div>
