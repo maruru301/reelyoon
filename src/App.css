@@ -3,9 +3,21 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
 :root {
+    --bg-color: rgb(10, 10, 10);
+    --bg-color-80: rgba(10, 10, 10, 0.8);
+    --bg-color-50: rgba(10, 10, 10, 0.5);
+    --bg-color-30: rgba(10, 10, 10, 0.3);
+
     --font-title: 'Do Hyeon', sans-serif;
     --font-body: 'Pretendard', 'Noto Sans KR', sans-serif;
-    --primary-gradient: linear-gradient(to right, rgba(30, 213, 169, 1), rgba(1, 180, 228, 1));
+
+    --color-primary-start-rgb: 30, 213, 169;
+    --color-primary-end-rgb: 1, 180, 228;
+    --primary-gradient: linear-gradient(
+        to right,
+        rgba(var(--color-primary-start-rgb), 1),
+        rgba(var(--color-primary-end-rgb), 1)
+    );
 }
 
 .gradient-text {
