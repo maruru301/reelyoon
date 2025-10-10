@@ -1,1 +1,14 @@
-/* 앱 전체에 적용되는 전역 스타일 */
+/* 글초기화 + 기본 HTML 스타일 */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0a0a0a;
+    color: white;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
