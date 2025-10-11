@@ -1,3 +1,5 @@
+import './HeaderBar.css';
+
 import NavMenu from './NavMenu';
 import SearchBox from './SearchBox';
 

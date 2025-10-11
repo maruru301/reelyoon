@@ -1,14 +1,14 @@
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import './HeaderSlider.css';
 
 import { Autoplay, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { fetchMovieDetails, fetchPopularMovies } from '../../api/tmdb';
 import { useEffect, useState } from 'react';
 
-import PlayBtn from '../../assets/play-btn.svg';
-import Star from '../../assets/star.svg';
+import BannerSlide from './BannerSlide';
 
 const HeaderSlider = () => {
     const [movies, setMovies] = useState([]);
@@ -25,7 +25,6 @@ const HeaderSlider = () => {
                         return { ...movie, ...details };
                     })
                 );
-                console.log(movieDetails);
 
                 setMovies(movieDetails);
             } catch (err) {
@@ -39,7 +38,7 @@ const HeaderSlider = () => {
         <div className="header-slider">
             {movies.length > 0 && (
                 <Swiper
-                    className="swiper"
+                    className="header-swiper"
                     key={movies.length}
                     slidesPerView={1}
                     loop={true}
@@ -48,30 +47,12 @@ const HeaderSlider = () => {
                     modules={[Autoplay, Pagination]}
                     centeredSlides={true}
                     allowTouchMove={false}
+                    observer={true}
+                    observeParents={true}
                 >
                     {movies.map((movie) => (
-                        <SwiperSlide className="swiper-slide" key={movie.id}>
-                            <img src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`} alt={movie.title} />
-                            <div className="overlay">
-                                <div className="movie-info">
-                                    <h2 className="gradient-text">{movie.title}</h2>
-                                    <div className="movie-stats">
-                                        <div className="vote-average">
-                                            <img src={Star} alt="별 아이콘" />
-                                            <span>{movie.vote_average.toFixed(1)}</span>
-                                        </div>
-                                        <div>{movie.runtime}분</div>
-                                        <div>{movie.release_date.slice(0, 4)}</div>
-                                        <div>{movie.genres.map((g) => `${g.name} `)}</div>
-                                    </div>
-                                    <p>{movie.overview}</p>
-
-                                    <button className="play-btn">
-                                        <img src={PlayBtn} alt="재생 버튼" />
-                                        <span>Play</span>
-                                    </button>
-                                </div>
-                            </div>
+                        <SwiperSlide className="header-swiper-slide" key={movie.id}>
+                            <BannerSlide movie={movie} />
                         </SwiperSlide>
                     ))}
                 </Swiper>
