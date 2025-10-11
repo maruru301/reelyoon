@@ -16,18 +16,23 @@
 }
 
 /* BannerSlide */
-.header-swiper-slide img {
+.banner-img-container {
+    display: flex;
+    position: relative;
     width: 100%;
+    aspect-ratio: 3 / 5;
+    overflow: hidden;
+}
+
+.banner-img-container img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    height: 850px;
 }
 
 .header-swiper-slide .overlay {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background-color: var(--bg-color-50);
     font-family: var(--font-body);
 }
@@ -48,7 +53,7 @@
 }
 
 .movie-info h2 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 900;
     text-shadow: -2px -2px white;
 }
@@ -81,7 +86,7 @@
 }
 
 .movie-info .play-btn {
-    width: 100%;
+    width: 6rem;
     background: var(--primary-gradient);
     padding: 0.5rem 1.2rem;
     border: none;
@@ -97,7 +102,7 @@
     font-weight: 700;
     color: inherit;
 
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease;
 }
 
 .movie-info .play-btn:hover {
@@ -107,4 +112,54 @@
 .movie-info .play-btn img {
     width: 20px;
     height: 20px;
+}
+
+@media (min-width: 40rem) {
+    .banner-img-container {
+        aspect-ratio: 4 / 5;
+    }
+
+    .overlay .movie-info {
+        padding: 3rem;
+        padding-bottom: 6rem;
+    }
+
+    .movie-info p {
+        width: 80%;
+    }
+
+    .movie-info h2 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (min-width: 48rem) {
+    .banner-img-container {
+        aspect-ratio: 1;
+    }
+
+    .overlay .movie-info {
+        padding: 6rem;
+        padding-bottom: 6rem;
+    }
+
+    .movie-info p {
+        width: 70%;
+    }
+}
+
+@media (min-width: 64rem) {
+    .banner-img-container {
+        aspect-ratio: 16 / 9;
+    }
+
+    .overlay .movie-info {
+        padding: 10rem;
+        padding-bottom: 6rem;
+    }
+
+    .movie-info h2 {
+        font-size: 3rem;
+        text-shadow: -2.5px -2.5px white;
+    }
 }

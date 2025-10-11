@@ -39,16 +39,14 @@ const HeaderSlider = () => {
             {movies.length > 0 && (
                 <Swiper
                     className="header-swiper"
-                    key={movies.length}
+                    spaceBetween={0}
                     slidesPerView={1}
                     loop={true}
+                    centeredSlides={false}
                     autoplay={{ delay: 3000, disableOnInteraction: false }}
                     pagination={{ clickable: true }}
                     modules={[Autoplay, Pagination]}
-                    centeredSlides={true}
                     allowTouchMove={false}
-                    observer={true}
-                    observeParents={true}
                 >
                     {movies.map((movie) => (
                         <SwiperSlide className="header-swiper-slide" key={movie.id}>
