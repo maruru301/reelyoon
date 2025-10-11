@@ -1,3 +1,5 @@
+import './Main.css';
+
 import { useEffect, useState } from 'react';
 
 import ContentList from './ContentList';
@@ -19,9 +21,8 @@ const Main = () => {
     }, []);
 
     return (
-        <main>
-            <h2>Main</h2>
-            <ContentList contents={movies} />
+        <main className="main">
+            <ContentList title="Top Rated Movies" contents={movies} />
         </main>
     );
 };

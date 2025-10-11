@@ -1,13 +1,11 @@
 const ContentCard = ({ content }) => {
-    const posterUrl = `https://image.tmdb.org/t/p/w200${content.backdrop_path}`;
+    const posterUrl = `https://image.tmdb.org/t/p/original${content.poster_path}`;
 
     return (
-        <li>
+        <div className="content-card">
             <h3>{content.title}</h3>
-            <div>
-                <img src={posterUrl} alt="" style={{ width: '500px', height: '300px' }} />
-            </div>
-        </li>
+            <img src={posterUrl} alt={content.title} />
+        </div>
     );
 };
 
