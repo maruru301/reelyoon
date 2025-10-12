@@ -64,17 +64,6 @@
     gap: 0.8rem;
 }
 
-.movie-stats .vote-average {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-}
-
-.movie-stats .vote-average img {
-    width: 16px;
-    height: 16px;
-}
-
 .movie-info p {
     width: 100%;
     line-height: 1.2rem;

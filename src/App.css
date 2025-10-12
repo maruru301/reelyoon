@@ -37,3 +37,15 @@
     opacity: 0;
     transition: opacity 0.3s ease;
 }
+
+/* 평점 */
+.vote-average {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.vote-average img {
+    width: 16px;
+    height: 16px;
+}
