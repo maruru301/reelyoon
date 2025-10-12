@@ -54,6 +54,20 @@ const ContentList = ({ title, contents, showTimeWindow = false, timeWindow, setT
                 spaceBetween={30}
                 modules={[Navigation]}
                 navigation={{ prevEl: prevRef.current, nextEl: nextRef.current }}
+                breakpoints={{
+                    640: {
+                        slidesPerView: 3,
+                        slidesPerGroup: 3,
+                    },
+                    768: {
+                        slidesPerView: 4,
+                        slidesPerGroup: 4,
+                    },
+                    1024: {
+                        slidesPerView: 5,
+                        slidesPerGroup: 5,
+                    },
+                }}
             >
                 {contents.map((content) => (
                     <SwiperSlide className="content-swiper-slide" key={content.id}>

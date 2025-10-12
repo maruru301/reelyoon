@@ -13,6 +13,17 @@
     gap: 1rem;
 }
 
+.content-list h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 1rem 0;
+}
+
+.content-list h2::before {
+    content: '|';
+    padding-right: 0.5rem;
+}
+
 .time-window-btn {
     border: 2px solid var(--white-80);
     border-radius: 0.5rem;
@@ -21,31 +32,20 @@
 
 .time-window-btn button {
     padding: 0.3rem 0.8rem;
-    font-size: 1rem;
+    font-size: 0.8rem;
     font-weight: 700;
     color: inherit;
     background-color: var(--bg-color);
     border: none;
-    transition: all 0.3s ease;
+    transition: background 0.3s ease;
 }
 
 .time-window-btn button:hover {
-    background-color: var(--white-30);
+    background: var(--white-30);
 }
 
 .time-window-btn button.active {
     background: var(--primary-gradient);
-}
-
-.content-list h2 {
-    font-size: 2rem;
-    font-weight: 700;
-    padding: 1rem 0;
-}
-
-.content-list h2::before {
-    content: '|';
-    padding-right: 0.5rem;
 }
 
 .content-swiper {
@@ -60,11 +60,11 @@
     transform: translateY(-50%);
     z-index: 1;
 
-    width: 3rem;
-    height: 3rem;
+    width: 2.5rem;
+    height: 2.5rem;
     color: inherit;
     border: none;
-    background: var(--white-30);
+    background: var(--bg-color-50);
     border-radius: 50%;
 
     display: flex;
@@ -147,4 +147,53 @@
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
+}
+
+@media (min-width: 40rem) {
+    .content-list {
+        margin: 2rem;
+    }
+}
+
+@media (min-width: 48rem) {
+    .content-list {
+        margin: 3.5rem;
+    }
+
+    .content-list h2 {
+        font-size: 2rem;
+    }
+
+    .time-window-btn button {
+        font-size: 1rem;
+    }
+
+    .prev-btn,
+    .next-btn {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .prev-btn img,
+    .next-btn img {
+        width: 1.5rem;
+    }
+}
+
+@media (min-width: 64rem) {
+    .content-list {
+        margin: 5rem;
+    }
+
+    .prev-btn,
+    .next-btn {
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+}
+
+@media (min-width: 90rem) {
+    .content-list {
+        margin: 5rem 8rem;
+    }
 }
