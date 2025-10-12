@@ -62,3 +62,29 @@ export const fetchTrendingContents = async (mediaType = 'movie', timeWindow = 'd
         console.error(`Trending Movies (${timeWindow}) API 호출 실패:`, err);
     }
 };
+
+// Search
+export const fetchSearchContents = async (query) => {
+    if (!query) return [];
+
+    try {
+        const [moviesRes, tvRes] = await Promise.all([
+            fetch(`${BASE_URL}/search/movie?query=${query}&language=ko`, options),
+            fetch(`${BASE_URL}/search/tv?query=${query}&language=ko`, options),
+        ]);
+
+        const moviesData = await moviesRes.json();
+        const tvData = await tvRes.json();
+
+        // 영화 + TV 합치기
+        const results = [
+            ...moviesData.results.map((item) => ({ ...item, media_type: 'movie' })),
+            ...tvData.results.map((item) => ({ ...item, media_type: 'tv' })),
+        ];
+
+        return results;
+    } catch (err) {
+        console.error(`Search API 호출 실패:`, err);
+        return [];
+    }
+};
