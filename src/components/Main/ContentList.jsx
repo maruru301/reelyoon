@@ -8,7 +8,15 @@ import Arrow from '../../assets/arrow.svg';
 import ContentCard from './ContentCard';
 import { Navigation } from 'swiper/modules';
 
-const ContentList = ({ title, contents, showTimeWindow = false, timeWindow, setTimeWindow }) => {
+const ContentList = ({
+    title,
+    contents,
+    showTimeWindow = false,
+    timeWindow,
+    setTimeWindow,
+    mediaType,
+    setMediaType,
+}) => {
     const swiperRef = useRef(null);
     const prevRef = useRef(null);
     const nextRef = useRef(null);
@@ -34,8 +42,17 @@ const ContentList = ({ title, contents, showTimeWindow = false, timeWindow, setT
             <div className="content-list-header">
                 <h2 className="gradient-text">{title}</h2>
 
+                <div className="media-type-btn content-header-btn">
+                    <button className={mediaType === 'movie' ? 'active' : ''} onClick={() => setMediaType('movie')}>
+                        Movie
+                    </button>
+                    <button className={mediaType === 'tv' ? 'active' : ''} onClick={() => setMediaType('tv')}>
+                        TV
+                    </button>
+                </div>
+
                 {showTimeWindow && (
-                    <div className="time-window-btn">
+                    <div className="time-window-btn content-header-btn">
                         <button className={timeWindow === 'day' ? 'active' : ''} onClick={() => setTimeWindow('day')}>
                             Daily
                         </button>
@@ -71,7 +88,7 @@ const ContentList = ({ title, contents, showTimeWindow = false, timeWindow, setT
             >
                 {contents.map((content) => (
                     <SwiperSlide className="content-swiper-slide" key={content.id}>
-                        <ContentCard content={content} />
+                        <ContentCard content={content} mediaType={mediaType} />
                     </SwiperSlide>
                 ))}
 

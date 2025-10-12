@@ -49,9 +49,9 @@ export const fetchMovieDetails = async (movieId) => {
     }
 };
 
-// Trending Movies (day: 일간, week: 주간)
-export const fetchTrendingMovies = async (timeWindow = 'day') => {
-    const url = `${BASE_URL}/trending/movie/${timeWindow}?language=ko`;
+// Trending (day: 일간, week: 주간)
+export const fetchTrendingContents = async (timeWindow = 'day', mediaType = 'movie') => {
+    const url = `${BASE_URL}/trending/${mediaType}/${timeWindow}?language=ko`;
 
     try {
         const res = await fetch(url, options);
