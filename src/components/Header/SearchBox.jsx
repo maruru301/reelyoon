@@ -1,18 +1,18 @@
 import { useRef, useState } from 'react';
 
 import Search from '../../assets/search.svg';
-import { fetchSearchContents } from '../../api/tmdb';
+import { useNavigate } from 'react-router-dom';
 
 const SearchBox = () => {
     const [inputOpen, setInputOpen] = useState(false);
     const [query, setQuery] = useState('');
 
     const inputRef = useRef(null);
+    const navigate = useNavigate();
 
     const handleSearch = async () => {
         if (!query.trim()) return;
-        const results = await fetchSearchContents(query);
-        console.log('검색 결과:', results);
+        navigate(`/search?query=${encodeURIComponent(query)}`);
     };
 
     const handleKeyDown = (e) => {
