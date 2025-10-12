@@ -1,7 +1,9 @@
+import './Footer.css';
+
 const Footer = () => {
     return (
-        <footer>
-            <h2>Footer</h2>
+        <footer className="footer">
+            <p>© 2025 ReelYoon. All rights reserved.</p>
         </footer>
     );
 };
