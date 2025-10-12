@@ -48,3 +48,17 @@ export const fetchMovieDetails = async (movieId) => {
         console.error(`Movie Details (${movieId}) API 호출 실패:`, err);
     }
 };
+
+// Trending Movies (day: 일간, week: 주간)
+export const fetchTrendingMovies = async (timeWindow = 'day') => {
+    const url = `${BASE_URL}/trending/movie/${timeWindow}?language=ko`;
+
+    try {
+        const res = await fetch(url, options);
+        const data = await res.json();
+
+        return data.results;
+    } catch (err) {
+        console.error(`Trending Movies (${timeWindow}) API 호출 실패:`, err);
+    }
+};

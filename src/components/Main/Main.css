@@ -7,6 +7,36 @@
     margin: 1rem;
 }
 
+.content-list-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.time-window-btn {
+    border: 2px solid var(--white-80);
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.time-window-btn button {
+    padding: 0.3rem 0.8rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: inherit;
+    background-color: var(--bg-color);
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.time-window-btn button:hover {
+    background-color: var(--white-30);
+}
+
+.time-window-btn button.active {
+    background: var(--primary-gradient);
+}
+
 .content-list h2 {
     font-size: 2rem;
     font-weight: 700;

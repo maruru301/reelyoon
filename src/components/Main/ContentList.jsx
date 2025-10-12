@@ -8,9 +8,10 @@ import Arrow from '../../assets/arrow.svg';
 import ContentCard from './ContentCard';
 import { Navigation } from 'swiper/modules';
 
-const ContentList = ({ title, contents }) => {
+const ContentList = ({ title, contents, showTimeWindow = false, timeWindow, setTimeWindow }) => {
     const swiperRef = useRef(null);
 
+    // Swiper prev/next 버튼 제어
     useEffect(() => {
         if (!swiperRef.current) return;
 
@@ -30,7 +31,20 @@ const ContentList = ({ title, contents }) => {
 
     return (
         <section className="content-list">
-            <h2 className="gradient-text">{title}</h2>
+            <div className="content-list-header">
+                <h2 className="gradient-text">{title}</h2>
+
+                {showTimeWindow && (
+                    <div className="time-window-btn">
+                        <button className={timeWindow === 'day' ? 'active' : ''} onClick={() => setTimeWindow('day')}>
+                            Daily
+                        </button>
+                        <button className={timeWindow === 'week' ? 'active' : ''} onClick={() => setTimeWindow('week')}>
+                            Weekly
+                        </button>
+                    </div>
+                )}
+            </div>
 
             <Swiper
                 className="content-swiper"
