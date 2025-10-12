@@ -5,7 +5,7 @@ import './HeaderSlider.css';
 
 import { Autoplay, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { fetchMovieDetails, fetchPopularMovies } from '../../api/tmdb';
+import { fetchMovieDetails, fetchPopularContents } from '../../api/tmdb';
 import { useEffect, useState } from 'react';
 
 import BannerSlide from './BannerSlide';
@@ -16,7 +16,7 @@ const HeaderSlider = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const popularMovies = await fetchPopularMovies(1);
+                const popularMovies = await fetchPopularContents();
                 const slicedPopularMovies = popularMovies.slice(3, 9);
 
                 const movieDetails = await Promise.all(

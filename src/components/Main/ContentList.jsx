@@ -2,25 +2,39 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import Arrow from '../../assets/arrow.svg';
 import ContentCard from './ContentCard';
 import ContentToggleGroup from './ContentToggleGroup';
 import { Navigation } from 'swiper/modules';
 
-const ContentList = ({
-    title,
-    contents,
-    showTimeWindow = false,
-    timeWindow,
-    setTimeWindow,
-    mediaType,
-    setMediaType,
-}) => {
+const ContentList = ({ title, contentsFetcher, showMediaType = false, showTimeWindow = false }) => {
+    const [contents, setContents] = useState([]);
+    const [mediaType, setMediaType] = useState('movie'); // 'movie' or 'tv'
+    const [timeWindow, setTimeWindow] = useState('day'); // 'day' or 'week'
+
     const swiperRef = useRef(null);
     const prevRef = useRef(null);
     const nextRef = useRef(null);
+
+    // 데이터 fetch
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                let data;
+                if (title === 'Trending') {
+                    data = await contentsFetcher(mediaType, timeWindow);
+                } else {
+                    data = await contentsFetcher(mediaType);
+                }
+                setContents(data);
+            } catch (err) {
+                console.error(`${title} 영화 데이터 불러오기 실패`, err);
+            }
+        };
+        fetchData();
+    }, [mediaType, timeWindow, contentsFetcher]);
 
     // Swiper prev/next 버튼 제어
     useEffect(() => {
@@ -43,14 +57,16 @@ const ContentList = ({
             <div className="content-list-header">
                 <h2 className="gradient-text">{title}</h2>
 
-                <ContentToggleGroup
-                    options={[
-                        { label: 'Movie', value: 'movie' },
-                        { label: 'TV', value: 'tv' },
-                    ]}
-                    activeValue={mediaType}
-                    onChange={setMediaType}
-                />
+                {showMediaType && (
+                    <ContentToggleGroup
+                        options={[
+                            { label: 'Movie', value: 'movie' },
+                            { label: 'TV', value: 'tv' },
+                        ]}
+                        activeValue={mediaType}
+                        onChange={setMediaType}
+                    />
+                )}
 
                 {showTimeWindow && (
                     <ContentToggleGroup
@@ -87,7 +103,7 @@ const ContentList = ({
                     },
                 }}
             >
-                {contents.map((content) => (
+                {contents?.map((content) => (
                     <SwiperSlide className="content-swiper-slide" key={content.id}>
                         <ContentCard content={content} mediaType={mediaType} />
                     </SwiperSlide>

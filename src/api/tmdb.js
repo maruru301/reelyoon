@@ -9,9 +9,9 @@ const options = {
     },
 };
 
-// Top Rated Movies
-export const fetchTopRatedMovies = async (page = 1) => {
-    const url = `${BASE_URL}/movie/top_rated?language=ko&page=${page}`;
+// Top Rated
+export const fetchTopRatedContents = async (mediaType = 'movie', page = 1) => {
+    const url = `${BASE_URL}/${mediaType}/top_rated?language=ko&page=${page}`;
     try {
         const res = await fetch(url, options);
         const data = await res.json();
@@ -23,8 +23,8 @@ export const fetchTopRatedMovies = async (page = 1) => {
 };
 
 // Popular
-export const fetchPopularMovies = async (page = 1) => {
-    const url = `${BASE_URL}/movie/popular?language=ko&page=${page}`;
+export const fetchPopularContents = async (mediaType = 'movie', page = 1) => {
+    const url = `${BASE_URL}/${mediaType}/popular?language=ko&page=${page}`;
     try {
         const res = await fetch(url, options);
         const data = await res.json();
@@ -50,7 +50,7 @@ export const fetchMovieDetails = async (movieId) => {
 };
 
 // Trending (day: 일간, week: 주간)
-export const fetchTrendingContents = async (timeWindow = 'day', mediaType = 'movie') => {
+export const fetchTrendingContents = async (mediaType = 'movie', timeWindow = 'day') => {
     const url = `${BASE_URL}/trending/${mediaType}/${timeWindow}?language=ko`;
 
     try {
