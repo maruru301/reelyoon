@@ -6,6 +6,7 @@ import { useEffect, useRef } from 'react';
 
 import Arrow from '../../assets/arrow.svg';
 import ContentCard from './ContentCard';
+import ContentToggleGroup from './ContentToggleGroup';
 import { Navigation } from 'swiper/modules';
 
 const ContentList = ({
@@ -42,24 +43,24 @@ const ContentList = ({
             <div className="content-list-header">
                 <h2 className="gradient-text">{title}</h2>
 
-                <div className="media-type-btn content-header-btn">
-                    <button className={mediaType === 'movie' ? 'active' : ''} onClick={() => setMediaType('movie')}>
-                        Movie
-                    </button>
-                    <button className={mediaType === 'tv' ? 'active' : ''} onClick={() => setMediaType('tv')}>
-                        TV
-                    </button>
-                </div>
+                <ContentToggleGroup
+                    options={[
+                        { label: 'Movie', value: 'movie' },
+                        { label: 'TV', value: 'tv' },
+                    ]}
+                    activeValue={mediaType}
+                    onChange={setMediaType}
+                />
 
                 {showTimeWindow && (
-                    <div className="time-window-btn content-header-btn">
-                        <button className={timeWindow === 'day' ? 'active' : ''} onClick={() => setTimeWindow('day')}>
-                            Daily
-                        </button>
-                        <button className={timeWindow === 'week' ? 'active' : ''} onClick={() => setTimeWindow('week')}>
-                            Weekly
-                        </button>
-                    </div>
+                    <ContentToggleGroup
+                        options={[
+                            { label: 'Daily', value: 'day' },
+                            { label: 'Weekly', value: 'week' },
+                        ]}
+                        activeValue={timeWindow}
+                        onChange={setTimeWindow}
+                    />
                 )}
             </div>
 
