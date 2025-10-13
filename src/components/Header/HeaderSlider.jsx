@@ -20,16 +20,24 @@ const HeaderSlider = () => {
         const fetchData = async () => {
             try {
                 const popularMovies = await fetchPopularContents();
-                const slicedPopularMovies = popularMovies.slice(3, 9);
 
-                const movieDetails = await Promise.all(
-                    slicedPopularMovies.map(async (movie) => {
+                const moviesWithTrailer = []; // 트레일러가 있는 영화만 담을 배열
+
+                for (const movie of popularMovies) {
+                    const trailers = await fetchMovieVideos(movie.id);
+
+                    console.log(trailers);
+                    if (trailers.length > 0) {
+                        // 트레일러가 있는 경우
                         const details = await fetchMovieDetails(movie.id);
-                        return { ...movie, ...details };
-                    })
-                );
+                        moviesWithTrailer.push({ ...movie, ...details, trailerKey: trailers[0].key });
+                    }
+                    console.log(moviesWithTrailer);
 
-                setMovies(movieDetails);
+                    if (moviesWithTrailer.length === 6) break;
+                }
+
+                setMovies(moviesWithTrailer);
             } catch (err) {
                 console.error('Popular 영화 상세 데이터 불러오기 실패', err);
             }
@@ -38,20 +46,10 @@ const HeaderSlider = () => {
     }, []);
 
     // 트레일러 open
-    const openTrailer = async (movieId) => {
+    const openTrailer = async (movie) => {
         try {
-            const trailers = await fetchMovieVideos(movieId);
-
-            console.log(trailers);
-
-            if (trailers.length > 0) {
-                const key = trailers[0].key;
-
-                setTrailerUrl(`https://www.youtube.com/embed/${key}`);
-                setIsTrailerOpen(true);
-            } else {
-                alert('트레일러가 없습니다.');
-            }
+            setTrailerUrl(`https://www.youtube.com/embed/${movie.trailerKey}`);
+            setIsTrailerOpen(true);
         } catch (err) {
             console.error('트레일러 불러오기 실패', err);
         }
@@ -73,7 +71,7 @@ const HeaderSlider = () => {
                 >
                     {movies.map((movie) => (
                         <SwiperSlide className="header-swiper-slide" key={movie.id}>
-                            <BannerSlide movie={movie} openTrailer={openTrailer} />
+                            <BannerSlide movie={movie} openTrailer={() => openTrailer(movie)} />
                         </SwiperSlide>
                     ))}
                 </Swiper>
