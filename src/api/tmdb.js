@@ -88,3 +88,21 @@ export const fetchSearchContents = async (query) => {
         return [];
     }
 };
+
+// Movie Videos (Trailer)
+export const fetchMovieVideos = async (movieId) => {
+    const url = `${BASE_URL}/movie/${movieId}/videos?language=ko`;
+
+    try {
+        const res = await fetch(url, options);
+        const data = await res.json();
+
+        // 트레일러만 필터링
+        const trailers = data.results.filter((video) => video.type === 'Trailer' && video.site === 'YouTube');
+
+        return trailers;
+    } catch (err) {
+        console.error(`Movie Videos API 호출 실패:`, err);
+        return [];
+    }
+};

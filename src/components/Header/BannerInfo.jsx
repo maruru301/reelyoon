@@ -1,7 +1,7 @@
 import PlayBtn from '../../assets/play-btn.svg';
 import Star from '../../assets/star.svg';
 
-const BannerInfo = ({ movie }) => {
+const BannerInfo = ({ movie, openTrailer }) => {
     return (
         <div className="movie-info">
             <h2 className="gradient-text">{movie.title}</h2>
@@ -18,7 +18,7 @@ const BannerInfo = ({ movie }) => {
 
             <p>{movie.overview}</p>
 
-            <button className="play-btn">
+            <button className="play-btn" onClick={() => openTrailer(movie.id)}>
                 <img src={PlayBtn} alt="재생 버튼" />
                 <span>Play</span>
             </button>
