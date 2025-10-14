@@ -3,7 +3,7 @@ import Star from '../../assets/star.svg';
 
 const BannerInfo = ({ movie, openTrailer }) => {
     return (
-        <div className="movie-info">
+        <div className="content-info">
             <h2 className="gradient-text">{movie.title}</h2>
 
             <div className="movie-stats">
