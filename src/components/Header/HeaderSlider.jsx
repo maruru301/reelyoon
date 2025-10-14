@@ -6,7 +6,7 @@ import './HeaderSlider.css';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { fetchMovieDetails, fetchMovieVideos, fetchPopularContents } from '../../api/tmdb';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import BannerSlide from './BannerSlide';
 import TrailerModal from './TrailerModal';
@@ -15,6 +15,8 @@ const HeaderSlider = () => {
     const [movies, setMovies] = useState([]);
     const [isTrailerOpen, setIsTrailerOpen] = useState(false); // 트레일러 open 상태
     const [trailerUrl, setTrailerUrl] = useState(''); // 트레일러 URL
+
+    const swiperRef = useRef(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -46,13 +48,18 @@ const HeaderSlider = () => {
     }, []);
 
     // 트레일러 open
-    const openTrailer = async (movie) => {
-        try {
-            setTrailerUrl(`https://www.youtube.com/embed/${movie.trailerKey}`);
-            setIsTrailerOpen(true);
-        } catch (err) {
-            console.error('트레일러 불러오기 실패', err);
-        }
+    const openTrailer = (movie) => {
+        setTrailerUrl(`https://www.youtube.com/embed/${movie.trailerKey}`);
+        setIsTrailerOpen(true);
+
+        swiperRef.current?.autoplay.stop(); // 모달 열면 슬라이드 stop
+    };
+
+    // 트레일러 close
+    const closeTrailer = () => {
+        setIsTrailerOpen(false);
+
+        swiperRef.current?.autoplay.start(); // 모달 닫으면 슬라이드 start
     };
 
     return (
@@ -60,6 +67,7 @@ const HeaderSlider = () => {
             {movies.length > 0 && (
                 <Swiper
                     className="header-swiper"
+                    onSwiper={(swiper) => (swiperRef.current = swiper)} // Swiper 인스턴스를 ref에 저장
                     spaceBetween={0}
                     slidesPerView={1}
                     loop={true}
@@ -77,11 +85,7 @@ const HeaderSlider = () => {
                 </Swiper>
             )}
 
-            <TrailerModal
-                isTrailerOpen={isTrailerOpen}
-                trailerUrl={trailerUrl}
-                onClose={() => setIsTrailerOpen(false)}
-            />
+            <TrailerModal isTrailerOpen={isTrailerOpen} trailerUrl={trailerUrl} onClose={closeTrailer} />
         </div>
     );
 };
