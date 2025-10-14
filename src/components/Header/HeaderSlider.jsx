@@ -23,21 +23,21 @@ const HeaderSlider = () => {
             try {
                 const popularMovies = await fetchPopularContents();
 
-                const moviesWithTrailer = []; // 트레일러가 있는 영화만 담을 배열
-
-                for (const movie of popularMovies) {
+                const moviePromises = popularMovies.map(async (movie) => {
                     const trailers = await fetchMovieVideos(movie.id);
 
-                    console.log(trailers);
                     if (trailers.length > 0) {
                         // 트레일러가 있는 경우
                         const details = await fetchMovieDetails(movie.id);
-                        moviesWithTrailer.push({ ...movie, ...details, trailerKey: trailers[0].key });
+                        return { ...movie, ...details, trailerKey: trailers[0].key };
                     }
-                    console.log(moviesWithTrailer);
+                    return null; // 트레일러 없음
+                });
 
-                    if (moviesWithTrailer.length === 6) break;
-                }
+                // 트레일러가 있는 영화만 담을 배열
+                const moviesWithTrailer = (await Promise.all(moviePromises))
+                    .filter(Boolean) // null 제거
+                    .slice(0, 6);
 
                 setMovies(moviesWithTrailer);
             } catch (err) {
