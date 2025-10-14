@@ -79,7 +79,7 @@ const HeaderSlider = () => {
                 >
                     {movies.map((movie) => (
                         <SwiperSlide className="header-swiper-slide" key={movie.id}>
-                            <BannerSlide movie={movie} openTrailer={() => openTrailer(movie)} />
+                            <BannerSlide movie={movie} openTrailer={openTrailer} />
                         </SwiperSlide>
                     ))}
                 </Swiper>
