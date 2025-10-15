@@ -1,4 +1,4 @@
-const ContentToggleGroup = ({ options, activeValue, onChange }) => {
+const ContentToggleButton = ({ options, activeValue, onChange }) => {
     return (
         <div className="content-header-btn">
             {options.map((opt) => (
@@ -14,4 +14,4 @@ const ContentToggleGroup = ({ options, activeValue, onChange }) => {
     );
 };
 
-export default ContentToggleGroup;
+export default ContentToggleButton;

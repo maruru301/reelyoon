@@ -6,17 +6,21 @@ import { useEffect, useRef, useState } from 'react';
 
 import Arrow from '../../assets/arrow.svg';
 import ContentCard from './ContentCard';
-import ContentToggleGroup from './ContentToggleGroup';
+import ContentCardSkeleton from './ContentCardSkeleton';
+import ContentToggleButton from './ContentToggleButton';
 import { Navigation } from 'swiper/modules';
 
 const ContentList = ({ title, contentsFetcher, showMediaType = false, showTimeWindow = false }) => {
     const [contents, setContents] = useState([]);
     const [mediaType, setMediaType] = useState('movie'); // 'movie' or 'tv'
     const [timeWindow, setTimeWindow] = useState('day'); // 'day' or 'week'
+    const [loading, setLoading] = useState(true);
 
     const swiperRef = useRef(null);
     const prevRef = useRef(null);
     const nextRef = useRef(null);
+
+    const skeletons = Array.from({ length: 6 }); // 로딩 상태에서 표시할 스켈레톤 카드 개수
 
     // 데이터 fetch
     useEffect(() => {
@@ -31,6 +35,8 @@ const ContentList = ({ title, contentsFetcher, showMediaType = false, showTimeWi
                 setContents(data);
             } catch (err) {
                 console.error(`${title} 영화 데이터 불러오기 실패`, err);
+            } finally {
+                setLoading(false);
             }
         };
         fetchData();
@@ -58,7 +64,7 @@ const ContentList = ({ title, contentsFetcher, showMediaType = false, showTimeWi
                 <h2 className="gradient-text">{title}</h2>
 
                 {showMediaType && (
-                    <ContentToggleGroup
+                    <ContentToggleButton
                         options={[
                             { label: 'Movie', value: 'movie' },
                             { label: 'TV', value: 'tv' },
@@ -69,7 +75,7 @@ const ContentList = ({ title, contentsFetcher, showMediaType = false, showTimeWi
                 )}
 
                 {showTimeWindow && (
-                    <ContentToggleGroup
+                    <ContentToggleButton
                         options={[
                             { label: 'Daily', value: 'day' },
                             { label: 'Weekly', value: 'week' },
@@ -103,11 +109,17 @@ const ContentList = ({ title, contentsFetcher, showMediaType = false, showTimeWi
                     },
                 }}
             >
-                {contents?.map((content) => (
-                    <SwiperSlide className="content-swiper-slide" key={content.id}>
-                        <ContentCard content={content} mediaType={mediaType} />
-                    </SwiperSlide>
-                ))}
+                {loading
+                    ? skeletons.map((_, idx) => (
+                          <SwiperSlide key={idx}>
+                              <ContentCardSkeleton />
+                          </SwiperSlide>
+                      ))
+                    : contents.map((content) => (
+                          <SwiperSlide key={content.id}>
+                              <ContentCard content={content} mediaType={mediaType} />
+                          </SwiperSlide>
+                      ))}
 
                 <button className="prev-btn" ref={prevRef}>
                     <img src={Arrow} alt="이전 버튼" />
