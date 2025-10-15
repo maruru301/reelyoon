@@ -18,7 +18,7 @@ const BannerInfo = ({ movie, openTrailer }) => {
 
             <p>{movie.overview}</p>
 
-            <button className="play-btn" onClick={() => openTrailer(movie)}>
+            <button className="play-btn" onClick={() => openTrailer(movie.trailerKey)}>
                 <img src={PlayBtn} alt="재생 버튼" />
                 <span>Play</span>
             </button>

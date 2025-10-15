@@ -11,6 +11,7 @@ import { useEffect, useRef, useState } from 'react';
 import BannerSkeleton from '../common/BannerSkeleton';
 import BannerSlide from './BannerSlide';
 import TrailerModal from './TrailerModal';
+import useTrailer from '../../hooks/useTrailer';
 
 const HeaderSwiper = ({ movies, openTrailer, swiperRef }) => {
     return (
@@ -37,11 +38,9 @@ const HeaderSwiper = ({ movies, openTrailer, swiperRef }) => {
 
 const HeaderSlider = () => {
     const [movies, setMovies] = useState([]);
-    const [isTrailerOpen, setIsTrailerOpen] = useState(false); // 트레일러 open 상태
-    const [trailerUrl, setTrailerUrl] = useState(''); // 트레일러 URL
     const [loading, setLoading] = useState(true); // loading 상태
-
     const swiperRef = useRef(null);
+    const { isTrailerOpen, trailerUrl, openTrailer, closeTrailer } = useTrailer(swiperRef);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -74,27 +73,12 @@ const HeaderSlider = () => {
         fetchData();
     }, []);
 
-    // 트레일러 open
-    const openTrailer = (movie) => {
-        setTrailerUrl(`https://www.youtube.com/embed/${movie.trailerKey}`);
-        setIsTrailerOpen(true);
-
-        swiperRef.current?.autoplay.stop(); // 모달 열면 슬라이드 stop
-    };
-
-    // 트레일러 close
-    const closeTrailer = () => {
-        setIsTrailerOpen(false);
-
-        swiperRef.current?.autoplay.start(); // 모달 닫으면 슬라이드 start
-    };
-
     return (
         <div className="header-slider">
             {loading ? (
                 <BannerSkeleton />
             ) : (
-                <HeaderSwiper movies={movies} onOpenTrailer={openTrailer} swiperRef={swiperRef} />
+                <HeaderSwiper movies={movies} openTrailer={openTrailer} swiperRef={swiperRef} />
             )}
 
             <TrailerModal isTrailerOpen={isTrailerOpen} trailerUrl={trailerUrl} onClose={closeTrailer} />
