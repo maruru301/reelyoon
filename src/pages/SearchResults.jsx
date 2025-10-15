@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import HeaderBar from '../components/Header/HeaderBar';
+import HeaderBar from '../components/Header/HeaderBar/HeaderBar';
 import { fetchSearchContents } from '../api/tmdb';
 import { useSearchParams } from 'react-router-dom';
 

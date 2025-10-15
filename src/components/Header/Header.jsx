@@ -1,7 +1,7 @@
 import './Header.css';
 
-import HeaderBar from './HeaderBar';
-import HeaderSlider from './HeaderSlider';
+import HeaderBar from './HeaderBar/HeaderBar';
+import HeaderSlider from './HeaderSlider/HeaderSlider';
 
 const Header = () => {
     return (

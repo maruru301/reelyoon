@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 
-import Search from '../../assets/search.svg';
+import Search from '../../../assets/search.svg';
 import { useNavigate } from 'react-router-dom';
 
 const SearchBox = () => {

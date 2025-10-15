@@ -1,19 +1,13 @@
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import './HeaderSlider.css';
 
 import { Autoplay, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import BannerSkeleton from '../common/BannerSkeleton';
 import BannerSlide from './BannerSlide';
-import TrailerModal from './TrailerModal';
-import useHeaderMovies from '../../hooks/useHeaderMovies';
-import { useRef } from 'react';
-import useTrailer from '../../hooks/useTrailer';
 
-const HeaderSwiper = ({ movies, openTrailer, swiperRef }) => {
+const BannerSwiper = ({ movies, openTrailer, swiperRef }) => {
     return (
         <Swiper
             className="header-swiper"
@@ -36,22 +30,4 @@ const HeaderSwiper = ({ movies, openTrailer, swiperRef }) => {
     );
 };
 
-const HeaderSlider = () => {
-    const swiperRef = useRef(null);
-    const { isTrailerOpen, trailerUrl, openTrailer, closeTrailer } = useTrailer(swiperRef);
-    const { movies, loading } = useHeaderMovies();
-
-    return (
-        <div className="header-slider">
-            {loading ? (
-                <BannerSkeleton />
-            ) : (
-                <HeaderSwiper movies={movies} openTrailer={openTrailer} swiperRef={swiperRef} />
-            )}
-
-            <TrailerModal isTrailerOpen={isTrailerOpen} trailerUrl={trailerUrl} onClose={closeTrailer} />
-        </div>
-    );
-};
-
-export default HeaderSlider;
+export default BannerSwiper;

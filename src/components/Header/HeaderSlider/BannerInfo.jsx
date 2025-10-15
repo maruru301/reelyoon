@@ -1,5 +1,5 @@
-import PlayBtn from '../../assets/play-btn.svg';
-import Star from '../../assets/star.svg';
+import PlayBtn from '../../../assets/play-btn.svg';
+import Star from '../../../assets/star.svg';
 
 const BannerInfo = ({ movie, openTrailer }) => {
     return (
