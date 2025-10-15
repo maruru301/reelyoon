@@ -25,6 +25,7 @@ const ContentList = ({ title, contentsFetcher, showMediaType = false, showTimeWi
     // 데이터 fetch
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true);
             try {
                 let data;
                 if (title === 'Trending') {
