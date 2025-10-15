@@ -1,6 +1,6 @@
 import './HeaderSlider.css';
 
-import BannerSkeleton from '../../common/BannerSkeleton';
+import BannerSkeleton from './BannerSkeleton';
 import BannerSwiper from './BannerSwiper';
 import TrailerModal from './TrailerModal';
 import useHeaderMovies from '../../../hooks/useHeaderMovies';

@@ -1,5 +1,5 @@
 import 'react-loading-skeleton/dist/skeleton.css';
-import '../common/BannerSkeleton.css';
+import './BannerSkeleton.css';
 
 import Skeleton from 'react-loading-skeleton';
 
