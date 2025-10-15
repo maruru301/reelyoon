@@ -12,6 +12,29 @@ import BannerSkeleton from '../common/BannerSkeleton';
 import BannerSlide from './BannerSlide';
 import TrailerModal from './TrailerModal';
 
+const HeaderSwiper = ({ movies, openTrailer, swiperRef }) => {
+    return (
+        <Swiper
+            className="header-swiper"
+            onSwiper={(swiper) => (swiperRef.current = swiper)} // Swiper 인스턴스를 ref에 저장
+            spaceBetween={0}
+            slidesPerView={1}
+            loop={true}
+            centeredSlides={false}
+            autoplay={{ delay: 3000, disableOnInteraction: false }}
+            pagination={{ clickable: true }}
+            modules={[Autoplay, Pagination]}
+            allowTouchMove={false}
+        >
+            {movies.map((movie) => (
+                <SwiperSlide className="header-swiper-slide" key={movie.id}>
+                    <BannerSlide movie={movie} openTrailer={openTrailer} />
+                </SwiperSlide>
+            ))}
+        </Swiper>
+    );
+};
+
 const HeaderSlider = () => {
     const [movies, setMovies] = useState([]);
     const [isTrailerOpen, setIsTrailerOpen] = useState(false); // 트레일러 open 상태
@@ -71,24 +94,7 @@ const HeaderSlider = () => {
             {loading ? (
                 <BannerSkeleton />
             ) : (
-                <Swiper
-                    className="header-swiper"
-                    onSwiper={(swiper) => (swiperRef.current = swiper)} // Swiper 인스턴스를 ref에 저장
-                    spaceBetween={0}
-                    slidesPerView={1}
-                    loop={true}
-                    centeredSlides={false}
-                    autoplay={{ delay: 3000, disableOnInteraction: false }}
-                    pagination={{ clickable: true }}
-                    modules={[Autoplay, Pagination]}
-                    allowTouchMove={false}
-                >
-                    {movies.map((movie) => (
-                        <SwiperSlide className="header-swiper-slide" key={movie.id}>
-                            <BannerSlide movie={movie} openTrailer={openTrailer} />
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
+                <HeaderSwiper movies={movies} onOpenTrailer={openTrailer} swiperRef={swiperRef} />
             )}
 
             <TrailerModal isTrailerOpen={isTrailerOpen} trailerUrl={trailerUrl} onClose={closeTrailer} />
