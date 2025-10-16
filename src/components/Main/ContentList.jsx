@@ -2,7 +2,6 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { useEffect, useRef } from 'react';
 
 import Arrow from '../../assets/arrow.svg';
 import ContentCard from './ContentCard';
@@ -10,11 +9,10 @@ import ContentCardSkeleton from './ContentCardSkeleton';
 import ContentToggleButton from './ContentToggleButton';
 import { Navigation } from 'swiper/modules';
 import useContents from '../../hooks/useContents';
+import useSwiperNavigation from '../../hooks/useSwiperNavigation';
 
 const ContentList = ({ title, contentsFetcher, showMediaType = false, showTimeWindow = false }) => {
-    const swiperRef = useRef(null);
-    const prevRef = useRef(null);
-    const nextRef = useRef(null);
+    const { swiperRef, prevRef, nextRef } = useSwiperNavigation();
 
     const {
         data: { contents, SKELETON_COUNT },
@@ -23,22 +21,6 @@ const ContentList = ({ title, contentsFetcher, showMediaType = false, showTimeWi
     } = useContents(title, contentsFetcher);
 
     const skeletons = Array.from({ length: SKELETON_COUNT });
-
-    // Swiper prev/next 버튼 제어
-    useEffect(() => {
-        if (!swiperRef.current) return;
-
-        const swiper = swiperRef.current.swiper;
-
-        // 초기 숨김
-        prevRef.current.classList.toggle('hidden', swiper.isBeginning);
-
-        // 슬라이드 변경 시 버튼 숨김/표시 제어
-        swiper.on('slideChange', () => {
-            prevRef.current.classList.toggle('hidden', swiper.isBeginning);
-            nextRef.current.classList.toggle('hidden', swiper.isEnd);
-        });
-    }, []);
 
     return (
         <section className="content-list">
@@ -103,7 +85,7 @@ const ContentList = ({ title, contentsFetcher, showMediaType = false, showTimeWi
                           </SwiperSlide>
                       ))}
 
-                <button className="prev-btn" ref={prevRef}>
+                <button className="prev-btn hidden" ref={prevRef}>
                     <img src={Arrow} alt="이전 버튼" />
                 </button>
                 <button className="next-btn" ref={nextRef}>
