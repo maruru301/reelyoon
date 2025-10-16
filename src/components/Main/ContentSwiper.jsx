@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import Arrow from '../../assets/arrow.svg';
 import ContentCard from './ContentCard';
-import ContentCardSkeleton from './ContentCardSkeleton';
+import ContentCardSkeleton from '../Skeleton/ContentCardSkeleton';
 import { Navigation } from 'swiper/modules';
 
 const ContentSwiper = ({ data, state, refs }) => {
