@@ -6,6 +6,7 @@
 body {
     background-color: var(--bg-color);
     color: white;
+    font-family: var(--font-body);
 }
 
 a {

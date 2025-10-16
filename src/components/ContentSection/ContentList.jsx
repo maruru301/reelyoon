@@ -13,7 +13,7 @@ const ContentList = ({ title, contentsFetcher, showMediaType = false, showTimeWi
     } = useContents(title, contentsFetcher);
 
     return (
-        <section className="content-list">
+        <div className="content-list">
             <ContentListHeader
                 title={title}
                 state={{ mediaType, timeWindow }}
@@ -26,7 +26,7 @@ const ContentList = ({ title, contentsFetcher, showMediaType = false, showTimeWi
                 state={{ mediaType, loading }}
                 refs={{ swiperRef, prevRef, nextRef }}
             />
-        </section>
+        </div>
     );
 };
 

@@ -1,17 +1,17 @@
-/* HeaderSlider, BannerSlide, BannerInfo */
+/* BannerSection, BannerSlide, BannerInfo */
 
-/* HeaderSlider */
-.header-slider .header-swiper {
+/* BannerSection */
+.banner-section .banner-swiper {
     --swiper-pagination-bullet-size: 12px;
     --swiper-pagination-color: rgb(255, 255, 255);
     --swiper-pagination-bullet-inactive-color: var(--white-30);
 }
-.header-slider .swiper-pagination-bullet-active {
+.banner-section .swiper-pagination-bullet-active {
     width: 20px;
     border-radius: 0.5rem;
 }
 
-.header-swiper-slide {
+.banner-swiper-slide {
     position: relative;
 }
 
@@ -30,7 +30,7 @@
     object-fit: cover;
 }
 
-.header-swiper-slide .overlay {
+.banner-swiper-slide .overlay {
     position: absolute;
     inset: 0;
     background-color: var(--bg-color-50);

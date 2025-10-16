@@ -10,7 +10,7 @@ import BannerSlide from './BannerSlide';
 const BannerSwiper = ({ movies, openTrailer, swiperRef }) => {
     return (
         <Swiper
-            className="header-swiper"
+            className="banner-swiper"
             onSwiper={(swiper) => (swiperRef.current = swiper)} // Swiper 인스턴스를 ref에 저장
             spaceBetween={0}
             slidesPerView={1}
@@ -22,7 +22,7 @@ const BannerSwiper = ({ movies, openTrailer, swiperRef }) => {
             allowTouchMove={false}
         >
             {movies.map((movie) => (
-                <SwiperSlide className="header-swiper-slide" key={movie.id}>
+                <SwiperSlide className="banner-swiper-slide" key={movie.id}>
                     <BannerSlide movie={movie} openTrailer={openTrailer} />
                 </SwiperSlide>
             ))}

@@ -1,11 +1,11 @@
-import Header from '../components/Header/Header';
-import Main from '../components/Main/Main';
+import BannerSection from '../components/BannerSection/BannerSection';
+import ContentSection from '../components/ContentSection/ContentSection';
 
 const Home = () => {
     return (
         <div>
-            <Header />
-            <Main />
+            <BannerSection />
+            <ContentSection />
         </div>
     );
 };
