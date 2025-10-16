@@ -2,46 +2,27 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 import Arrow from '../../assets/arrow.svg';
 import ContentCard from './ContentCard';
 import ContentCardSkeleton from './ContentCardSkeleton';
 import ContentToggleButton from './ContentToggleButton';
 import { Navigation } from 'swiper/modules';
+import useContents from '../../hooks/useContents';
 
 const ContentList = ({ title, contentsFetcher, showMediaType = false, showTimeWindow = false }) => {
-    const [contents, setContents] = useState([]);
-    const [mediaType, setMediaType] = useState('movie'); // 'movie' or 'tv'
-    const [timeWindow, setTimeWindow] = useState('day'); // 'day' or 'week'
-    const [loading, setLoading] = useState(true);
-
     const swiperRef = useRef(null);
     const prevRef = useRef(null);
     const nextRef = useRef(null);
 
-    const skeletons = Array.from({ length: 6 }); // 로딩 상태에서 표시할 스켈레톤 카드 개수
+    const {
+        data: { contents, SKELETON_COUNT },
+        state: { loading, mediaType, timeWindow },
+        actions: { setMediaType, setTimeWindow },
+    } = useContents(title, contentsFetcher);
 
-    // 데이터 fetch
-    useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true);
-            try {
-                let data;
-                if (title === 'Trending') {
-                    data = await contentsFetcher(mediaType, timeWindow);
-                } else {
-                    data = await contentsFetcher(mediaType);
-                }
-                setContents(data);
-            } catch (err) {
-                console.error(`${title} 영화 데이터 불러오기 실패`, err);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchData();
-    }, [mediaType, timeWindow, contentsFetcher]);
+    const skeletons = Array.from({ length: SKELETON_COUNT });
 
     // Swiper prev/next 버튼 제어
     useEffect(() => {
