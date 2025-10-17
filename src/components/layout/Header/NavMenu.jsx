@@ -1,4 +1,4 @@
-import HamburgerMenu from '../../assets/hamburger-menu.svg';
+import HamburgerMenu from '../../../assets/hamburger-menu.svg';
 import { useState } from 'react';
 
 const NavMenu = () => {

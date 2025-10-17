@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import HeaderBar from '../components/Header/HeaderBar';
 import { fetchSearchContents } from '../api/tmdb';
 import { useSearchParams } from 'react-router-dom';
 
@@ -20,7 +19,6 @@ const SearchResults = () => {
 
     return (
         <>
-            <HeaderBar />
             <div style={{ marginTop: '8rem' }}>
                 <h2>검색 결과: {query}</h2>
                 <ul>

@@ -1,12 +1,12 @@
-import './Main.css';
+import './ContentSection.css';
 
 import { fetchPopularContents, fetchTopRatedContents, fetchTrendingContents } from '../../api/tmdb';
 
 import ContentList from './ContentList';
 
-const Main = () => {
+const ContentSection = () => {
     return (
-        <main className="main">
+        <section className="content-section">
             <ContentList
                 title="Trending"
                 contentsFetcher={fetchTrendingContents}
@@ -15,8 +15,8 @@ const Main = () => {
             />
             <ContentList title="Top Rated" contentsFetcher={fetchTopRatedContents} showMediaType={true} />
             <ContentList title="Popular" contentsFetcher={fetchPopularContents} showMediaType={true} />
-        </main>
+        </section>
     );
 };
 
-export default Main;
+export default ContentSection;

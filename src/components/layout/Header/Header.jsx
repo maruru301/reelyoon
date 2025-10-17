@@ -1,11 +1,11 @@
-import './HeaderBar.css';
+import './Header.css';
 
 import NavMenu from './NavMenu';
 import SearchBox from './SearchBox';
 
-const HeaderBar = () => {
+const Header = () => {
     return (
-        <div className="header-bar">
+        <header className="header">
             <NavMenu />
 
             <a className="logo gradient-text" href="/">
@@ -13,8 +13,8 @@ const HeaderBar = () => {
             </a>
 
             <SearchBox />
-        </div>
+        </header>
     );
 };
 
-export default HeaderBar;
+export default Header;
