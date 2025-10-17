@@ -1,7 +1,7 @@
 import { fetchMovieDetails, fetchMovieVideos, fetchPopularContents } from '../api/tmdb';
 import { useEffect, useState } from 'react';
 
-const useHeaderMovies = () => {
+const useBannerMovies = () => {
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true); // loading 상태
 
@@ -25,7 +25,7 @@ const useHeaderMovies = () => {
                 // 트레일러가 있는 영화만 담을 배열
                 const moviesWithTrailer = (await Promise.all(moviePromises))
                     .filter(Boolean) // null 제거
-                    .slice(0, 6);
+                    .slice(0, 7);
 
                 setMovies(moviesWithTrailer);
             } catch (err) {
@@ -41,4 +41,4 @@ const useHeaderMovies = () => {
     return { movies, loading };
 };
 
-export default useHeaderMovies;
+export default useBannerMovies;

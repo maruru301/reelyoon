@@ -3,14 +3,14 @@ import './BannerSection.css';
 import BannerSkeleton from '../Skeleton/BannerSkeleton';
 import BannerSwiper from './BannerSwiper';
 import TrailerModal from './TrailerModal';
-import useHeaderMovies from '../../hooks/useHeaderMovies';
+import useBannerMovies from '../../hooks/useBannerMovies';
 import { useRef } from 'react';
 import useTrailer from '../../hooks/useTrailer';
 
 const BannerSection = () => {
     const swiperRef = useRef(null);
     const { isTrailerOpen, trailerUrl, openTrailer, closeTrailer } = useTrailer(swiperRef);
-    const { movies, loading } = useHeaderMovies();
+    const { movies, loading } = useBannerMovies();
 
     return (
         <section className="banner-section">

@@ -106,3 +106,17 @@ export const fetchMovieVideos = async (movieId) => {
         return [];
     }
 };
+
+// Movie Images
+export const fetchMovieImages = async (movieId) => {
+    const url = `${BASE_URL}/movie/${movieId}/images?include_image_language=en-US`;
+
+    try {
+        const res = await fetch(url, options);
+        const data = await res.json();
+
+        return data;
+    } catch (err) {
+        console.error(`Movie Images API 호출 실패:`, err);
+    }
+};

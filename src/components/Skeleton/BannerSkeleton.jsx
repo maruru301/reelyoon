@@ -8,7 +8,7 @@ const BannerSkeleton = () => {
         <div className="banner-skeleton">
             <Skeleton height={'100%'} />
 
-            <div className="content-info">
+            <div className="banner-info-skeleton banner-info">
                 <Skeleton className="title-skeleton" width="50%" borderRadius={10} />
                 <Skeleton width="40%" height={20} borderRadius={10} />
                 <Skeleton className="overview-skeleton" height={50} borderRadius={10} />
