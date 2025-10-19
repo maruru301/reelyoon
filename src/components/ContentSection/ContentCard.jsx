@@ -9,15 +9,9 @@ const ContentCard = ({ content, mediaType }) => {
         ? `https://image.tmdb.org/t/p/original${content.poster_path}`
         : 'https://placehold.co/200x300?text=No+Image';
 
-    const year = content.release_date?.slice(0, 4);
-    const contentTitle =
-        mediaType === 'movie'
-            ? year
-                ? `${content.title} (${year})`
-                : content.title
-            : year
-            ? `${content.name} (${year})`
-            : content.name;
+    const title = mediaType === 'movie' ? content.title : content.name;
+    const year = mediaType === 'movie' ? content.release_date?.slice(0, 4) : content.first_air_date?.slice(0, 4);
+    const contentTitle = year ? `${title} (${year})` : title;
 
     return (
         <div className="content-card">
@@ -25,7 +19,7 @@ const ContentCard = ({ content, mediaType }) => {
 
             <img
                 src={posterUrl}
-                alt={mediaType === 'movie' ? content.title : content.name}
+                alt={title}
                 onLoad={() => setImgLoaded(true)}
                 className={`card-image ${imgLoaded ? 'loaded' : ''}`}
             />
