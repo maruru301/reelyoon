@@ -7,10 +7,11 @@ import { fetchSearchContents } from '../../api/tmdb';
 import { useSearchParams } from 'react-router-dom';
 
 const SearchResultsSection = () => {
-    const [searchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const query = searchParams.get('query');
-    const [results, setResults] = useState([]);
-    const [filter, setFilter] = useState('all');
+    const initialFilter = searchParams.get('filter') || 'all'; // URL에서 필터 가져오기
+    const [results, setResults] = useState([]); // 전체 검색 결과
+    const [filter, setFilter] = useState(initialFilter); // 현재 선택된 필터
 
     useEffect(() => {
         if (!query) return;
@@ -28,6 +29,12 @@ const SearchResultsSection = () => {
         fetchData();
     }, [query]);
 
+    // 필터 버튼 클릭 시 상태와 URL 쿼리 업데이트
+    const onFilterChange = (newFilter) => {
+        setFilter(newFilter);
+        setSearchParams({ query, filter: newFilter });
+    };
+
     const filteredResults = results.filter((r) => {
         if (filter === 'all') return true;
         return r.media_type === filter;
@@ -41,13 +48,13 @@ const SearchResultsSection = () => {
                 <h2 className="content-title gradient-text">검색 결과</h2>
 
                 <div className="search-results-tabs">
-                    <button className={filter === 'all' ? 'active' : ''} onClick={() => setFilter('all')}>
+                    <button className={filter === 'all' ? 'active' : ''} onClick={() => onFilterChange('all')}>
                         전체 ({results.length})
                     </button>
-                    <button className={filter === 'movie' ? 'active' : ''} onClick={() => setFilter('movie')}>
+                    <button className={filter === 'movie' ? 'active' : ''} onClick={() => onFilterChange('movie')}>
                         영화 ({results.filter((r) => r.media_type === 'movie').length})
                     </button>
-                    <button className={filter === 'tv' ? 'active' : ''} onClick={() => setFilter('tv')}>
+                    <button className={filter === 'tv' ? 'active' : ''} onClick={() => onFilterChange('tv')}>
                         TV ({results.filter((r) => r.media_type === 'tv').length})
                     </button>
                 </div>
