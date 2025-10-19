@@ -7,7 +7,7 @@ const ContentListHeader = ({ title, state, actions, options }) => {
 
     return (
         <div className="content-list-header">
-            <h2 className="gradient-text">{title}</h2>
+            <h2 className="content-title gradient-text">{title}</h2>
 
             {showMediaType && (
                 <ContentToggleButton
