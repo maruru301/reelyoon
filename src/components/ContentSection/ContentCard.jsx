@@ -3,13 +3,21 @@ import Star from '../../assets/star.svg';
 import { useState } from 'react';
 
 const ContentCard = ({ content, mediaType }) => {
-    const [imgLoaded, setImgLoaded] = useState(false);
-    const posterUrl = `https://image.tmdb.org/t/p/original${content.poster_path}`;
+    const [imgLoaded, setImgLoaded] = useState(!content.poster_path);
 
+    const posterUrl = content.poster_path
+        ? `https://image.tmdb.org/t/p/original${content.poster_path}`
+        : 'https://placehold.co/200x300?text=No+Image';
+
+    const year = content.release_date?.slice(0, 4);
     const contentTitle =
         mediaType === 'movie'
-            ? `${content.title} (${content.release_date?.slice(0, 4)})`
-            : `${content.name} (${content.first_air_date?.slice(0, 4)})`;
+            ? year
+                ? `${content.title} (${year})`
+                : content.title
+            : year
+            ? `${content.name} (${year})`
+            : content.name;
 
     return (
         <div className="content-card">
