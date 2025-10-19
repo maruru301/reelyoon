@@ -1,0 +1,32 @@
+.search-results-section {
+    margin-top: 6rem;
+    padding: 1rem 2rem;
+}
+
+.search-results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1.5rem;
+}
+
+@media (min-width: 48rem) {
+    .search-results-section {
+        padding: 2rem 4rem;
+    }
+}
+
+@media (min-width: 64rem) {
+    .search-results-section {
+        padding: 3rem 6rem;
+    }
+
+    .search-results-grid {
+        gap: 2rem;
+    }
+}
+
+@media (min-width: 90rem) {
+    .search-results-section {
+        padding: 4rem 8rem;
+    }
+}
