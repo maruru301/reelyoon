@@ -14,10 +14,17 @@ const SearchResultsSection = () => {
 
     useEffect(() => {
         if (!query) return;
+
         const fetchData = async () => {
-            const data = await fetchSearchContents(query);
-            setResults(data);
+            try {
+                const data = await fetchSearchContents(query);
+                setResults(data);
+            } catch (err) {
+                console.error(`${query} 검색 결과 불러오기 실패:`, err);
+                setResults([]);
+            }
         };
+
         fetchData();
     }, [query]);
 
