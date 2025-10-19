@@ -1,4 +1,4 @@
-import { fetchMovieDetails, fetchMovieVideos, fetchPopularContents } from '../api/tmdb';
+import { fetchMovieDetails, fetchMovieImages, fetchMovieVideos, fetchPopularContents } from '../api/tmdb';
 import { useEffect, useState } from 'react';
 
 const useBannerMovies = () => {
@@ -11,15 +11,19 @@ const useBannerMovies = () => {
                 const popularMovies = await fetchPopularContents();
 
                 const moviePromises = popularMovies.map(async (movie) => {
+                    // 트레일러 가져오기
                     const trailers = await fetchMovieVideos(movie.id);
+                    if (!trailers.length) return null;
+                    const trailerKey = trailers[0].key;
 
-                    if (trailers.length > 0) {
-                        // 트레일러가 있는 경우
-                        const details = await fetchMovieDetails(movie.id);
-                        return { ...movie, ...details, trailerKey: trailers[0].key };
-                    }
+                    // 상세 정보 가져오기
+                    const details = await fetchMovieDetails(movie.id);
 
-                    return null; // 트레일러 없음
+                    // 로고 이미지 가져오기
+                    const images = await fetchMovieImages(movie.id);
+                    const logoUrl = images.logos?.[0].file_path || '';
+
+                    return { ...movie, ...details, trailerKey, logoUrl };
                 });
 
                 // 트레일러가 있는 영화만 담을 배열

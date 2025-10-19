@@ -1,36 +1,13 @@
-import { useEffect, useState } from 'react';
-
 import PlayBtn from '../../assets/play-btn.svg';
 import Star from '../../assets/star.svg';
-import { fetchMovieImages } from '../../api/tmdb';
 
 const BannerInfo = ({ movie, openTrailer }) => {
-    const [logoUrl, setLogoUrl] = useState('');
-
-    useEffect(() => {
-        const fetchLogoImage = async () => {
-            try {
-                const images = await fetchMovieImages(movie.id);
-
-                console.log(`${movie.title} : ${images.logos.length}`);
-                console.log(images.logos);
-
-                setLogoUrl(images.logos[0].file_path);
-            } catch (err) {
-                console.error(`영화 로고 데이터 불러오기 실패`, err);
-            }
-        };
-
-        fetchLogoImage();
-    });
-
-    console.log(logoUrl);
-
+    console.log(movie);
     return (
         <div className="banner-info">
             <img
                 className="movie-logo"
-                src={`https://image.tmdb.org/t/p/original${logoUrl}`}
+                src={`https://image.tmdb.org/t/p/original${movie.logoUrl}`}
                 alt={`${movie.title} 로고`}
             />
 
