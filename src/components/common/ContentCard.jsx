@@ -1,3 +1,5 @@
+import './ContentCard.css';
+
 import ContentCardSkeleton from '../Skeleton/ContentCardSkeleton';
 import Star from '../../assets/star.svg';
 import { useState } from 'react';

@@ -2,7 +2,7 @@ import './SearchResultsSection.css';
 
 import { useEffect, useState } from 'react';
 
-import ContentCard from '../ContentSection/ContentCard';
+import ContentCard from '../common/ContentCard';
 import { fetchSearchContents } from '../../api/tmdb';
 import { useSearchParams } from 'react-router-dom';
 
