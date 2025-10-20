@@ -16,6 +16,11 @@ const SearchResultsSection = () => {
     useEffect(() => {
         if (!query) return;
 
+        // 검색어가 바뀌면 필터를 'all'로 초기화
+        setFilter('all');
+        setResults([]); // 이전 결과 지우기
+        setSearchParams({ query, filter: 'all' });
+
         const fetchData = async () => {
             try {
                 const data = await fetchSearchContents(query);
