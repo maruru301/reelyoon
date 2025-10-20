@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 
 import Search from '../../../assets/search.svg';
+import { fetchSearchContents } from '../../../api/tmdb';
 import { useNavigate } from 'react-router-dom';
 
 const SearchBox = () => {
@@ -11,8 +12,26 @@ const SearchBox = () => {
     const navigate = useNavigate();
 
     const handleSearch = async () => {
-        if (!query.trim()) return;
-        navigate(`/search?query=${encodeURIComponent(query)}`);
+        const trimmedQuery = query.trim();
+        if (!trimmedQuery) return;
+
+        try {
+            const results = await fetchSearchContents(trimmedQuery);
+
+            if (results.length) {
+                navigate(`/search?query=${encodeURIComponent(query)}`);
+            } else {
+                alert('검색 결과가 존재하지 않습니다.');
+
+                // 검색창 닫히지 않게 유지 + 다시 포커스
+                setInputOpen(true);
+                if (inputRef.current) {
+                    inputRef.current.focus();
+                }
+            }
+        } catch (err) {
+            console.error('검색 중 오류 발생:', err);
+        }
     };
 
     const handleKeyDown = (e) => {
