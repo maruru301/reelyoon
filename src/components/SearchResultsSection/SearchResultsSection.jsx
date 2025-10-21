@@ -16,6 +16,23 @@ const SearchResultsSection = () => {
 
     const [currentPage, setCurrentPage] = useState(1); // 현재 선택된 페이지 번호
     const totalPages = 17; // 임시 테스트 데이터
+    const [blockSize, setBlockSize] = useState(5);
+
+    useEffect(() => {
+        const updateBlockSize = () => {
+            if (window.innerWidth >= 1024) {
+                // 64rem = 1024px
+                setBlockSize(10);
+            } else {
+                setBlockSize(5);
+            }
+        };
+
+        updateBlockSize(); // 초기값 설정
+        window.addEventListener('resize', updateBlockSize);
+
+        return () => window.removeEventListener('resize', updateBlockSize);
+    }, []);
 
     useEffect(() => {
         if (!query) return;
@@ -72,13 +89,20 @@ const SearchResultsSection = () => {
 
             {/* body - 콘텐츠 + Pagination */}
             <div className="search-results-body">
+                <div className="pagination-info">{`${currentPage}/${totalPages} 페이지`}</div>
+
                 <div className="search-results-grid">
                     {filteredResults.map((result) => (
                         <ContentCard key={result.id} content={result} mediaType={result.media_type} />
                     ))}
                 </div>
 
-                <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={setCurrentPage}
+                    blockSize={blockSize}
+                />
             </div>
         </div>
     );

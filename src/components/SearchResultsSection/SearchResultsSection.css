@@ -37,7 +37,17 @@
 .search-results-body {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 2rem;
+    position: relative;
+}
+
+.pagination-info {
+    font-size: 1rem;
+    font-weight: 500;
+    position: absolute;
+    top: -30px;
+    right: 0;
+    padding: 0 1rem;
 }
 
 .search-results-grid {
@@ -54,7 +64,7 @@
 
 @media (min-width: 64rem) {
     .search-results-section {
-        padding: 2rem 6rem;
+        padding: 3rem 6rem;
         flex-direction: row;
     }
 
@@ -80,7 +90,7 @@
 
 @media (min-width: 90rem) {
     .search-results-section {
-        padding: 3rem 8rem;
+        padding: 4rem 8rem;
     }
 
     .search-results-body {
