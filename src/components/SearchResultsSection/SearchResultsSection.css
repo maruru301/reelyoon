@@ -34,6 +34,12 @@
     border-bottom: 2px solid rgba(var(--color-primary-end-rgb), 1);
 }
 
+.search-results-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
 .search-results-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -63,9 +69,12 @@
         align-items: start;
     }
 
+    .search-results-body {
+        flex: 5;
+    }
+
     .search-results-grid {
         gap: 2rem;
-        flex: 5;
     }
 }
 
@@ -74,7 +83,7 @@
         padding: 3rem 8rem;
     }
 
-    .search-results-grid {
+    .search-results-body {
         flex: 6;
     }
 }
