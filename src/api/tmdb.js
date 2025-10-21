@@ -64,13 +64,13 @@ export const fetchTrendingContents = async (mediaType = 'movie', timeWindow = 'd
 };
 
 // Search
-export const fetchSearchContents = async (query) => {
-    if (!query) return [];
+export const fetchSearchContents = async (query, page = 1) => {
+    if (!query) return { results: [], totalPages: 1 };
 
     try {
         const [moviesRes, tvRes] = await Promise.all([
-            fetch(`${BASE_URL}/search/movie?query=${query}&language=ko`, options),
-            fetch(`${BASE_URL}/search/tv?query=${query}&language=ko`, options),
+            fetch(`${BASE_URL}/search/movie?query=${query}&language=ko&page=${page}`, options),
+            fetch(`${BASE_URL}/search/tv?query=${query}&language=ko&page=${page}`, options),
         ]);
 
         const moviesData = await moviesRes.json();
@@ -82,10 +82,12 @@ export const fetchSearchContents = async (query) => {
             ...tvData.results.map((item) => ({ ...item, media_type: 'tv' })),
         ];
 
-        return results;
+        const totalPages = Math.max(moviesData.total_pages, tvData.total_pages);
+
+        return { results, totalPages };
     } catch (err) {
         console.error(`Search API 호출 실패:`, err);
-        return [];
+        return { results: [], totalPages: 1 };
     }
 };
 

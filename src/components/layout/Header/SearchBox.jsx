@@ -16,7 +16,7 @@ const SearchBox = () => {
         if (!trimmedQuery) return;
 
         try {
-            const results = await fetchSearchContents(trimmedQuery);
+            const { results } = await fetchSearchContents(trimmedQuery);
 
             if (results.length) {
                 navigate(`/search?query=${encodeURIComponent(query)}`);

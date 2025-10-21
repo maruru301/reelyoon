@@ -11,13 +11,15 @@ const SearchResultsSection = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const query = searchParams.get('query');
     const initialFilter = searchParams.get('filter') || 'all'; // URL에서 필터 가져오기
+
     const [results, setResults] = useState([]); // 전체 검색 결과
     const [filter, setFilter] = useState(initialFilter); // 현재 선택된 필터
 
     const [currentPage, setCurrentPage] = useState(1); // 현재 선택된 페이지 번호
-    const totalPages = 17; // 임시 테스트 데이터
+    const [totalPages, setTotalPages] = useState(1); // 총 페이지
     const [blockSize, setBlockSize] = useState(5);
 
+    // 반응형 blockSize
     useEffect(() => {
         const updateBlockSize = () => {
             if (window.innerWidth >= 1024) {
@@ -34,18 +36,25 @@ const SearchResultsSection = () => {
         return () => window.removeEventListener('resize', updateBlockSize);
     }, []);
 
+    // query가 바뀔 때만 초기화
     useEffect(() => {
         if (!query) return;
 
-        // 검색어가 바뀌면 필터를 'all'로 초기화
-        setFilter('all');
+        setFilter('all'); //필터를 'all'로 초기화
         setResults([]); // 이전 결과 지우기
+        setCurrentPage(1); // 검색어 변경 시 페이지 초기화
         setSearchParams({ query, filter: 'all' });
+    }, [query]);
+
+    // 데이터 fetch
+    useEffect(() => {
+        if (!query) return;
 
         const fetchData = async () => {
             try {
-                const data = await fetchSearchContents(query);
-                setResults(data);
+                const { results, totalPages } = await fetchSearchContents(query, currentPage);
+                setResults(results);
+                setTotalPages(totalPages);
             } catch (err) {
                 console.error(`${query} 검색 결과 불러오기 실패:`, err);
                 setResults([]);
@@ -53,7 +62,12 @@ const SearchResultsSection = () => {
         };
 
         fetchData();
-    }, [query]);
+    }, [query, currentPage]);
+
+    // 페이지 바뀌면 스크롤 위로 이동
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [currentPage]);
 
     // 필터 버튼 클릭 시 상태와 URL 쿼리 업데이트
     const onFilterChange = (newFilter) => {
@@ -61,12 +75,7 @@ const SearchResultsSection = () => {
         setSearchParams({ query, filter: newFilter });
     };
 
-    const filteredResults = results.filter((r) => {
-        if (filter === 'all') return true;
-        return r.media_type === filter;
-    });
-
-    console.log(filteredResults);
+    const filteredResults = results.filter((r) => filter === 'all' || r.media_type === filter);
 
     return (
         <div className="search-results-section">
