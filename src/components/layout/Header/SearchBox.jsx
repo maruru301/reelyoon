@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 
 import Search from '../../../assets/search.svg';
-import { fetchSearchContents } from '../../../api/tmdb';
+import { fetchSearchAll } from '../../../api/tmdb';
 import { useNavigate } from 'react-router-dom';
 
 const SearchBox = () => {
@@ -16,7 +16,7 @@ const SearchBox = () => {
         if (!trimmedQuery) return;
 
         try {
-            const { results } = await fetchSearchContents(trimmedQuery);
+            const { results } = await fetchSearchAll(trimmedQuery);
 
             if (results.length) {
                 navigate(`/search?query=${encodeURIComponent(query)}`);
