@@ -113,7 +113,7 @@ export const fetchSearchAll = async (query, page = 1) => {
     if (!query) return { results: [], totalMovieResults: 0, totalTvResults: 0, totalPages: 0 };
 
     try {
-        // 전체 개수 확인용 (1페이지 fetch)
+        // 1페이지 fetch로 전체 개수 확인
         const [movieDataFirst, tvDataFirst] = await Promise.all([fetchSearchMovies(query, 1), fetchSearchTv(query, 1)]);
 
         const totalMovieResults = movieDataFirst.totalResults;
@@ -121,34 +121,53 @@ export const fetchSearchAll = async (query, page = 1) => {
         const totalResults = totalMovieResults + totalTvResults;
         const totalPages = Math.ceil(totalResults / ITEMS_PER_PAGE);
 
-        // UI 페이지 기준으로 필요한 영화/TV API 페이지 계산
+        // UI 페이지 기준
         const startIndex = (page - 1) * ITEMS_PER_PAGE;
+        const endIndex = startIndex + ITEMS_PER_PAGE - 1;
 
-        // 영화 페이지, TV 페이지 계산
-        const movieStartIndex = startIndex;
-        const tvStartIndex = startIndex - totalMovieResults;
+        let results = [];
 
-        const moviePage = Math.floor(movieStartIndex / ITEMS_PER_PAGE) + 1;
-        const tvPage = Math.floor(Math.max(tvStartIndex, 0) / ITEMS_PER_PAGE) + 1;
+        // 영화 데이터
+        if (startIndex < totalMovieResults) {
+            const movieStart = startIndex;
+            const movieEnd = Math.min(endIndex, totalMovieResults - 1);
 
-        // 실제 페이지 데이터 fetch
-        const [moviePageData, tvPageData] = await Promise.all([
-            fetchSearchMovies(query, moviePage),
-            fetchSearchTv(query, tvPage),
-        ]);
+            const firstMoviePage = Math.floor(movieStart / ITEMS_PER_PAGE) + 1;
+            const lastMoviePage = Math.floor(movieEnd / ITEMS_PER_PAGE) + 1;
 
-        // 영화/TV 데이터 slice
-        const movieOffset = movieStartIndex % ITEMS_PER_PAGE;
-        const tvOffset = tvStartIndex > 0 ? tvStartIndex % ITEMS_PER_PAGE : 0;
+            let movieResults = [];
 
-        const movieResults = moviePageData.results.slice(movieOffset);
-        const tvResults = tvStartIndex > 0 ? tvPageData.results.slice(tvOffset) : [];
+            for (let p = firstMoviePage; p <= lastMoviePage; p++) {
+                const pageData = await fetchSearchMovies(query, p);
+                movieResults.push(...pageData.results);
+            }
 
-        // 합쳐서 ITEMS_PER_PAGE만큼 잘라서 반환
-        const allResults = [...movieResults, ...tvResults].slice(0, ITEMS_PER_PAGE);
+            const movieOffset = movieStart % ITEMS_PER_PAGE;
+            results.push(...movieResults.slice(movieOffset, movieOffset + (movieEnd - movieStart + 1)));
+        }
+
+        // TV 데이터
+        const tvStart = Math.max(startIndex - totalMovieResults, 0);
+        if (tvStart < totalTvResults) {
+            const tvEnd = endIndex - totalMovieResults;
+
+            const firstTvPage = Math.floor(tvStart / ITEMS_PER_PAGE) + 1;
+            const lastTvPage = Math.floor(tvEnd / ITEMS_PER_PAGE) + 1;
+
+            let tvResults = [];
+
+            for (let p = firstTvPage; p <= lastTvPage; p++) {
+                const pageData = await fetchSearchTv(query, p);
+                tvResults.push(...pageData.results);
+            }
+
+            const tvOffset = tvStart % ITEMS_PER_PAGE;
+            const tvNeeded = endIndex - startIndex + 1 - results.length;
+            results.push(...tvResults.slice(tvOffset, tvOffset + tvNeeded));
+        }
 
         return {
-            results: allResults,
+            results,
             totalMovieResults,
             totalTvResults,
             totalPages,

@@ -33,9 +33,15 @@ const SearchResultsSection = () => {
     // 검색어 바뀔 때 초기화
     useEffect(() => {
         if (!query) return;
+
         setFilter('all');
         setCurrentPage(1);
-        setSearchParams({ query, filter: 'all' });
+
+        // 이미 filter 파라미터가 'all'이면 중복 업데이트 방지
+        const currentFilter = searchParams.get('filter');
+        if (currentFilter !== 'all') {
+            setSearchParams({ query, filter: 'all' });
+        }
     }, [query]);
 
     // 데이터 fetch
@@ -50,12 +56,10 @@ const SearchResultsSection = () => {
                     data = await fetchSearchMovies(query, currentPage);
                     setResults(data.results);
                     setTotalMovieResults(data.totalResults); // 전체값 유지
-                    setTotalTvResults(totalTvResults || totalTvResults); // 변경 안 함
                 } else if (filter === 'tv') {
                     data = await fetchSearchTv(query, currentPage);
                     setResults(data.results);
                     setTotalTvResults(data.totalResults);
-                    setTotalMovieResults(totalMovieResults || totalMovieResults);
                 } else {
                     data = await fetchSearchAll(query, currentPage);
                     setResults(data.results);
