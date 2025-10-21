@@ -1,6 +1,6 @@
 import './SearchResultsSection.css';
 
-import { fetchSearchAll, fetchSearchMovies, fetchSearchTv } from '../../api/tmdb';
+import { fetchSearchAll, fetchSearchMovies, fetchSearchTv } from '../../api/searchApi';
 import { useEffect, useState } from 'react';
 
 import ContentCard from '../common/ContentCard';

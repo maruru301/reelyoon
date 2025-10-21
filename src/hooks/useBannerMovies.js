@@ -1,5 +1,7 @@
-import { fetchMovieDetails, fetchMovieImages, fetchMovieVideos, fetchPopularContents } from '../api/tmdb';
+import { fetchMovieDetails, fetchMovieImages, fetchMovieVideos } from '../api/detailsApi';
 import { useEffect, useState } from 'react';
+
+import { fetchPopularContents } from '../api/listApi';
 
 const useBannerMovies = () => {
     const [movies, setMovies] = useState([]);

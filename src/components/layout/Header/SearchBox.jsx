@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 
 import Search from '../../../assets/search.svg';
-import { fetchSearchAll } from '../../../api/tmdb';
+import { fetchSearchAll } from '../../../api/searchApi';
 import { useNavigate } from 'react-router-dom';
 
 const SearchBox = () => {
