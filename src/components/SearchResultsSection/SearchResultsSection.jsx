@@ -1,13 +1,11 @@
 import './SearchResultsSection.css';
 
-import { fetchSearchAll, fetchSearchMovies, fetchSearchTv } from '../../api/searchApi';
 import { useEffect, useState } from 'react';
 
 import SearchResultsBody from './SearchResultsBody';
 import SearchResultsHeader from './SearchResultsHeader';
 import { useSearchParams } from 'react-router-dom';
-
-const ITEMS_PER_PAGE = 20;
+import useSearchResults from '../../hooks/useSearchResults';
 
 const SearchResultsSection = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -15,12 +13,11 @@ const SearchResultsSection = () => {
     const initialFilter = searchParams.get('filter') || 'all';
 
     const [filter, setFilter] = useState(initialFilter);
-    const [results, setResults] = useState([]);
 
-    const [totalMovieResults, setTotalMovieResults] = useState(0);
-    const [totalTvResults, setTotalTvResults] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [blockSize, setBlockSize] = useState(5);
+
+    const { results, totalMovieResults, totalTvResults, totalPages } = useSearchResults(query, filter, currentPage);
 
     // 반응형 blockSize
     useEffect(() => {
@@ -44,37 +41,6 @@ const SearchResultsSection = () => {
         }
     }, [query]);
 
-    // 데이터 fetch
-    useEffect(() => {
-        if (!query) return;
-
-        const fetchData = async () => {
-            try {
-                let data;
-
-                if (filter === 'movie') {
-                    data = await fetchSearchMovies(query, currentPage);
-                    setResults(data.results);
-                    setTotalMovieResults(data.totalResults); // 전체값 유지
-                } else if (filter === 'tv') {
-                    data = await fetchSearchTv(query, currentPage);
-                    setResults(data.results);
-                    setTotalTvResults(data.totalResults);
-                } else {
-                    data = await fetchSearchAll(query, currentPage);
-                    setResults(data.results);
-                    setTotalMovieResults(data.totalMovieResults);
-                    setTotalTvResults(data.totalTvResults);
-                }
-            } catch (err) {
-                console.error('검색 실패:', err);
-                setResults([]);
-            }
-        };
-
-        fetchData();
-    }, [query, currentPage, filter]);
-
     // 페이지 바뀌면 스크롤 위로
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -86,13 +52,6 @@ const SearchResultsSection = () => {
         setCurrentPage(1); // 탭 바뀔 때 1페이지로
         setSearchParams({ query, filter: newFilter });
     };
-
-    const totalPages =
-        filter === 'movie'
-            ? Math.ceil(totalMovieResults / ITEMS_PER_PAGE)
-            : filter === 'tv'
-            ? Math.ceil(totalTvResults / ITEMS_PER_PAGE)
-            : Math.ceil((totalMovieResults + totalTvResults) / ITEMS_PER_PAGE);
 
     return (
         <div className="search-results-section">
