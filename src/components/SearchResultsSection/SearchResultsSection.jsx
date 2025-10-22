@@ -4,12 +4,11 @@ import { useEffect, useState } from 'react';
 
 import SearchResultsBody from './SearchResultsBody';
 import SearchResultsHeader from './SearchResultsHeader';
-import useQueryFilter from '../../hooks/useQueryFilter';
 import useSearchResults from '../../hooks/useSearchResults';
+import useSearchState from '../../hooks/useSearchState';
 
 const SearchResultsSection = () => {
-    const { query, filter, updateFilter } = useQueryFilter();
-    const [currentPage, setCurrentPage] = useState(1);
+    const { query, filter, currentPage, updateFilter, updatePage } = useSearchState();
     const [blockSize, setBlockSize] = useState(5);
 
     const { results, totalMovieResults, totalTvResults, totalPages } = useSearchResults(query, filter, currentPage);
@@ -22,28 +21,17 @@ const SearchResultsSection = () => {
         return () => window.removeEventListener('resize', updateBlockSize);
     }, []);
 
-    // 페이지 바뀌면 스크롤 위로
+    // 페이지 또는 검색어 변경 시 스크롤 위로
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }, [currentPage, query]);
-
-    // 필터 변경 시 페이지 1로 초기화
-    const onFilterChange = (newFilter) => {
-        updateFilter(newFilter);
-        setCurrentPage(1);
-    };
-
-    // query 변경 시 1페이지로 초기화
-    useEffect(() => {
-        if (currentPage !== 1) setCurrentPage(1);
-    }, [query]);
 
     return (
         <div className="search-results-section">
             {/* header - 제목 + 필터 탭 */}
             <SearchResultsHeader
                 filter={filter}
-                onFilterChange={onFilterChange}
+                onFilterChange={updateFilter}
                 totalMovieResults={totalMovieResults}
                 totalTvResults={totalTvResults}
             />
@@ -54,7 +42,7 @@ const SearchResultsSection = () => {
                 currentPage={currentPage}
                 totalPages={totalPages}
                 blockSize={blockSize}
-                onPageChange={setCurrentPage}
+                onPageChange={updatePage}
             />
         </div>
     );
