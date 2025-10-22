@@ -5,15 +5,15 @@
     aspect-ratio: 3 / 5;
 }
 
-.content-info .title-skeleton {
+.banner-info-skeleton .title-skeleton {
     height: 2rem;
 }
 
-.content-info .overview-skeleton {
+.banner-info-skeleton .overview-skeleton {
     width: 100%;
 }
 
-.content-info .btn-skeleton {
+.banner-info-skeleton .btn-skeleton {
     margin-top: 0.5rem;
 }
 
@@ -22,7 +22,7 @@
     --highlight-color: var(--skeleton-bg-highlight);
 }
 
-.content-info .react-loading-skeleton {
+.banner-info-skeleton .react-loading-skeleton {
     --base-color: var(--skeleton-content-base);
     --highlight-color: var(--skeleton-content-highlight);
 }
@@ -32,11 +32,11 @@
         aspect-ratio: 4 / 5;
     }
 
-    .content-info .overview-skeleton {
+    .banner-info-skeleton .overview-skeleton {
         width: 80%;
     }
 
-    .content-info .title-skeleton {
+    .banner-info-skeleton .title-skeleton {
         height: 2.5rem;
     }
 }
@@ -46,7 +46,7 @@
         aspect-ratio: 1;
     }
 
-    .content-info .overview-skeleton {
+    .banner-info-skeleton .overview-skeleton {
         width: 70%;
     }
 }
@@ -56,7 +56,7 @@
         aspect-ratio: 14 / 9;
     }
 
-    .content-info .title-skeleton {
+    .banner-info-skeleton .title-skeleton {
         height: 3rem;
     }
 }

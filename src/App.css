@@ -57,3 +57,11 @@
     width: 16px;
     height: 16px;
 }
+
+/* 공통 fade-up 효과 */
+.fade-up {
+    opacity: 0;
+    transform: translateY(20%);
+    transition: all 0.3s ease;
+    pointer-events: none;
+}

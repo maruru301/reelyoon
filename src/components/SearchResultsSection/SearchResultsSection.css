@@ -1,0 +1,134 @@
+.search-results-section {
+    min-height: calc(100vh - 150px);
+    margin-top: 4rem;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.search-results-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-results-title-tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.search-results-tabs {
+    display: flex;
+    gap: 1rem;
+}
+
+.search-results-tabs button {
+    border: none;
+    background-color: inherit;
+    color: inherit;
+    padding-bottom: 3px;
+    border-radius: 3px;
+}
+
+.search-results-tabs button:hover {
+    color: rgba(var(--color-primary-end-rgb), 1);
+}
+
+.search-results-tabs button.active {
+    color: rgba(var(--color-primary-end-rgb), 1);
+    border-bottom: 2px solid rgba(var(--color-primary-end-rgb), 1);
+}
+
+.search-results-header .sort-select {
+    margin: 2rem 0;
+    padding: 0.5rem;
+    width: 8rem;
+    border-radius: 0.3rem;
+    border: 1.5px solid var(--white-30);
+    background-color: var(--bg-color);
+    color: white;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.search-results-header .sort-select:focus {
+    outline: none;
+    border-color: rgba(var(--color-primary-end-rgb), 0.8);
+}
+
+.search-results-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    position: relative;
+}
+
+.pagination-info {
+    font-size: 1rem;
+    font-weight: 500;
+    position: absolute;
+    top: -30px;
+    right: 0;
+    padding: 0 1rem;
+}
+
+.search-results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1.5rem;
+}
+
+@media (min-width: 48rem) {
+    .search-results-section {
+        padding: 0 4rem;
+    }
+
+    .search-results-header .sort-select {
+        width: 10rem;
+    }
+}
+
+@media (min-width: 64rem) {
+    .search-results-section {
+        padding: 3rem 6rem;
+        flex-direction: row;
+    }
+
+    .search-results-header {
+        flex: 1;
+        gap: 1rem;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .search-results-header .sort-select {
+        margin: 0;
+        width: 10rem;
+    }
+
+    .search-results-tabs {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .search-results-body {
+        flex: 5;
+    }
+
+    .search-results-grid {
+        gap: 2rem;
+    }
+}
+
+@media (min-width: 90rem) {
+    .search-results-section {
+        padding: 4rem 8rem;
+    }
+
+    .search-results-body {
+        flex: 6;
+    }
+}

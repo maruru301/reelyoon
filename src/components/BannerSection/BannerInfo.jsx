@@ -2,9 +2,16 @@ import PlayBtn from '../../assets/play-btn.svg';
 import Star from '../../assets/star.svg';
 
 const BannerInfo = ({ movie, openTrailer }) => {
+    console.log(movie);
     return (
-        <div className="content-info">
-            <h2 className="gradient-text">{movie.title}</h2>
+        <div className="banner-info">
+            <img
+                className="movie-logo"
+                src={`https://image.tmdb.org/t/p/original${movie.logoUrl}`}
+                alt={`${movie.title} 로고`}
+            />
+
+            <h2>{movie.title}</h2>
 
             <div className="movie-stats">
                 <div className="vote-average">

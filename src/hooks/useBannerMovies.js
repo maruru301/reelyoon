@@ -1,7 +1,9 @@
-import { fetchMovieDetails, fetchMovieVideos, fetchPopularContents } from '../api/tmdb';
+import { fetchMovieDetails, fetchMovieImages, fetchMovieVideos } from '../api/detailsApi';
 import { useEffect, useState } from 'react';
 
-const useHeaderMovies = () => {
+import { fetchPopularContents } from '../api/listApi';
+
+const useBannerMovies = () => {
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true); // loading 상태
 
@@ -11,21 +13,25 @@ const useHeaderMovies = () => {
                 const popularMovies = await fetchPopularContents();
 
                 const moviePromises = popularMovies.map(async (movie) => {
+                    // 트레일러 가져오기
                     const trailers = await fetchMovieVideos(movie.id);
+                    if (!trailers.length) return null;
+                    const trailerKey = trailers[0].key;
 
-                    if (trailers.length > 0) {
-                        // 트레일러가 있는 경우
-                        const details = await fetchMovieDetails(movie.id);
-                        return { ...movie, ...details, trailerKey: trailers[0].key };
-                    }
+                    // 상세 정보 가져오기
+                    const details = await fetchMovieDetails(movie.id);
 
-                    return null; // 트레일러 없음
+                    // 로고 이미지 가져오기
+                    const images = await fetchMovieImages(movie.id);
+                    const logoUrl = images.logos?.[0].file_path || '';
+
+                    return { ...movie, ...details, trailerKey, logoUrl };
                 });
 
                 // 트레일러가 있는 영화만 담을 배열
                 const moviesWithTrailer = (await Promise.all(moviePromises))
                     .filter(Boolean) // null 제거
-                    .slice(0, 6);
+                    .slice(0, 7);
 
                 setMovies(moviesWithTrailer);
             } catch (err) {
@@ -41,4 +47,4 @@ const useHeaderMovies = () => {
     return { movies, loading };
 };
 
-export default useHeaderMovies;
+export default useBannerMovies;
