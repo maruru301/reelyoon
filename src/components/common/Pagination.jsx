@@ -10,6 +10,9 @@ const Pagination = ({ currentPage, totalPages, onPageChange, blockSize = 5 }) =>
     // 블록 끝 페이지 계산
     const endPage = Math.min(startPage + blockSize - 1, totalPages); // 단, totalPages를 넘지 않도록
 
+    const hasPrevBlock = startPage > 1;
+    const hasNextBlock = endPage < totalPages;
+
     const pages = [];
     for (let i = startPage; i <= endPage; i++) {
         pages.push(i);
@@ -17,9 +20,12 @@ const Pagination = ({ currentPage, totalPages, onPageChange, blockSize = 5 }) =>
 
     return (
         <div className="pagination">
-            <button className="pagination-prev" disabled={startPage === 1} onClick={() => onPageChange(startPage - 1)}>
-                {'이전'}
-            </button>
+            {/* 이전 버튼 - 이동 가능한 경우에만 표시 */}
+            {hasPrevBlock && (
+                <button className="pagination-prev" onClick={() => onPageChange(startPage - 1)}>
+                    이전
+                </button>
+            )}
 
             {/* 페이지 번호 */}
             {pages.map((page) => {
@@ -34,13 +40,12 @@ const Pagination = ({ currentPage, totalPages, onPageChange, blockSize = 5 }) =>
                 );
             })}
 
-            <button
-                className="pagination-next"
-                disabled={endPage === totalPages}
-                onClick={() => onPageChange(endPage + 1)}
-            >
-                다음
-            </button>
+            {/* 다음 버튼 - 이동 가능한 경우에만 표시 */}
+            {hasNextBlock && (
+                <button className="pagination-next" onClick={() => onPageChange(endPage + 1)}>
+                    다음
+                </button>
+            )}
         </div>
     );
 };

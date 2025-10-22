@@ -17,11 +17,6 @@
     background-color: var(--white-30);
 }
 
-.pagination button:disabled {
-    opacity: 0.5;
-    cursor: default;
-}
-
 .pagination-page {
     font-weight: 500;
     font-size: 1rem;
