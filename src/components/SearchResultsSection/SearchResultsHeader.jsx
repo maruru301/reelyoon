@@ -1,7 +1,15 @@
-const SearchResultsHeader = ({ filter, onFilterChange, totalMovieResults, totalTvResults }) => {
+const SearchResultsHeader = ({
+    filter,
+    onFilterChange,
+    totalMovieResults,
+    totalTvResults,
+    sortOption,
+    onSortChange,
+}) => {
     return (
         <div className="search-results-header">
             <h2 className="content-title gradient-text">검색 결과</h2>
+
             <div className="search-results-tabs">
                 <button className={filter === 'all' ? 'active' : ''} onClick={() => onFilterChange('all')}>
                     전체 ({totalMovieResults + totalTvResults})
@@ -13,6 +21,11 @@ const SearchResultsHeader = ({ filter, onFilterChange, totalMovieResults, totalT
                     TV ({totalTvResults})
                 </button>
             </div>
+
+            <select className="sort-select" value={sortOption} onChange={(e) => onSortChange(e.target.value)}>
+                <option value="latest">최신순</option>
+                <option value="rating">평점순</option>
+            </select>
         </div>
     );
 };
