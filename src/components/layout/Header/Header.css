@@ -117,3 +117,9 @@
         font-size: 1rem;
     }
 }
+
+@media (min-width: 90rem) {
+    .search-input {
+        width: 20rem;
+    }
+}
