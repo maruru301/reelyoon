@@ -11,6 +11,8 @@ const SearchBox = () => {
     const inputRef = useRef(null);
     const navigate = useNavigate();
 
+    const isDesktop = window.innerWidth >= 1024;
+
     const handleSearch = async () => {
         const trimmedQuery = query.trim();
         if (!trimmedQuery) return;
@@ -47,7 +49,7 @@ const SearchBox = () => {
                 <input
                     className={`search-input ${inputOpen ? 'open' : ''}`}
                     ref={inputRef}
-                    type="text"
+                    type="search"
                     name="query"
                     placeholder="검색"
                     autoComplete="off"
@@ -58,6 +60,12 @@ const SearchBox = () => {
                     className="search-btn"
                     type="button"
                     onClick={() => {
+                        // PC 화면이면 항상 열려 있도록
+                        if (isDesktop) {
+                            if (query.trim()) handleSearch();
+                            return;
+                        }
+
                         if (inputOpen && query.trim()) {
                             handleSearch(); // input이 열려 있고 텍스트가 있으면 검색
                         }
