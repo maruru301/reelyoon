@@ -4,16 +4,11 @@ import { useEffect, useState } from 'react';
 
 import SearchResultsBody from './SearchResultsBody';
 import SearchResultsHeader from './SearchResultsHeader';
-import { useSearchParams } from 'react-router-dom';
+import useQueryFilter from '../../hooks/useQueryFilter';
 import useSearchResults from '../../hooks/useSearchResults';
 
 const SearchResultsSection = () => {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const query = searchParams.get('query');
-    const initialFilter = searchParams.get('filter') || 'all';
-
-    const [filter, setFilter] = useState(initialFilter);
-
+    const { query, filter, updateFilter } = useQueryFilter();
     const [currentPage, setCurrentPage] = useState(1);
     const [blockSize, setBlockSize] = useState(5);
 
@@ -27,31 +22,21 @@ const SearchResultsSection = () => {
         return () => window.removeEventListener('resize', updateBlockSize);
     }, []);
 
-    // 검색어 바뀔 때 초기화
-    useEffect(() => {
-        if (!query) return;
-
-        setFilter('all');
-        setCurrentPage(1);
-
-        // 이미 filter 파라미터가 'all'이면 중복 업데이트 방지
-        const currentFilter = searchParams.get('filter');
-        if (currentFilter !== 'all') {
-            setSearchParams({ query, filter: 'all' });
-        }
-    }, [query]);
-
     // 페이지 바뀌면 스크롤 위로
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, [currentPage]);
+    }, [currentPage, query]);
 
-    // 필터 버튼 클릭 시 상태와 URL 쿼리 업데이트
+    // 필터 변경 시 페이지 1로 초기화
     const onFilterChange = (newFilter) => {
-        setFilter(newFilter);
-        setCurrentPage(1); // 탭 바뀔 때 1페이지로
-        setSearchParams({ query, filter: newFilter });
+        updateFilter(newFilter);
+        setCurrentPage(1);
     };
+
+    // query 변경 시 1페이지로 초기화
+    useEffect(() => {
+        if (currentPage !== 1) setCurrentPage(1);
+    }, [query]);
 
     return (
         <div className="search-results-section">
