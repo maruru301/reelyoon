@@ -3,8 +3,8 @@ import './SearchResultsSection.css';
 import { fetchSearchAll, fetchSearchMovies, fetchSearchTv } from '../../api/searchApi';
 import { useEffect, useState } from 'react';
 
-import ContentCard from '../common/ContentCard';
-import Pagination from '../common/Pagination';
+import SearchResultsBody from './SearchResultsBody';
+import SearchResultsHeader from './SearchResultsHeader';
 import { useSearchParams } from 'react-router-dom';
 
 const ITEMS_PER_PAGE = 20;
@@ -97,38 +97,21 @@ const SearchResultsSection = () => {
     return (
         <div className="search-results-section">
             {/* header - 제목 + 필터 탭 */}
-            <div className="search-results-header">
-                <h2 className="content-title gradient-text">검색 결과</h2>
-                <div className="search-results-tabs">
-                    <button className={filter === 'all' ? 'active' : ''} onClick={() => onFilterChange('all')}>
-                        전체 ({totalMovieResults + totalTvResults})
-                    </button>
-                    <button className={filter === 'movie' ? 'active' : ''} onClick={() => onFilterChange('movie')}>
-                        영화 ({totalMovieResults})
-                    </button>
-                    <button className={filter === 'tv' ? 'active' : ''} onClick={() => onFilterChange('tv')}>
-                        TV ({totalTvResults})
-                    </button>
-                </div>
-            </div>
+            <SearchResultsHeader
+                filter={filter}
+                onFilterChange={onFilterChange}
+                totalMovieResults={totalMovieResults}
+                totalTvResults={totalTvResults}
+            />
 
             {/* body - 콘텐츠 + Pagination */}
-            <div className="search-results-body">
-                <div className="pagination-info">{`${currentPage}/${totalPages} 페이지`}</div>
-
-                <div className="search-results-grid">
-                    {results.map((result) => (
-                        <ContentCard key={result.id} content={result} mediaType={result.media_type} />
-                    ))}
-                </div>
-
-                <Pagination
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                    onPageChange={setCurrentPage}
-                    blockSize={blockSize}
-                />
-            </div>
+            <SearchResultsBody
+                results={results}
+                currentPage={currentPage}
+                totalPages={totalPages}
+                blockSize={blockSize}
+                onPageChange={setCurrentPage}
+            />
         </div>
     );
 };
