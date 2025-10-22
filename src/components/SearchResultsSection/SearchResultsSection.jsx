@@ -29,6 +29,9 @@ const SearchResultsSection = () => {
         } else if (sortOption === 'rating') {
             // 평점순
             sorted.sort((a, b) => b.vote_average - a.vote_average);
+        } else if (sortOption === 'popularity') {
+            // 인기순
+            sorted.sort((a, b) => b.popularity - a.popularity);
         }
 
         return sorted;

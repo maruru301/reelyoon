@@ -25,6 +25,7 @@ const SearchResultsHeader = ({
             <select className="sort-select" value={sortOption} onChange={(e) => onSortChange(e.target.value)}>
                 <option value="latest">최신순</option>
                 <option value="rating">평점순</option>
+                <option value="popularity">인기순</option>
             </select>
         </div>
     );
