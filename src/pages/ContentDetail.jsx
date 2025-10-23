@@ -1,9 +1,7 @@
-import { useParams } from 'react-router-dom';
+import ContentInfoSection from '../components/ContentInfoSection/ContentInfoSection';
 
 const ContentDetail = () => {
-    const { type, id } = useParams();
-
-    return <div>{(type, id)}</div>;
+    return <ContentInfoSection />;
 };
 
 export default ContentDetail;

@@ -1,0 +1,98 @@
+.content-info-section {
+    height: 90vh;
+}
+
+.backdrop {
+    position: relative;
+    width: 100%;
+    height: 80vh;
+    background-size: cover;
+    background-position: center;
+}
+
+.content-info-section .overlay {
+    background-color: var(--bg-color-50);
+}
+
+.content-container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 6rem 2rem;
+}
+
+.content-container .poster img {
+    max-width: 20rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+.content-container .info {
+    flex: 1;
+}
+
+.content-container .title {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.content-container .meta {
+    display: flex;
+}
+
+.content-container .meta p {
+    margin-right: 1rem;
+    font-weight: 500;
+}
+
+.content-container .overview {
+    margin-top: 1.5rem;
+    line-height: 1.6;
+    color: #ddd;
+}
+
+@media (min-width: 40rem) {
+    .content-container {
+        padding: 6rem 3rem;
+    }
+}
+
+@media (min-width: 48rem) {
+    .content-container {
+        padding: 6rem 4rem;
+    }
+}
+
+@media (min-width: 64rem) {
+    .content-container {
+        flex-direction: row;
+        padding: 8rem;
+        gap: 4rem;
+        align-items: flex-start;
+    }
+
+    .content-container .info {
+        display: flex;
+        flex-direction: column;
+        margin-top: 4rem;
+        gap: 0.5rem;
+    }
+}
+
+@media (min-width: 90rem) {
+    .content-container {
+        padding: 8rem 15rem;
+        gap: 5rem;
+    }
+
+    .content-container .info {
+        gap: 1rem;
+        margin-top: 5rem;
+    }
+}
