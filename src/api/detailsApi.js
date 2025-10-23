@@ -1,16 +1,16 @@
 import { BASE_URL, fetchFromApi } from './tmdbCommon.js';
 
-// Movie Details
-export const fetchMovieDetails = async (movieId) => {
-    const url = `${BASE_URL}/movie/${movieId}?language=ko`;
+// 공통 Content Details
+const fetchContentDetails = async (id, type = 'movie') => {
+    const url = `${BASE_URL}/${type}/${id}?language=ko`;
     const data = await fetchFromApi(url);
 
     return data;
 };
 
-// Movie Videos (Trailer)
-export const fetchMovieVideos = async (movieId) => {
-    const url = `${BASE_URL}/movie/${movieId}/videos?language=ko`;
+// 공통 Content Videos (트레일러만)
+const fetchContentVideos = async (id, type = 'movie') => {
+    const url = `${BASE_URL}/${type}/${id}/videos?language=ko`;
     const data = await fetchFromApi(url);
 
     // 트레일러만 필터링
@@ -26,3 +26,9 @@ export const fetchMovieImages = async (movieId) => {
 
     return data;
 };
+
+export const fetchMovieDetails = (id) => fetchContentDetails(id, 'movie');
+export const fetchMovieVideos = (id) => fetchContentVideos(id, 'movie');
+
+export const fetchTvDetails = (id) => fetchContentDetails(id, 'tv');
+export const fetchTvVideos = (id) => fetchContentVideos(id, 'tv');
