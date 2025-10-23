@@ -23,17 +23,20 @@ const useBannerMovies = () => {
 
                     // 로고 이미지 가져오기
                     const images = await fetchMovieImages(movie.id);
-                    const logoUrl = images.logos?.[0].file_path || '';
+                    const logoUrl = images.logos?.[0]?.file_path || '';
+
+                    // 로고가 없으면 제외
+                    if (!logoUrl) return null;
 
                     return { ...movie, ...details, trailerKey, logoUrl };
                 });
 
                 // 트레일러가 있는 영화만 담을 배열
-                const moviesWithTrailer = (await Promise.all(moviePromises))
+                const moviesWithTrailerAndLogo = (await Promise.all(moviePromises))
                     .filter(Boolean) // null 제거
                     .slice(0, 7);
 
-                setMovies(moviesWithTrailer);
+                setMovies(moviesWithTrailerAndLogo);
             } catch (err) {
                 console.error('영화 데이터 불러오기 실패:', err);
             } finally {
