@@ -5,6 +5,7 @@
 :root {
     --bg-color: rgb(10, 10, 10);
     --bg-color-80: rgba(10, 10, 10, 0.8);
+    --bg-color-70: rgba(10, 10, 10, 0.7);
     --bg-color-50: rgba(10, 10, 10, 0.5);
     --bg-color-30: rgba(10, 10, 10, 0.3);
     --bg-color-00: rgba(10, 10, 10, 0);
@@ -47,13 +48,13 @@
 }
 
 /* 평점 */
-.vote-average {
+.meta-item {
     display: flex;
     align-items: center;
     gap: 0.3rem;
 }
 
-.vote-average img {
+.meta-item img {
     width: 16px;
     height: 16px;
 }

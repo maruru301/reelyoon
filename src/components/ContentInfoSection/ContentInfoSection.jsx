@@ -3,6 +3,7 @@ import './ContentInfoSection.css';
 import { fetchMovieDetails, fetchTvDetails } from '../../api/detailsApi';
 import { useEffect, useState } from 'react';
 
+import Clock from '../../assets/clock.svg';
 import Star from '../../assets/star.svg';
 import { useParams } from 'react-router-dom';
 
@@ -41,6 +42,7 @@ const ContentInfoSection = () => {
         release_date,
         first_air_date,
         runtime,
+        episode_run_time,
         genres,
         overview,
         vote_average,
@@ -48,7 +50,14 @@ const ContentInfoSection = () => {
 
     const displayTitle = title || name;
 
-    const displayDate = release_date || first_air_date;
+    const rawDate = release_date || first_air_date;
+    const displayDate = rawDate
+        ? new Date(rawDate).toLocaleDateString('ko-KR', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+          })
+        : null;
 
     const backdropUrl = backdrop_path
         ? `https://image.tmdb.org/t/p/original${backdrop_path}`
@@ -57,6 +66,8 @@ const ContentInfoSection = () => {
     const posterUrl = poster_path
         ? `https://image.tmdb.org/t/p/original${poster_path}`
         : 'https://placehold.co/200x300?text=No+Image';
+
+    const displayRuntime = runtime || (episode_run_time?.[0] ?? null);
 
     return (
         <div className="content-info-section">
@@ -74,17 +85,29 @@ const ContentInfoSection = () => {
                         <img src={posterUrl} alt={displayTitle} draggable="false" />
                     </div>
 
-                    <div className="info">
+                    <div className="content-info">
                         <h1 className="title">{displayTitle}</h1>
 
-                        <div className="meta">
-                            <p>{displayDate}</p>
-                            <p className="vote-average">
-                                <img src={Star} alt="별 아이콘" />
-                                <span>{(vote_average ?? 0).toFixed(1)}</span>
-                            </p>
-                            {runtime && <p>{runtime}분</p>}
-                            {genres?.length > 0 && <p>{genres.map((g) => g.name).join(' · ')}</p>}
+                        <div className="details">
+                            <div className="meta-info">
+                                <p>{displayDate}</p>
+
+                                {displayRuntime && (
+                                    <p className="meta-item">
+                                        <img src={Clock} alt="시계 아이콘" />
+                                        <span>{displayRuntime}분</span>
+                                    </p>
+                                )}
+
+                                <p className="meta-item">
+                                    <img src={Star} alt="별 아이콘" />
+                                    <span>{(vote_average ?? 0).toFixed(1)}</span>
+                                </p>
+                            </div>
+
+                            <div className="genres">
+                                {genres?.length > 0 && genres.map((g) => <p key={g.id}>{g.name}</p>)}
+                            </div>
                         </div>
 
                         <p className="overview">{overview || '줄거리 정보가 없습니다.'}</p>
