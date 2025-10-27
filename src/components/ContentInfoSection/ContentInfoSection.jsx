@@ -1,39 +1,9 @@
 import './ContentInfoSection.css';
 
-import { fetchMovieDetails, fetchTvDetails } from '../../api/detailsApi';
-import { useEffect, useState } from 'react';
-
 import Clock from '../../assets/clock.svg';
 import Star from '../../assets/star.svg';
-import { useParams } from 'react-router-dom';
 
-const ContentInfoSection = () => {
-    const { type, id } = useParams();
-    const [details, setDetails] = useState(null);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const getDetails = async () => {
-            setLoading(true);
-
-            try {
-                const data = type === 'movie' ? await fetchMovieDetails(id) : await fetchTvDetails(id);
-                setDetails(data);
-            } catch (err) {
-                console.log(err);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        if (id && type) getDetails();
-    }, [id, type]);
-
-    if (loading) return <p>로딩 중...</p>;
-    if (!details) return <p>데이터를 불러올 수 없습니다.</p>;
-
-    console.log(details);
-
+const ContentInfoSection = ({ details }) => {
     const {
         title,
         name,
