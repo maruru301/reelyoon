@@ -1,9 +1,8 @@
 import './CreditsSection.css';
 
-const CreditsSection = ({ directors, cast }) => {
-    const getProfileUrl = (path) =>
-        path ? `https://image.tmdb.org/t/p/original${path}` : 'https://placehold.co/200x300?text=No+Image';
+import ProfileCard from './ProfileCard';
 
+const CreditsSection = ({ directors, cast }) => {
     return (
         <div className="credits-section">
             <h2 className="content-title gradient-text">Cast & Crew</h2>
@@ -11,36 +10,24 @@ const CreditsSection = ({ directors, cast }) => {
             <div className="credits-grid">
                 {directors?.length > 0 &&
                     directors.map((d) => (
-                        <div key={d.id} className="profile-card">
-                            <img
-                                src={getProfileUrl(d.profile_path)}
-                                alt={`${d.name} (${d.original_name})`}
-                                draggable="false"
-                            />
-
-                            <div className="profile-info">
-                                <p className="name">
-                                    {d.name}
-                                    {d.name !== d.original_name && ` (${d.original_name})`}
-                                </p>
-                                <p className="role">{d.job}</p>
-                            </div>
-                        </div>
+                        <ProfileCard
+                            key={d.id}
+                            profile_path={d.profile_path}
+                            name={d.name}
+                            original_name={d.original_name}
+                            role={d.job}
+                        />
                     ))}
 
                 {cast?.length > 0 &&
                     cast.map((c) => (
-                        <div key={c.id} className="profile-card">
-                            <img src={getProfileUrl(c.profile_path)} alt={c.name} draggable="false" />
-
-                            <div className="profile-info">
-                                <p className="name">
-                                    {c.name}
-                                    {c.name !== c.original_name && ` (${c.original_name})`}
-                                </p>
-                                <p className="role">{c.character} 역</p>
-                            </div>
-                        </div>
+                        <ProfileCard
+                            key={c.id}
+                            profile_path={c.profile_path}
+                            name={c.name}
+                            original_name={c.original_name}
+                            role={`${c.character} 역`}
+                        />
                     ))}
             </div>
         </div>

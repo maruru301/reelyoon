@@ -10,7 +10,6 @@ const fetchContentDetails = async (id, type = 'movie') => {
     if (type === 'movie') {
         directors = data.credits?.crew?.filter((m) => m.job === 'Director') ?? [];
     } else if (type === 'tv') {
-        console.log(data.created_by);
         directors =
             data.created_by?.map((c) => ({
                 id: c.id,
