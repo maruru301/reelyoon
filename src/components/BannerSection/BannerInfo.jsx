@@ -1,8 +1,7 @@
-import PlayBtn from '../../assets/play-btn.svg';
 import Star from '../../assets/star.svg';
+import TrailerButton from '../Trailer/TrailerButton';
 
 const BannerInfo = ({ movie, openTrailer }) => {
-    console.log(movie);
     return (
         <div className="banner-info">
             <img
@@ -25,10 +24,7 @@ const BannerInfo = ({ movie, openTrailer }) => {
 
             <p>{movie.overview}</p>
 
-            <button className="play-btn" onClick={() => openTrailer(movie.trailerKey)}>
-                <img src={PlayBtn} alt="재생 버튼" />
-                <span>Play</span>
-            </button>
+            <TrailerButton trailerKey={movie.trailerKey} onClick={openTrailer} />
         </div>
     );
 };

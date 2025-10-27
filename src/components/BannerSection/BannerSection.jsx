@@ -2,7 +2,7 @@ import './BannerSection.css';
 
 import BannerSkeleton from '../Skeleton/BannerSkeleton';
 import BannerSwiper from './BannerSwiper';
-import TrailerModal from './TrailerModal';
+import TrailerModal from '../Trailer/TrailerModal';
 import useBannerMovies from '../../hooks/useBannerMovies';
 import { useRef } from 'react';
 import useTrailer from '../../hooks/useTrailer';
