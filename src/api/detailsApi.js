@@ -21,7 +21,7 @@ const fetchContentDetails = async (id, type = 'movie') => {
     }
 
     // 출연진 정보 (상위 몇 명만)
-    const cast = data.credits?.cast?.slice(0, 10) ?? [];
+    const cast = data.credits?.cast ?? [];
 
     return {
         ...data,
