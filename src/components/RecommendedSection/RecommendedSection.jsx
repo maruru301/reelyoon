@@ -25,18 +25,21 @@ const RecommendedSection = ({ id, type }) => {
         if (id) getRecommended();
     }, [id, type]);
 
-    if (loading) return <p>로딩 중...</p>;
-    if (!recommendedContents.length) return <p>추천 콘텐츠가 없습니다.</p>;
-
     return (
         <div className="recommended-section">
-            <h2 className="content-title gradient-text">Similar Contents</h2>
+            <h2 className="content-title gradient-text">추천 콘텐츠</h2>
 
-            <div className="recommended-grid">
-                {recommendedContents.map((s) => (
-                    <ContentCard key={s.id} content={s} mediaType={type} />
-                ))}
-            </div>
+            {loading ? (
+                <p>로딩 중...</p>
+            ) : recommendedContents.length === 0 ? (
+                <p className="empty-message">조금만 기다려 주세요, 추천 콘텐츠 준비 중입니다 …</p>
+            ) : (
+                <div className="recommended-grid">
+                    {recommendedContents.map((s) => (
+                        <ContentCard key={s.id} content={s} mediaType={type} />
+                    ))}
+                </div>
+            )}
         </div>
     );
 };

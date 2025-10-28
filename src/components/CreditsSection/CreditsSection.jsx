@@ -10,7 +10,7 @@ const CreditsSection = ({ directors, cast }) => {
 
     return (
         <div className="credits-section">
-            <h2 className="content-title gradient-text">Cast & Crew</h2>
+            <h2 className="content-title gradient-text">출연 / 제작진</h2>
 
             <div className="credits-grid">
                 {directors?.length > 0 &&
