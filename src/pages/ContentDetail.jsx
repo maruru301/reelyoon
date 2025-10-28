@@ -1,22 +1,34 @@
-import { fetchMovieDetails, fetchTvDetails } from '../api/detailsApi';
+import { fetchMovieDetails, fetchMovieVideos, fetchTvDetails, fetchTvVideos } from '../api/detailsApi';
 import { useEffect, useState } from 'react';
 
 import ContentInfoSection from '../components/ContentInfoSection/ContentInfoSection';
 import CreditsSection from '../components/CreditsSection/CreditsSection';
+import TrailerModal from '../components/Trailer/TrailerModal';
 import { useParams } from 'react-router-dom';
+import useTrailer from '../hooks/useTrailer';
 
 const ContentDetail = () => {
     const { type, id } = useParams();
     const [details, setDetails] = useState(null);
+    const [trailerKey, setTrailerKey] = useState(null);
     const [loading, setLoading] = useState(true);
+
+    const { isTrailerOpen, trailerUrl, openTrailer, closeTrailer } = useTrailer();
 
     useEffect(() => {
         const getDetails = async () => {
             setLoading(true);
 
             try {
-                const data = type === 'movie' ? await fetchMovieDetails(id) : await fetchTvDetails(id);
-                setDetails(data);
+                // 상세 + 트레일러
+                const [detailsData, videosData] = await Promise.all([
+                    type === 'movie' ? fetchMovieDetails(id) : fetchTvDetails(id),
+                    type === 'movie' ? fetchMovieVideos(id) : fetchTvVideos(id),
+                ]);
+
+                setDetails(detailsData);
+
+                if (videosData.length) setTrailerKey(videosData[0].key);
             } catch (err) {
                 console.log(err);
             } finally {
@@ -32,8 +44,12 @@ const ContentDetail = () => {
 
     return (
         <>
-            <ContentInfoSection details={details} />
+            <ContentInfoSection details={details} openTrailer={() => openTrailer(trailerKey)} />
             <CreditsSection directors={details.directors} cast={details.cast} />
+
+            {isTrailerOpen && (
+                <TrailerModal isTrailerOpen={isTrailerOpen} trailerUrl={trailerUrl} onClose={closeTrailer} />
+            )}
         </>
     );
 };

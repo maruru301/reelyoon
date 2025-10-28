@@ -2,8 +2,9 @@ import './ContentInfoSection.css';
 
 import Clock from '../../assets/clock.svg';
 import Star from '../../assets/star.svg';
+import TrailerButton from '../Trailer/TrailerButton';
 
-const ContentInfoSection = ({ details }) => {
+const ContentInfoSection = ({ details, openTrailer }) => {
     const {
         title,
         name,
@@ -81,6 +82,8 @@ const ContentInfoSection = ({ details }) => {
                         </div>
 
                         <p className="overview">{overview || '줄거리 정보가 없습니다.'}</p>
+
+                        {openTrailer && <TrailerButton onClick={openTrailer} />}
                     </div>
                 </div>
             </div>
