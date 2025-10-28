@@ -38,7 +38,6 @@ const fetchContentVideos = async (id, type = 'movie') => {
     // 트레일러만 필터링
     let trailers = data.results.filter((video) => video.type === 'Trailer' && video.site === 'YouTube');
 
-    console.log(trailers);
     // 한국어 트레일러가 없으면 영어로
     if (trailers.length === 0) {
         url = `${BASE_URL}/${type}/${id}/videos?language=en-US`;

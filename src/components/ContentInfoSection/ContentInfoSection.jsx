@@ -83,7 +83,7 @@ const ContentInfoSection = ({ details, openTrailer }) => {
 
                         <p className="overview">{overview || '줄거리 정보가 없습니다.'}</p>
 
-                        {openTrailer && <TrailerButton onClick={openTrailer} />}
+                        <div>{openTrailer && <TrailerButton onClick={openTrailer} />}</div>
                     </div>
                 </div>
             </div>

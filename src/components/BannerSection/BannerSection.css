@@ -72,6 +72,12 @@
     text-overflow: ellipsis;
 }
 
+.banner-info .button-section {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
 @media (min-width: 40rem) {
     .banner-img-container {
         aspect-ratio: 4 / 5;

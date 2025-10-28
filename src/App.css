@@ -76,3 +76,31 @@
     font-family: var(--font-body);
     background: linear-gradient(var(--bg-color-00), var(--bg-color));
 }
+
+/* 공통 버튼 스타일 */
+.common-btn {
+    background-color: #535353;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 1rem;
+    margin-top: 0.5rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    font-size: 1rem;
+    font-weight: 700;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+.common-btn:hover {
+    transform: translateY(-5px);
+}
+
+.common-btn img {
+    width: 20px;
+    height: 20px;
+}

@@ -1,7 +1,11 @@
+import Info from '../../assets/info.svg';
 import Star from '../../assets/star.svg';
 import TrailerButton from '../Trailer/TrailerButton';
+import { useNavigate } from 'react-router-dom';
 
 const BannerInfo = ({ movie, openTrailer }) => {
+    const navigate = useNavigate();
+
     return (
         <div className="banner-info">
             <img
@@ -24,7 +28,13 @@ const BannerInfo = ({ movie, openTrailer }) => {
 
             <p>{movie.overview}</p>
 
-            <TrailerButton trailerKey={movie.trailerKey} onClick={openTrailer} />
+            <div className="button-section">
+                <TrailerButton trailerKey={movie.trailerKey} onClick={openTrailer} />
+                <button className="common-btn" onClick={() => navigate(`/movie/${movie.id}`)}>
+                    <img src={Info} alt="정보 버튼" />
+                    <span>더보기</span>
+                </button>
+            </div>
         </div>
     );
 };
