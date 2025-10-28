@@ -44,7 +44,7 @@ const ContentDetail = () => {
 
     return (
         <>
-            <ContentInfoSection details={details} openTrailer={() => openTrailer(trailerKey)} />
+            <ContentInfoSection details={details} openTrailer={trailerKey ? () => openTrailer(trailerKey) : null} />
             <CreditsSection directors={details.directors} cast={details.cast} />
 
             {isTrailerOpen && (

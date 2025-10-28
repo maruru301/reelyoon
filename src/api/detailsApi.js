@@ -32,11 +32,20 @@ const fetchContentDetails = async (id, type = 'movie') => {
 
 // 공통 Content Videos (트레일러만)
 const fetchContentVideos = async (id, type = 'movie') => {
-    const url = `${BASE_URL}/${type}/${id}/videos?language=ko`;
-    const data = await fetchFromApi(url);
+    let url = `${BASE_URL}/${type}/${id}/videos?language=ko`;
+    let data = await fetchFromApi(url);
 
     // 트레일러만 필터링
-    const trailers = data.results.filter((video) => video.type === 'Trailer' && video.site === 'YouTube');
+    let trailers = data.results.filter((video) => video.type === 'Trailer' && video.site === 'YouTube');
+
+    console.log(trailers);
+    // 한국어 트레일러가 없으면 영어로
+    if (trailers.length === 0) {
+        url = `${BASE_URL}/${type}/${id}/videos?language=en-US`;
+        data = await fetchFromApi(url);
+
+        trailers = data.results.filter((video) => video.type === 'Trailer' && video.site === 'YouTube');
+    }
 
     return trailers;
 };
