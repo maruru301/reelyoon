@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 
 import ContentInfoSection from '../components/ContentInfoSection/ContentInfoSection';
 import CreditsSection from '../components/CreditsSection/CreditsSection';
+import RecommendedSection from '../components/RecommendedSection/RecommendedSection';
 import TrailerModal from '../components/Trailer/TrailerModal';
 import { useParams } from 'react-router-dom';
 import useTrailer from '../hooks/useTrailer';
@@ -46,6 +47,7 @@ const ContentDetail = () => {
         <>
             <ContentInfoSection details={details} openTrailer={trailerKey ? () => openTrailer(trailerKey) : null} />
             <CreditsSection directors={details.directors} cast={details.cast} />
+            <RecommendedSection id={id} type={type} />
 
             {isTrailerOpen && (
                 <TrailerModal isTrailerOpen={isTrailerOpen} trailerUrl={trailerUrl} onClose={closeTrailer} />

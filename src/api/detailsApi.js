@@ -49,6 +49,14 @@ const fetchContentVideos = async (id, type = 'movie') => {
     return trailers;
 };
 
+// 공통 Content Recommendations
+const fetchRecommendedContent = async (id, type = 'movie') => {
+    const url = `${BASE_URL}/${type}/${id}/similar?language=ko&page=1`;
+    const data = await fetchFromApi(url);
+
+    return data.results ?? [];
+};
+
 // Movie Images
 export const fetchMovieImages = async (movieId) => {
     const url = `${BASE_URL}/movie/${movieId}/images?include_image_language=en-US`;
@@ -62,3 +70,6 @@ export const fetchMovieVideos = (id) => fetchContentVideos(id, 'movie');
 
 export const fetchTvDetails = (id) => fetchContentDetails(id, 'tv');
 export const fetchTvVideos = (id) => fetchContentVideos(id, 'tv');
+
+export const fetchRecommendedMovie = (id) => fetchRecommendedContent(id, 'movie');
+export const fetchRecommendedTv = (id) => fetchRecommendedContent(id, 'tv');
