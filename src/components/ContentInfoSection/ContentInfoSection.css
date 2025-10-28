@@ -40,9 +40,10 @@
     font-weight: 700;
 }
 
-.content-container .original-title {
-    font-size: 1.2rem;
-    font-weight: 500;
+.content-container .tagline {
+    font-style: italic;
+    color: #ccc;
+    margin-bottom: 1rem;
 }
 
 .content-container .details {

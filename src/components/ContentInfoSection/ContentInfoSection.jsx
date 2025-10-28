@@ -17,6 +17,7 @@ const ContentInfoSection = ({ details, openTrailer }) => {
         genres,
         overview,
         vote_average,
+        tagline,
     } = details;
 
     const displayTitle = title || name;
@@ -58,6 +59,8 @@ const ContentInfoSection = ({ details, openTrailer }) => {
 
                     <div className="content-info">
                         <h1 className="title">{displayTitle}</h1>
+
+                        {tagline && <p className="tagline">"{details.tagline}"</p>}
 
                         <div className="details">
                             <div className="meta-info">
