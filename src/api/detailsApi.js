@@ -2,16 +2,19 @@ import { BASE_URL, fetchFromApi } from './tmdbCommon.js';
 
 // 공통 Content Details
 const fetchContentDetails = async (id, type = 'movie') => {
-    const url = `${BASE_URL}/${type}/${id}?language=ko&append_to_response=credits`;
-    const data = await fetchFromApi(url);
+    const detailsUrl = `${BASE_URL}/${type}/${id}?language=ko&append_to_response=credits`;
+    const ratingUrl =
+        type === 'movie' ? `${BASE_URL}/movie/${id}/release_dates` : `${BASE_URL}/tv/${id}/content_ratings`;
+
+    const [detailsData, ratingData] = await Promise.all([fetchFromApi(detailsUrl), fetchFromApi(ratingUrl)]);
 
     // 감독 정보
     let directors = [];
     if (type === 'movie') {
-        directors = data.credits?.crew?.filter((m) => m.job === 'Director') ?? [];
+        directors = detailsData.credits?.crew?.filter((m) => m.job === 'Director') ?? [];
     } else if (type === 'tv') {
         directors =
-            data.created_by?.map((c) => ({
+            detailsData.created_by?.map((c) => ({
                 id: c.id,
                 name: c.name,
                 original_name: c.original_name,
@@ -21,12 +24,26 @@ const fetchContentDetails = async (id, type = 'movie') => {
     }
 
     // 출연진 정보 (상위 몇 명만)
-    const cast = data.credits?.cast ?? [];
+    const cast = detailsData.credits?.cast ?? [];
+
+    // 한국 관람가 / 시청 등급
+    let ratingKR = '';
+    if (type === 'movie') {
+        const krData = ratingData.results.find((r) => r.iso_3166_1 === 'KR');
+
+        if (krData && krData.release_dates.length > 0) {
+            ratingKR = krData.release_dates[0].certification || '';
+        }
+    } else if (type === 'tv') {
+        const krRating = ratingData.results.find((r) => r.iso_3166_1 === 'KR');
+        ratingKR = krRating?.rating || '';
+    }
 
     return {
-        ...data,
+        ...detailsData,
         directors,
         cast,
+        ratingKR,
     };
 };
 

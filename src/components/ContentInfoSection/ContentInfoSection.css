@@ -38,6 +38,32 @@
 .content-container .title {
     font-size: 2em;
     font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.rating-badge {
+    display: inline-block;
+    padding: 0.4rem;
+    border-radius: 0.3rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+}
+
+/* 등급별 색상 */
+.rating-ALL {
+    background-color: #4caf50;
+}
+.rating-12 {
+    background-color: #2196f3;
+}
+.rating-15 {
+    background-color: #ff9800;
+}
+.rating-19 {
+    background-color: #f44336;
 }
 
 .content-container .tagline {

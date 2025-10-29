@@ -18,6 +18,7 @@ const ContentInfoSection = ({ details, openTrailer }) => {
         overview,
         vote_average,
         tagline,
+        ratingKR,
     } = details;
 
     const displayTitle = title || name;
@@ -58,9 +59,12 @@ const ContentInfoSection = ({ details, openTrailer }) => {
                     </div>
 
                     <div className="content-info">
-                        <h1 className="title">{displayTitle}</h1>
+                        <h1 className="title">
+                            {displayTitle}
+                            <span className={`rating-badge rating-${ratingKR}`}>{ratingKR}</span>
+                        </h1>
 
-                        {tagline && <p className="tagline">"{details.tagline}"</p>}
+                        {tagline && <p className="tagline">"{tagline}"</p>}
 
                         <div className="details">
                             <div className="meta-info">
