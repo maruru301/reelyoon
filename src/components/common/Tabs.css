@@ -1,0 +1,41 @@
+.content-tabs {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.tab-button-box {
+    position: relative;
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    background-color: var(--white-80);
+    overflow: hidden;
+}
+
+.tab-slider {
+    position: absolute;
+    height: 80%;
+    border-radius: 1rem;
+    background: var(--primary-gradient);
+    transition: all 0.3s ease;
+}
+
+.tab-button {
+    position: relative;
+    z-index: 1;
+    padding: 1rem 2.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 1rem;
+    border: none;
+    background: transparent;
+    color: black;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.tab-button.active {
+    color: #fff;
+}

@@ -2,17 +2,23 @@ import { fetchMovieDetails, fetchMovieVideos, fetchTvDetails, fetchTvVideos } fr
 import { useEffect, useState } from 'react';
 
 import ContentInfoSection from '../components/ContentInfoSection/ContentInfoSection';
-import CreditsSection from '../components/CreditsSection/CreditsSection';
-import RecommendedSection from '../components/RecommendedSection/RecommendedSection';
+import TabContent from '../components/common/TabContent';
+import Tabs from '../components/common/Tabs';
 import TrailerModal from '../components/Trailer/TrailerModal';
 import { useParams } from 'react-router-dom';
 import useTrailer from '../hooks/useTrailer';
+
+const TABS = [
+    { key: 'credits', label: '출연 / 제작' },
+    { key: 'recommended', label: '추천 콘텐츠' },
+];
 
 const ContentDetail = () => {
     const { type, id } = useParams();
     const [details, setDetails] = useState(null);
     const [trailerKey, setTrailerKey] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [activeTab, setActiveTab] = useState('credits');
 
     const { isTrailerOpen, trailerUrl, openTrailer, closeTrailer } = useTrailer();
 
@@ -46,8 +52,10 @@ const ContentDetail = () => {
     return (
         <>
             <ContentInfoSection details={details} openTrailer={trailerKey ? () => openTrailer(trailerKey) : null} />
-            <CreditsSection directors={details.directors} cast={details.cast} />
-            <RecommendedSection id={id} type={type} />
+
+            <Tabs tabs={TABS} activeTab={activeTab} onTabChange={setActiveTab} />
+
+            <TabContent activeTab={activeTab} details={details} id={id} type={type} />
 
             {isTrailerOpen && (
                 <TrailerModal isTrailerOpen={isTrailerOpen} trailerUrl={trailerUrl} onClose={closeTrailer} />

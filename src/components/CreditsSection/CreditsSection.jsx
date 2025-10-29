@@ -1,6 +1,7 @@
 import './CreditsSection.css';
 
 import ProfileCard from './ProfileCard';
+import React from 'react';
 import { useState } from 'react';
 
 const CreditsSection = ({ directors, cast }) => {
@@ -8,6 +9,7 @@ const CreditsSection = ({ directors, cast }) => {
 
     const visibleCast = showAllCast ? cast : cast.slice(0, 10);
 
+    console.log('CreditsSection 렌더링');
     return (
         <div className="credits-section">
             <h2 className="content-title gradient-text">출연 / 제작진</h2>
@@ -45,4 +47,4 @@ const CreditsSection = ({ directors, cast }) => {
     );
 };
 
-export default CreditsSection;
+export default React.memo(CreditsSection);

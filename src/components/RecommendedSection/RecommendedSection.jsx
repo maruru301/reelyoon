@@ -4,17 +4,19 @@ import { fetchRecommendedMovie, fetchRecommendedTv } from '../../api/detailsApi'
 import { useEffect, useState } from 'react';
 
 import ContentCard from '../common/ContentCard';
+import React from 'react';
 
 const RecommendedSection = ({ id, type }) => {
     const [recommendedContents, setRecommendedContents] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    console.log('RecommendedSection 렌더링');
     useEffect(() => {
         const getRecommended = async () => {
             setLoading(true);
             try {
                 const data = type === 'movie' ? await fetchRecommendedMovie(id) : await fetchRecommendedTv(id);
-                setRecommendedContents(data.slice(0, 12));
+                setRecommendedContents(data.slice(0, 14));
             } catch (err) {
                 console.error('Recommended 콘텐츠 가져오기 실패:', err);
             } finally {
@@ -44,4 +46,4 @@ const RecommendedSection = ({ id, type }) => {
     );
 };
 
-export default RecommendedSection;
+export default React.memo(RecommendedSection);
