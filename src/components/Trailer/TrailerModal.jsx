@@ -19,7 +19,7 @@ const TrailerModal = ({ isTrailerOpen, trailerUrl, onClose }) => {
                 <iframe
                     width="100%"
                     height="100%"
-                    src={trailerUrl}
+                    src={`${trailerUrl}?autoplay=1&mute=1`}
                     title="Trailer"
                     allow="autoplay; encrypted-media"
                     allowFullScreen
