@@ -1,6 +1,7 @@
 import { fetchMovieDetails, fetchMovieVideos, fetchTvDetails, fetchTvVideos } from '../api/detailsApi';
 import { useEffect, useState } from 'react';
 
+import ContentDetailSkeleton from '../components/Skeleton/ContentDetailSkeleton';
 import ContentInfoSection from '../components/ContentInfoSection/ContentInfoSection';
 import TabContent from '../components/common/TabContent';
 import Tabs from '../components/common/Tabs';
@@ -46,12 +47,13 @@ const ContentDetail = () => {
         if (id && type) getDetails();
     }, [id, type]);
 
-    if (loading) return <p>로딩 중...</p>;
+    if (loading) return <ContentDetailSkeleton />;
     if (!details) return <p>데이터를 불러올 수 없습니다.</p>;
 
     return (
         <>
-            <ContentInfoSection details={details} openTrailer={trailerKey ? () => openTrailer(trailerKey) : null} />
+            <ContentDetailSkeleton />
+            {/* <ContentInfoSection details={details} openTrailer={trailerKey ? () => openTrailer(trailerKey) : null} />
 
             <Tabs tabs={TABS} activeTab={activeTab} onTabChange={setActiveTab} />
 
@@ -59,7 +61,7 @@ const ContentDetail = () => {
 
             {isTrailerOpen && (
                 <TrailerModal isTrailerOpen={isTrailerOpen} trailerUrl={trailerUrl} onClose={closeTrailer} />
-            )}
+            )} */}
         </>
     );
 };

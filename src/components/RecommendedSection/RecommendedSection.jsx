@@ -4,13 +4,11 @@ import { fetchRecommendedMovie, fetchRecommendedTv } from '../../api/detailsApi'
 import { useEffect, useState } from 'react';
 
 import ContentCard from '../common/ContentCard';
-import React from 'react';
 
 const RecommendedSection = ({ id, type }) => {
     const [recommendedContents, setRecommendedContents] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    console.log('RecommendedSection 렌더링');
     useEffect(() => {
         const getRecommended = async () => {
             setLoading(true);
@@ -46,4 +44,4 @@ const RecommendedSection = ({ id, type }) => {
     );
 };
 
-export default React.memo(RecommendedSection);
+export default RecommendedSection;

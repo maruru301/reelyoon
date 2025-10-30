@@ -1,6 +1,7 @@
 .backdrop {
     position: relative;
     width: 100%;
+    height: 100vh;
     background-size: cover;
     background-position: center;
 }
@@ -27,7 +28,7 @@
     box-shadow: 0 0 20px var(--bg-color-80);
 }
 
-.content-container .content-info {
+.content-info {
     flex: 1;
     width: 100%;
     display: flex;
@@ -72,7 +73,7 @@
     margin-bottom: 1rem;
 }
 
-.content-container .details {
+.details {
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
@@ -118,10 +119,6 @@
 }
 
 @media (min-width: 64rem) {
-    .backdrop {
-        height: 80vh;
-    }
-
     .content-container {
         flex-direction: row;
         padding: 8rem 4rem;
@@ -129,11 +126,11 @@
         align-items: flex-start;
     }
 
-    .content-container .content-info {
+    .content-info {
         display: flex;
         flex-direction: column;
         margin-top: 2rem;
-        gap: 0.5rem;
+        gap: 1rem;
     }
 }
 
@@ -143,12 +140,11 @@
         gap: 5rem;
     }
 
-    .content-container .content-info {
-        gap: 1rem;
+    .content-info {
         margin-top: 3rem;
     }
 
-    .content-container .details {
+    .details {
         flex-direction: row;
     }
 }
