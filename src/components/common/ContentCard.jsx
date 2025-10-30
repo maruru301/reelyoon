@@ -40,7 +40,7 @@ const ContentCard = ({ content, mediaType }) => {
                 <>
                     <h3 className="fade-up">{contentTitle}</h3>
 
-                    <div className="vote-average fade-up">
+                    <div className="meta-item fade-up">
                         <img src={Star} alt="별 아이콘" />
                         <span>{(content.vote_average ?? 0).toFixed(1)}</span>
                     </div>

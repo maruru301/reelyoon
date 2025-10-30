@@ -17,7 +17,7 @@ const BannerInfo = ({ movie, openTrailer }) => {
             <h2>{movie.title}</h2>
 
             <div className="movie-stats">
-                <div className="vote-average">
+                <div className="meta-item">
                     <img src={Star} alt="별 아이콘" />
                     <span>{movie.vote_average.toFixed(1)}</span>
                 </div>
