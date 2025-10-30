@@ -9,6 +9,7 @@ import Footer from './components/layout/Footer/Footer';
 import Header from './components/layout/Header/Header';
 import Home from './pages/Home';
 import { Reset } from 'styled-reset';
+import ScrollTopButton from './components/common/ScrollTopButton';
 import SearchResults from './pages/SearchResults';
 
 function App() {
@@ -25,6 +26,8 @@ function App() {
             </Routes>
 
             <Footer />
+
+            <ScrollTopButton />
         </React.Fragment>
     );
 }
