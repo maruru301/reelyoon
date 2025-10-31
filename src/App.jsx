@@ -9,6 +9,7 @@ import Footer from './components/layout/Footer/Footer';
 import Header from './components/layout/Header/Header';
 import Home from './pages/Home';
 import { Reset } from 'styled-reset';
+import ScrollToTop from './components/common/ScrollToTop';
 import ScrollTopButton from './components/common/ScrollTopButton';
 import SearchResults from './pages/SearchResults';
 
@@ -18,6 +19,8 @@ function App() {
             <Reset />
 
             <Header />
+
+            <ScrollToTop />
 
             <Routes>
                 <Route path="/" element={<Home />} />
