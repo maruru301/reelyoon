@@ -61,7 +61,7 @@ const ContentInfoSection = ({ details, openTrailer }) => {
                     <div className="content-info">
                         <h1 className="title">
                             {displayTitle}
-                            <span className={`rating-badge rating-${ratingKR}`}>{ratingKR}</span>
+                            {ratingKR && <span className={`rating-badge rating-${ratingKR}`}>{ratingKR}</span>}
                         </h1>
 
                         {tagline && <p className="tagline">"{tagline}"</p>}

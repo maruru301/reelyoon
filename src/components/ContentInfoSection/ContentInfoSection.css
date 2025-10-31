@@ -51,6 +51,7 @@
     font-size: 1rem;
     font-weight: 700;
     color: white;
+    background-color: var(--white-30);
 }
 
 /* 등급별 색상 */
@@ -63,6 +64,7 @@
 .rating-15 {
     background-color: #ff9800;
 }
+
 .rating-19 {
     background-color: #f44336;
 }
