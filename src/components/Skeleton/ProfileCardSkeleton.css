@@ -1,0 +1,4 @@
+.profile-card .react-loading-skeleton {
+    --base-color: var(--skeleton-content-base);
+    --highlight-color: var(--skeleton-content-highlight);
+}

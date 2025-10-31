@@ -1,6 +1,7 @@
 import './ContentDetailSkeleton.css';
 import 'react-loading-skeleton/dist/skeleton.css';
 
+import ProfileCardSkeleton from './ProfileCardSkeleton';
 import Skeleton from 'react-loading-skeleton';
 
 const ContentDetailSkeleton = () => {
@@ -13,13 +14,8 @@ const ContentDetailSkeleton = () => {
                 {/* 컨텐츠 컨테이너 */}
                 <div className="content-container-skeleton">
                     {/* 포스터 */}
-                    <div className="poster" style={{ width: '50%', minWidth: '300px', maxWidth: '250px' }}>
-                        <Skeleton
-                            width="100%"
-                            height="100%"
-                            borderRadius={16}
-                            style={{ aspectRatio: '2 / 3', borderRadius: '16px' }}
-                        />
+                    <div className="poster">
+                        <Skeleton width="100%" height="100%" borderRadius={16} />
                     </div>
 
                     <div className="content-info">
@@ -58,17 +54,15 @@ const ContentDetailSkeleton = () => {
             </div>
 
             {/* 탭 콘텐츠 */}
-            <div className="credits-section section-skeleton" style={{ marginTop: '1rem' }}>
+            <div className="credits-section section-skeleton">
                 <div className="section-title-skeleton">
                     <Skeleton width={150} height={35} />
                 </div>
 
                 {/* 프로필 카드 그리드 */}
                 <div className="credits-grid">
-                    {[...Array(10)].map((_, i) => (
-                        <div key={i} className="profile-card-skeleton">
-                            <Skeleton width={150} borderRadius={12} style={{ aspectRatio: '2/3' }} />
-                        </div>
+                    {[...Array(12)].map((_, i) => (
+                        <ProfileCardSkeleton key={i} />
                     ))}
                 </div>
             </div>

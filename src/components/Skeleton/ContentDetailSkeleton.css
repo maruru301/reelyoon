@@ -19,6 +19,11 @@
     padding: 6rem 2rem 2rem 2rem;
 }
 
+.content-container-skeleton .poster {
+    min-width: 300px;
+    aspect-ratio: 2/3;
+}
+
 .content-container-skeleton .react-loading-skeleton,
 .content-tabs-skeleton .react-loading-skeleton,
 .section-skeleton .react-loading-skeleton {
