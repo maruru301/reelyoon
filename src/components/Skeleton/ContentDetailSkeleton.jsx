@@ -8,7 +8,7 @@ const ContentDetailSkeleton = () => {
     return (
         <div className="content-detail-skeleton">
             {/* 백드롭 */}
-            <div className="backdrop backdrop-skeleton">
+            <div className="backdrop-skeleton">
                 <Skeleton height="100%" width="100%" />
 
                 {/* 컨텐츠 컨테이너 */}

@@ -1,3 +1,7 @@
+.backdrop-skeleton {
+    height: 100vh;
+}
+
 .backdrop-skeleton .react-loading-skeleton {
     --base-color: var(--skeleton-bg-base);
     --highlight-color: var(--skeleton-bg-highlight);
