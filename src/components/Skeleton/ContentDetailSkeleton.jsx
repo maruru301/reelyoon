@@ -52,15 +52,25 @@ const ContentDetailSkeleton = () => {
                 </div>
             </div>
 
-            {/* 탭 버튼 자리 */}
-            <div className="skeleton-tabs" style={{ display: 'flex', gap: '10px', marginTop: '2rem' }}>
-                <Skeleton width={120} height={36} borderRadius={20} />
-                <Skeleton width={120} height={36} borderRadius={20} />
+            {/* 탭 버튼 */}
+            <div className="content-tabs content-tabs-skeleton">
+                <Skeleton width={330} height={70} borderRadius={16} />
             </div>
 
-            {/* 탭 콘텐츠 자리 */}
-            <div className="skeleton-tab-content" style={{ marginTop: '1rem' }}>
-                <Skeleton count={4} height={16} style={{ marginBottom: '8px' }} />
+            {/* 탭 콘텐츠 */}
+            <div className="credits-section section-skeleton" style={{ marginTop: '1rem' }}>
+                <div className="section-title-skeleton">
+                    <Skeleton width={150} height={35} />
+                </div>
+
+                {/* 프로필 카드 그리드 */}
+                <div className="credits-grid">
+                    {[...Array(10)].map((_, i) => (
+                        <div key={i} className="profile-card-skeleton">
+                            <Skeleton width={150} borderRadius={12} style={{ aspectRatio: '2/3' }} />
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );

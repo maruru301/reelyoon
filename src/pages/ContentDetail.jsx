@@ -52,8 +52,7 @@ const ContentDetail = () => {
 
     return (
         <>
-            <ContentDetailSkeleton />
-            {/* <ContentInfoSection details={details} openTrailer={trailerKey ? () => openTrailer(trailerKey) : null} />
+            <ContentInfoSection details={details} openTrailer={trailerKey ? () => openTrailer(trailerKey) : null} />
 
             <Tabs tabs={TABS} activeTab={activeTab} onTabChange={setActiveTab} />
 
@@ -61,7 +60,7 @@ const ContentDetail = () => {
 
             {isTrailerOpen && (
                 <TrailerModal isTrailerOpen={isTrailerOpen} trailerUrl={trailerUrl} onClose={closeTrailer} />
-            )} */}
+            )}
         </>
     );
 };

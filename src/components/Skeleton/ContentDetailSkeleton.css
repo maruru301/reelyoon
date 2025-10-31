@@ -19,7 +19,9 @@
     padding: 6rem 2rem 2rem 2rem;
 }
 
-.content-container-skeleton .react-loading-skeleton {
+.content-container-skeleton .react-loading-skeleton,
+.content-tabs-skeleton .react-loading-skeleton,
+.section-skeleton .react-loading-skeleton {
     --base-color: var(--skeleton-content-base);
     --highlight-color: var(--skeleton-content-highlight);
 }
@@ -27,6 +29,16 @@
 .content-container-skeleton .genres {
     display: flex;
     gap: 0.5rem;
+}
+
+.section-title-skeleton {
+    margin-bottom: 1rem;
+}
+
+.profile-card-skeleton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 @media (min-width: 40rem) {
