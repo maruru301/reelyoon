@@ -4,6 +4,7 @@ import { fetchRecommendedMovie, fetchRecommendedTv } from '../../api/detailsApi'
 import { useEffect, useState } from 'react';
 
 import ContentCard from '../common/ContentCard';
+import ContentCardSkeleton from '../Skeleton/ContentCardSkeleton';
 
 const RecommendedSection = ({ id, type }) => {
     const [recommendedContents, setRecommendedContents] = useState([]);
@@ -30,7 +31,11 @@ const RecommendedSection = ({ id, type }) => {
             <h2 className="content-title gradient-text">추천 콘텐츠</h2>
 
             {loading ? (
-                <p>로딩 중...</p>
+                <div className="recommended-grid">
+                    {[...Array(14)].map((_, i) => (
+                        <ContentCardSkeleton key={i} />
+                    ))}
+                </div>
             ) : recommendedContents.length === 0 ? (
                 <p className="empty-message">조금만 기다려 주세요, 추천 콘텐츠 준비 중입니다 …</p>
             ) : (
