@@ -9,14 +9,14 @@ const useTrailer = (swiperRef) => {
         setTrailerUrl(`https://www.youtube.com/embed/${trailerKey}`);
         setIsTrailerOpen(true);
 
-        swiperRef.current?.autoplay.stop(); // 모달 열면 슬라이드 stop
+        swiperRef?.current?.autoplay.stop(); // 모달 열면 슬라이드 stop
     };
 
     // 트레일러 close
     const closeTrailer = () => {
         setIsTrailerOpen(false);
 
-        swiperRef.current?.autoplay.start(); // 모달 닫으면 슬라이드 start
+        swiperRef?.current?.autoplay.start(); // 모달 닫으면 슬라이드 start
     };
 
     return { isTrailerOpen, trailerUrl, openTrailer, closeTrailer };

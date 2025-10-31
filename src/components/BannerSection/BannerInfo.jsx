@@ -1,8 +1,11 @@
-import PlayBtn from '../../assets/play-btn.svg';
+import Info from '../../assets/info.svg';
 import Star from '../../assets/star.svg';
+import TrailerButton from '../Trailer/TrailerButton';
+import { useNavigate } from 'react-router-dom';
 
 const BannerInfo = ({ movie, openTrailer }) => {
-    console.log(movie);
+    const navigate = useNavigate();
+
     return (
         <div className="banner-info">
             <img
@@ -14,7 +17,7 @@ const BannerInfo = ({ movie, openTrailer }) => {
             <h2>{movie.title}</h2>
 
             <div className="movie-stats">
-                <div className="vote-average">
+                <div className="meta-item">
                     <img src={Star} alt="별 아이콘" />
                     <span>{movie.vote_average.toFixed(1)}</span>
                 </div>
@@ -25,10 +28,13 @@ const BannerInfo = ({ movie, openTrailer }) => {
 
             <p>{movie.overview}</p>
 
-            <button className="play-btn" onClick={() => openTrailer(movie.trailerKey)}>
-                <img src={PlayBtn} alt="재생 버튼" />
-                <span>Play</span>
-            </button>
+            <div className="button-section">
+                <TrailerButton trailerKey={movie.trailerKey} onClick={openTrailer} />
+                <button className="common-btn" onClick={() => navigate(`/movie/${movie.id}`)}>
+                    <img src={Info} alt="정보 버튼" />
+                    <span>더보기</span>
+                </button>
+            </div>
         </div>
     );
 };

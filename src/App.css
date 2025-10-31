@@ -5,11 +5,13 @@
 :root {
     --bg-color: rgb(10, 10, 10);
     --bg-color-80: rgba(10, 10, 10, 0.8);
+    --bg-color-70: rgba(10, 10, 10, 0.7);
     --bg-color-50: rgba(10, 10, 10, 0.5);
     --bg-color-30: rgba(10, 10, 10, 0.3);
     --bg-color-00: rgba(10, 10, 10, 0);
 
     --white-80: rgba(255, 255, 255, 0.8);
+    --white-50: rgba(255, 255, 255, 0.5);
     --white-30: rgba(255, 255, 255, 0.3);
     --white-10: rgba(255, 255, 255, 0.1);
 
@@ -47,13 +49,13 @@
 }
 
 /* 평점 */
-.vote-average {
+.meta-item {
     display: flex;
     align-items: center;
     gap: 0.3rem;
 }
 
-.vote-average img {
+.meta-item img {
     width: 16px;
     height: 16px;
 }
@@ -64,4 +66,50 @@
     transform: translateY(20%);
     transition: all 0.3s ease;
     pointer-events: none;
+}
+
+/* 공통 overlay */
+.overlay {
+    position: absolute;
+    inset: 0;
+    background-color: var(--bg-color-50);
+    font-family: var(--font-body);
+    background: linear-gradient(var(--bg-color-00), var(--bg-color));
+}
+
+/* 공통 버튼 스타일 */
+.common-btn {
+    background-color: #535353;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 1rem;
+    margin-top: 0.5rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    font-size: 1rem;
+    font-weight: 700;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+.common-btn:hover {
+    transform: translateY(-5px);
+}
+
+.common-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+/* empty message */
+.empty-message {
+    border: 1.5px solid var(--white-30);
+    border-radius: 0.5rem;
+    padding: 2rem 1rem;
+    text-align: center;
+    color: var(--white-80);
 }

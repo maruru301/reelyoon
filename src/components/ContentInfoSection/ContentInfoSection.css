@@ -1,0 +1,153 @@
+.backdrop {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    background-size: cover;
+    background-position: center;
+}
+
+.content-info-section .overlay {
+    background-color: var(--bg-color-70);
+}
+
+.content-container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 6rem 2rem 2rem 2rem;
+}
+
+.content-container .poster img {
+    max-width: 20rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px var(--bg-color-80);
+}
+
+.content-info {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.content-container .title {
+    font-size: 2em;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.rating-badge {
+    display: inline-block;
+    padding: 0.4rem;
+    border-radius: 0.3rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+    background-color: var(--white-30);
+}
+
+/* 등급별 색상 */
+.rating-ALL {
+    background-color: #4caf50;
+}
+.rating-12 {
+    background-color: #2196f3;
+}
+.rating-15 {
+    background-color: #ff9800;
+}
+
+.rating-19 {
+    background-color: #f44336;
+}
+
+.content-container .tagline {
+    font-style: italic;
+    color: #ccc;
+    margin-bottom: 1rem;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.content-container .details p {
+    margin-right: 1rem;
+    font-weight: 500;
+}
+
+.content-container .meta-info {
+    display: flex;
+    align-items: center;
+}
+
+.content-container .genres {
+    display: flex;
+}
+
+.content-container .genres p {
+    background-color: var(--white-30);
+    padding: 0.3rem 0.5rem;
+    border-radius: 0.3rem;
+    box-shadow: 0 0 10px var(--bg-color-50);
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+}
+
+.content-container .overview {
+    line-height: 1.6;
+}
+
+@media (min-width: 40rem) {
+    .content-container {
+        padding: 6rem 3rem 2rem 3rem;
+    }
+}
+
+@media (min-width: 48rem) {
+    .content-container {
+        padding: 6rem 4rem 2rem 4rem;
+    }
+}
+
+@media (min-width: 64rem) {
+    .content-container {
+        flex-direction: row;
+        padding: 8rem 4rem;
+        gap: 4rem;
+        align-items: flex-start;
+    }
+
+    .content-info {
+        display: flex;
+        flex-direction: column;
+        margin-top: 2rem;
+        gap: 1rem;
+    }
+}
+
+@media (min-width: 90rem) {
+    .content-container {
+        padding: 8rem;
+        gap: 5rem;
+    }
+
+    .content-info {
+        margin-top: 3rem;
+    }
+
+    .details {
+        flex-direction: row;
+    }
+}

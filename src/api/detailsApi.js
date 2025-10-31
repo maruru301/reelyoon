@@ -1,22 +1,77 @@
 import { BASE_URL, fetchFromApi } from './tmdbCommon.js';
 
-// Movie Details
-export const fetchMovieDetails = async (movieId) => {
-    const url = `${BASE_URL}/movie/${movieId}?language=ko`;
-    const data = await fetchFromApi(url);
+// 공통 Content Details
+const fetchContentDetails = async (id, type = 'movie') => {
+    const detailsUrl = `${BASE_URL}/${type}/${id}?language=ko&append_to_response=credits`;
+    const ratingUrl =
+        type === 'movie' ? `${BASE_URL}/movie/${id}/release_dates` : `${BASE_URL}/tv/${id}/content_ratings`;
 
-    return data;
+    const [detailsData, ratingData] = await Promise.all([fetchFromApi(detailsUrl), fetchFromApi(ratingUrl)]);
+
+    // 감독 정보
+    let directors = [];
+    if (type === 'movie') {
+        directors = detailsData.credits?.crew?.filter((m) => m.job === 'Director') ?? [];
+    } else if (type === 'tv') {
+        directors =
+            detailsData.created_by?.map((c) => ({
+                id: c.id,
+                name: c.name,
+                original_name: c.original_name,
+                profile_path: c.profile_path,
+                job: 'Creator',
+            })) ?? [];
+    }
+
+    // 출연진 정보 (상위 몇 명만)
+    const cast = detailsData.credits?.cast ?? [];
+
+    // 한국 관람가 / 시청 등급
+    let ratingKR = '';
+    if (type === 'movie') {
+        const krData = ratingData.results.find((r) => r.iso_3166_1 === 'KR');
+
+        if (krData && krData.release_dates.length > 0) {
+            ratingKR = krData.release_dates[0].certification || '';
+        }
+    } else if (type === 'tv') {
+        const krRating = ratingData.results.find((r) => r.iso_3166_1 === 'KR');
+        ratingKR = krRating?.rating || '';
+    }
+
+    return {
+        ...detailsData,
+        directors,
+        cast,
+        ratingKR,
+    };
 };
 
-// Movie Videos (Trailer)
-export const fetchMovieVideos = async (movieId) => {
-    const url = `${BASE_URL}/movie/${movieId}/videos?language=ko`;
-    const data = await fetchFromApi(url);
+// 공통 Content Videos (트레일러만)
+const fetchContentVideos = async (id, type = 'movie') => {
+    let url = `${BASE_URL}/${type}/${id}/videos?language=ko`;
+    let data = await fetchFromApi(url);
 
     // 트레일러만 필터링
-    const trailers = data.results.filter((video) => video.type === 'Trailer' && video.site === 'YouTube');
+    let trailers = data.results.filter((video) => video.type === 'Trailer' && video.site === 'YouTube');
+
+    // 한국어 트레일러가 없으면 영어로
+    if (trailers.length === 0) {
+        url = `${BASE_URL}/${type}/${id}/videos?language=en-US`;
+        data = await fetchFromApi(url);
+
+        trailers = data.results.filter((video) => video.type === 'Trailer' && video.site === 'YouTube');
+    }
 
     return trailers;
+};
+
+// 공통 Content Recommendations
+const fetchRecommendedContent = async (id, type = 'movie') => {
+    const url = `${BASE_URL}/${type}/${id}/similar?language=ko&page=1`;
+    const data = await fetchFromApi(url);
+
+    return data.results ?? [];
 };
 
 // Movie Images
@@ -26,3 +81,12 @@ export const fetchMovieImages = async (movieId) => {
 
     return data;
 };
+
+export const fetchMovieDetails = (id) => fetchContentDetails(id, 'movie');
+export const fetchMovieVideos = (id) => fetchContentVideos(id, 'movie');
+
+export const fetchTvDetails = (id) => fetchContentDetails(id, 'tv');
+export const fetchTvVideos = (id) => fetchContentVideos(id, 'tv');
+
+export const fetchRecommendedMovie = (id) => fetchRecommendedContent(id, 'movie');
+export const fetchRecommendedTv = (id) => fetchRecommendedContent(id, 'tv');
