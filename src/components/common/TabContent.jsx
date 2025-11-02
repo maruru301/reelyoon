@@ -9,7 +9,6 @@ const TabContent = ({ activeTab, details, id, type }) => {
         case 'recommended':
             return <RecommendedSection id={id} type={type} />;
         case 'collection':
-            // movie 전용
             return type === 'movie' ? <CollectionSection id={id} /> : null;
         default:
             return null;
