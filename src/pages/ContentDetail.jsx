@@ -11,6 +11,7 @@ import useTrailer from '../hooks/useTrailer';
 
 const TABS = [
     { key: 'credits', label: '출연 / 제작' },
+    { key: 'collection', label: '컬렉션' },
     { key: 'recommended', label: '추천 콘텐츠' },
 ];
 

@@ -74,6 +74,26 @@ const fetchRecommendedContent = async (id, type = 'movie') => {
     return data.results ?? [];
 };
 
+export const fetchMovieCollection = async (movieId) => {
+    const movieDetails = await fetchContentDetails(movieId, 'movie');
+
+    const collectionId = movieDetails.belongs_to_collection?.id;
+    if (!collectionId) return null;
+
+    const url = `${BASE_URL}/collection/${collectionId}?language=ko`;
+    const data = await fetchFromApi(url);
+
+    const filteredParts = (data.parts ?? [])
+        .filter((part) => Number(part.id) !== Number(movieId)) // 자기 자신 제외
+        .sort((a, b) => new Date(b.release_date) - new Date(a.release_date)); // 최신순
+
+    return {
+        ...data,
+        collectionName: data.name,
+        parts: filteredParts,
+    };
+};
+
 // Movie Images
 export const fetchMovieImages = async (movieId) => {
     const url = `${BASE_URL}/movie/${movieId}/images?include_image_language=en-US`;
