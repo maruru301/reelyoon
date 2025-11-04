@@ -3,6 +3,7 @@ import './ContentCard.css';
 import ContentCardSkeleton from '../Skeleton/ContentCardSkeleton';
 import MetaItem from './MetaItem';
 import Star from '../../assets/star.svg';
+import { formatContentData } from '../../utils/formatContentData';
 import { getDDay } from '../../utils/getDDay';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -13,16 +14,9 @@ const ContentCard = ({ content, mediaType }) => {
     const navigate = useNavigate();
     const type = mediaType || content.media_type;
 
-    const posterUrl = content.poster_path
-        ? `https://image.tmdb.org/t/p/original${content.poster_path}`
-        : 'https://placehold.co/200x300?text=No+Image';
-
-    const title = mediaType === 'movie' ? content.title : content.name;
-    const year = mediaType === 'movie' ? content.release_date?.slice(0, 4) : content.first_air_date?.slice(0, 4);
-    const contentTitle = year ? `${title} (${year})` : title;
-
-    const releaseDateStr = mediaType === 'movie' ? content.release_date : content.first_air_date;
-    const dDay = getDDay(releaseDateStr);
+    const { displayTitle, releaseYear, rawDate, posterUrl } = formatContentData(content);
+    const contentTitle = releaseYear ? `${displayTitle} (${releaseYear})` : displayTitle;
+    const dDay = getDDay(rawDate);
 
     // 카드 클릭 시 상세 페이지 이동
     const handleClick = () => {
@@ -36,7 +30,7 @@ const ContentCard = ({ content, mediaType }) => {
 
             <img
                 src={posterUrl}
-                alt={title}
+                alt={displayTitle}
                 onLoad={() => setImgLoaded(true)}
                 className={`card-image ${imgLoaded ? 'loaded' : ''}`}
             />
