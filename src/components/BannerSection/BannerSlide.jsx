@@ -1,10 +1,13 @@
 import BannerInfo from './BannerInfo';
+import { formatContentData } from '../../utils/formatContentData';
 
 const BannerSlide = ({ movie, openTrailer }) => {
+    const { displayTitle, backdropUrl } = formatContentData(movie);
+
     return (
         <>
             <div className="banner-img-container">
-                <img src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`} alt={movie.title} />
+                <img src={backdropUrl} alt={displayTitle} />
             </div>
             <div className="overlay">
                 <BannerInfo movie={movie} openTrailer={openTrailer} />

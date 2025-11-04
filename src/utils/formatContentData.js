@@ -12,6 +12,7 @@ export const formatContentData = (contentData) => {
               day: 'numeric',
           })
         : null;
+    const releaseYear = rawDate ? new Date(rawDate).getFullYear() : null;
 
     const displayRuntime = runtime || (episode_run_time?.[0] ?? null);
 
@@ -27,6 +28,7 @@ export const formatContentData = (contentData) => {
         displayTitle,
         rawDate,
         displayDate,
+        releaseYear,
         displayRuntime,
         backdropUrl,
         posterUrl,
