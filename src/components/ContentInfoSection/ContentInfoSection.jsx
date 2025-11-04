@@ -1,6 +1,7 @@
 import './ContentInfoSection.css';
 
 import Clock from '../../assets/clock.svg';
+import MetaItem from '../common/MetaItem';
 import Star from '../../assets/star.svg';
 import TrailerButton from '../Trailer/TrailerButton';
 import { formatContentData } from '../../utils/formatContentData';
@@ -41,23 +42,21 @@ const ContentInfoSection = ({ details, openTrailer }) => {
 
                         <div className="details">
                             <div className="meta-info">
-                                <p>{displayDate}</p>
+                                <div>{displayDate}</div>
 
                                 {displayRuntime && (
-                                    <p className="meta-item">
-                                        <img src={Clock} alt="시계 아이콘" />
-                                        <span>{displayRuntime}분</span>
-                                    </p>
+                                    <MetaItem icon={Clock} alt={'시계 아이콘'}>
+                                        {displayRuntime}분
+                                    </MetaItem>
                                 )}
 
-                                <p className="meta-item">
-                                    <img src={Star} alt="별 아이콘" />
-                                    <span>{vote_average ? vote_average.toFixed(1) : '-'}</span>
-                                </p>
+                                <MetaItem icon={Star} alt={'별 아이콘'}>
+                                    {vote_average ? vote_average.toFixed(1) : '-'}
+                                </MetaItem>
                             </div>
 
                             <div className="genres">
-                                {genres?.length > 0 && genres.map((g) => <p key={g.id}>{g.name}</p>)}
+                                {genres?.length > 0 && genres.map((g) => <div key={g.id}>{g.name}</div>)}
                             </div>
                         </div>
 

@@ -1,6 +1,7 @@
 import './ContentCard.css';
 
 import ContentCardSkeleton from '../Skeleton/ContentCardSkeleton';
+import MetaItem from './MetaItem';
 import Star from '../../assets/star.svg';
 import { getDDay } from '../../utils/getDDay';
 import { useNavigate } from 'react-router-dom';
@@ -44,10 +45,9 @@ const ContentCard = ({ content, mediaType }) => {
                 <>
                     <h3 className="fade-up">{contentTitle}</h3>
 
-                    <div className="meta-item fade-up">
-                        <img src={Star} alt="별 아이콘" />
-                        <span>{content.vote_count > 0 ? content.vote_average.toFixed(1) : '-'}</span>
-                    </div>
+                    <MetaItem icon={Star} alt={'별 아이콘'} className="fade-up">
+                        {content.vote_count > 0 ? content.vote_average.toFixed(1) : '-'}
+                    </MetaItem>
 
                     {dDay && <div className="meta-item d-day-badge">{dDay}</div>}
                 </>
