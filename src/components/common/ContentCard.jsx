@@ -2,6 +2,7 @@ import './ContentCard.css';
 
 import ContentCardSkeleton from '../Skeleton/ContentCardSkeleton';
 import Star from '../../assets/star.svg';
+import { getDDay } from '../../utils/getDDay';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -18,6 +19,9 @@ const ContentCard = ({ content, mediaType }) => {
     const title = mediaType === 'movie' ? content.title : content.name;
     const year = mediaType === 'movie' ? content.release_date?.slice(0, 4) : content.first_air_date?.slice(0, 4);
     const contentTitle = year ? `${title} (${year})` : title;
+
+    const releaseDateStr = mediaType === 'movie' ? content.release_date : content.first_air_date;
+    const dDay = getDDay(releaseDateStr);
 
     // 카드 클릭 시 상세 페이지 이동
     const handleClick = () => {
@@ -42,8 +46,10 @@ const ContentCard = ({ content, mediaType }) => {
 
                     <div className="meta-item fade-up">
                         <img src={Star} alt="별 아이콘" />
-                        <span>{(content.vote_average ?? 0).toFixed(1)}</span>
+                        <span>{content.vote_count > 0 ? content.vote_average.toFixed(1) : '-'}</span>
                     </div>
+
+                    {dDay && <div className="meta-item d-day-badge">{dDay}</div>}
                 </>
             )}
         </div>

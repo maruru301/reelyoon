@@ -23,10 +23,22 @@
     padding: 6rem 2rem 2rem 2rem;
 }
 
+.content-container .poster {
+    position: relative;
+}
+
 .content-container .poster img {
     max-width: 20rem;
     border-radius: 1rem;
     box-shadow: 0 0 20px var(--bg-color-80);
+}
+
+.content-container .d-day-badge {
+    position: absolute;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    background-color: var(--bg-color-80);
+    border-radius: 0.5rem;
 }
 
 .content-info {

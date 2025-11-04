@@ -3,6 +3,7 @@ import './ContentInfoSection.css';
 import Clock from '../../assets/clock.svg';
 import Star from '../../assets/star.svg';
 import TrailerButton from '../Trailer/TrailerButton';
+import { getDDay } from '../../utils/getDDay';
 
 const ContentInfoSection = ({ details, openTrailer }) => {
     const {
@@ -42,6 +43,8 @@ const ContentInfoSection = ({ details, openTrailer }) => {
 
     const displayRuntime = runtime || (episode_run_time?.[0] ?? null);
 
+    const dDay = getDDay(rawDate);
+
     return (
         <div className="content-info-section">
             <div
@@ -56,6 +59,8 @@ const ContentInfoSection = ({ details, openTrailer }) => {
                 <div className="content-container">
                     <div className="poster">
                         <img src={posterUrl} alt={displayTitle} draggable="false" />
+
+                        {dDay && <span className="d-day-badge">{dDay}</span>}
                     </div>
 
                     <div className="content-info">
@@ -79,7 +84,7 @@ const ContentInfoSection = ({ details, openTrailer }) => {
 
                                 <p className="meta-item">
                                     <img src={Star} alt="별 아이콘" />
-                                    <span>{(vote_average ?? 0).toFixed(1)}</span>
+                                    <span>{vote_average ? vote_average.toFixed(1) : '-'}</span>
                                 </p>
                             </div>
 

@@ -9,11 +9,6 @@ import TrailerModal from '../components/Trailer/TrailerModal';
 import { useParams } from 'react-router-dom';
 import useTrailer from '../hooks/useTrailer';
 
-const TABS = [
-    { key: 'credits', label: '출연 / 제작' },
-    { key: 'recommended', label: '추천 콘텐츠' },
-];
-
 const ContentDetail = () => {
     const { type, id } = useParams();
     const [details, setDetails] = useState(null);
@@ -22,6 +17,12 @@ const ContentDetail = () => {
     const [activeTab, setActiveTab] = useState('credits');
 
     const { isTrailerOpen, trailerUrl, openTrailer, closeTrailer } = useTrailer();
+
+    const tabs = [
+        { key: 'credits', label: '출연 / 제작' },
+        ...(type === 'movie' ? [{ key: 'collection', label: '컬렉션' }] : []), // movie일 때만 나타나도록
+        { key: 'recommended', label: '추천 콘텐츠' },
+    ];
 
     useEffect(() => {
         const getDetails = async () => {
@@ -54,7 +55,7 @@ const ContentDetail = () => {
         <>
             <ContentInfoSection details={details} openTrailer={trailerKey ? () => openTrailer(trailerKey) : null} />
 
-            <Tabs tabs={TABS} activeTab={activeTab} onTabChange={setActiveTab} />
+            <Tabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
 
             <TabContent activeTab={activeTab} details={details} id={id} type={type} />
 

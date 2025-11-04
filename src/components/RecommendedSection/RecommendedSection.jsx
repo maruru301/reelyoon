@@ -1,10 +1,7 @@
-import './RecommendedSection.css';
-
 import { fetchRecommendedMovie, fetchRecommendedTv } from '../../api/detailsApi';
 import { useEffect, useState } from 'react';
 
-import ContentCard from '../common/ContentCard';
-import ContentCardSkeleton from '../Skeleton/ContentCardSkeleton';
+import ContentGridSection from '../common/ContentGridSection';
 
 const RecommendedSection = ({ id, type }) => {
     const [recommendedContents, setRecommendedContents] = useState([]);
@@ -26,27 +23,7 @@ const RecommendedSection = ({ id, type }) => {
         if (id) getRecommended();
     }, [id, type]);
 
-    return (
-        <div className="recommended-section">
-            <h2 className="content-title gradient-text">추천 콘텐츠</h2>
-
-            {loading ? (
-                <div className="recommended-grid">
-                    {[...Array(14)].map((_, i) => (
-                        <ContentCardSkeleton key={i} />
-                    ))}
-                </div>
-            ) : recommendedContents.length === 0 ? (
-                <p className="empty-message">조금만 기다려 주세요, 추천 콘텐츠 준비 중입니다 …</p>
-            ) : (
-                <div className="recommended-grid">
-                    {recommendedContents.map((s) => (
-                        <ContentCard key={s.id} content={s} mediaType={type} />
-                    ))}
-                </div>
-            )}
-        </div>
-    );
+    return <ContentGridSection title="추천 콘텐츠" loading={loading} contents={recommendedContents} mediaType={type} />;
 };
 
 export default RecommendedSection;
