@@ -45,7 +45,7 @@
 }
 
 .movie-logo {
-    width: 16rem;
+    width: 18rem;
     object-fit: contain;
     margin-bottom: 1rem;
 }
@@ -124,7 +124,7 @@
     }
 
     .banner-info .movie-logo {
-        width: 20rem;
+        width: 24rem;
     }
 
     .banner-info {

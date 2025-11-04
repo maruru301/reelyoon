@@ -1,28 +1,29 @@
 import Info from '../../assets/info.svg';
 import Star from '../../assets/star.svg';
 import TrailerButton from '../Trailer/TrailerButton';
+import { formatContentData } from '../../utils/formatContentData';
 import { useNavigate } from 'react-router-dom';
 
 const BannerInfo = ({ movie, openTrailer }) => {
     const navigate = useNavigate();
+
+    const { displayTitle, releaseYear, displayRuntime } = formatContentData(movie);
 
     return (
         <div className="banner-info">
             <img
                 className="movie-logo"
                 src={`https://image.tmdb.org/t/p/original${movie.logoUrl}`}
-                alt={`${movie.title} 로고`}
+                alt={`${displayTitle} 로고`}
             />
-
-            <h2>{movie.title}</h2>
 
             <div className="movie-stats">
                 <div className="meta-item">
                     <img src={Star} alt="별 아이콘" />
                     <span>{movie.vote_average.toFixed(1)}</span>
                 </div>
-                <div>{movie.runtime}분</div>
-                <div>{movie.release_date.slice(0, 4)}</div>
+                <div>{displayRuntime}분</div>
+                <div>{releaseYear}</div>
                 <div>{movie.genres.map((g) => g.name).join(' · ')}</div>
             </div>
 
