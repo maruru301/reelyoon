@@ -45,7 +45,7 @@
 }
 
 .movie-logo {
-    width: 16rem;
+    width: 18rem;
     object-fit: contain;
     margin-bottom: 1rem;
 }
@@ -64,7 +64,7 @@
 
 .banner-info p {
     width: 100%;
-    line-height: 1.2rem;
+    line-height: 1.6rem;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
@@ -124,7 +124,7 @@
     }
 
     .banner-info .movie-logo {
-        width: 20rem;
+        width: 24rem;
     }
 
     .banner-info {

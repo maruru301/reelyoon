@@ -1,28 +1,30 @@
+import Clock from '../../assets/clock.svg';
 import Info from '../../assets/info.svg';
+import MetaItem from '../common/MetaItem';
 import Star from '../../assets/star.svg';
 import TrailerButton from '../Trailer/TrailerButton';
+import { formatContentData } from '../../utils/formatContentData';
 import { useNavigate } from 'react-router-dom';
 
 const BannerInfo = ({ movie, openTrailer }) => {
     const navigate = useNavigate();
+
+    const { displayTitle, releaseYear, displayRuntime } = formatContentData(movie);
 
     return (
         <div className="banner-info">
             <img
                 className="movie-logo"
                 src={`https://image.tmdb.org/t/p/original${movie.logoUrl}`}
-                alt={`${movie.title} 로고`}
+                alt={`${displayTitle} 로고`}
             />
 
-            <h2>{movie.title}</h2>
-
             <div className="movie-stats">
-                <div className="meta-item">
-                    <img src={Star} alt="별 아이콘" />
-                    <span>{movie.vote_average.toFixed(1)}</span>
-                </div>
-                <div>{movie.runtime}분</div>
-                <div>{movie.release_date.slice(0, 4)}</div>
+                <div>{releaseYear}</div>
+                <MetaItem icon={Clock}>{displayRuntime}분</MetaItem>
+                <MetaItem icon={Star} alt={'별 아이콘'}>
+                    {movie.vote_average ? movie.vote_average.toFixed(1) : '-'}
+                </MetaItem>
                 <div>{movie.genres.map((g) => g.name).join(' · ')}</div>
             </div>
 

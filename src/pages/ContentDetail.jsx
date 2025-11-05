@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 
 import ContentDetailSkeleton from '../components/Skeleton/ContentDetailSkeleton';
 import ContentInfoSection from '../components/ContentInfoSection/ContentInfoSection';
-import TabContent from '../components/common/TabContent';
-import Tabs from '../components/common/Tabs';
+import TabContent from '../components/Tab/TabContent';
+import Tabs from '../components/Tab/Tabs';
 import TrailerModal from '../components/Trailer/TrailerModal';
 import { useParams } from 'react-router-dom';
 import useTrailer from '../hooks/useTrailer';
