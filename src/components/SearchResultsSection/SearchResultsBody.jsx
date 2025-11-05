@@ -1,5 +1,5 @@
 import ContentCard from '../common/ContentCard';
-import Pagination from '../common/Pagination';
+import Pagination from '../Pagination/Pagination';
 
 const SearchResultsBody = ({ results, currentPage, totalPages, blockSize, onPageChange }) => {
     return (
