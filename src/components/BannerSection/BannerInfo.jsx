@@ -1,3 +1,4 @@
+import Clock from '../../assets/clock.svg';
 import Info from '../../assets/info.svg';
 import MetaItem from '../common/MetaItem';
 import Star from '../../assets/star.svg';
@@ -19,11 +20,11 @@ const BannerInfo = ({ movie, openTrailer }) => {
             />
 
             <div className="movie-stats">
+                <div>{releaseYear}</div>
+                <MetaItem icon={Clock}>{displayRuntime}분</MetaItem>
                 <MetaItem icon={Star} alt={'별 아이콘'}>
                     {movie.vote_average ? movie.vote_average.toFixed(1) : '-'}
                 </MetaItem>
-                <div>{displayRuntime}분</div>
-                <div>{releaseYear}</div>
                 <div>{movie.genres.map((g) => g.name).join(' · ')}</div>
             </div>
 
