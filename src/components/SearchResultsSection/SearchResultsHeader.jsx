@@ -1,4 +1,5 @@
 const SearchResultsHeader = ({
+    query,
     filter,
     onFilterChange,
     totalMovieResults,
@@ -9,7 +10,7 @@ const SearchResultsHeader = ({
     return (
         <div className="search-results-header">
             <div className="search-results-title-tabs">
-                <h2 className="content-title gradient-text">검색 결과</h2>
+                <h2 className="content-title gradient-text">{`"${query}" 검색 결과`}</h2>
 
                 <div className="search-results-tabs">
                     <button className={filter === 'all' ? 'active' : ''} onClick={() => onFilterChange('all')}>

@@ -67,36 +67,37 @@ const GenreContents = () => {
     if (loading) return <div style={{ padding: '10rem' }}>로딩 중...</div>;
 
     return (
-        <div style={{ padding: '10rem' }}>
-            <h1 className="content-title gradient-text">"{genreName}" 장르</h1>
-            <div>현재 페이지 {currentPage}</div>
-            <div>총 {totalPages} 페이지</div>
-            <div>총 {totalResults} 개의 결과</div>
+        <div className="search-results-section">
+            <div className="search-results-header">
+                <div className="search-results-title-tabs">
+                    <h1 className="content-title gradient-text">"{genreName}" 장르</h1>
 
-            {contents.length === 0 ? (
-                <p>표시할 콘텐츠가 없습니다.</p>
-            ) : (
-                <div
-                    style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-                        gap: '1.5rem',
-                    }}
-                >
-                    {contents.map((content) => (
-                        <div key={content.id}>
-                            <ContentCard content={content} mediaType={mediaType} />
-                        </div>
-                    ))}
+                    <div>총 {totalResults} 개의 결과</div>
                 </div>
-            )}
+            </div>
 
-            <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={onPageChange}
-                blockSize={blockSize}
-            />
+            <div className="search-results-body">
+                <div className="pagination-info">{`${currentPage}/${totalPages} 페이지`}</div>
+
+                {contents.length === 0 ? (
+                    <p>표시할 콘텐츠가 없습니다.</p>
+                ) : (
+                    <div className="search-results-grid">
+                        {contents.map((content) => (
+                            <div key={content.id}>
+                                <ContentCard content={content} mediaType={mediaType} />
+                            </div>
+                        ))}
+                    </div>
+                )}
+
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={onPageChange}
+                    blockSize={blockSize}
+                />
+            </div>
         </div>
     );
 };

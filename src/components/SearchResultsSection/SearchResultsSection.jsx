@@ -65,6 +65,7 @@ const SearchResultsSection = () => {
         <div className="search-results-section">
             {/* header - 제목 + 필터 탭 */}
             <SearchResultsHeader
+                query={query}
                 filter={filter}
                 onFilterChange={updateFilter}
                 totalMovieResults={totalMovieResults}

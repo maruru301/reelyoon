@@ -97,7 +97,7 @@
     }
 
     .search-results-header {
-        flex: 1;
+        flex: 1.5;
         gap: 1rem;
         flex-direction: column;
         justify-content: flex-start;
@@ -125,7 +125,7 @@
 
 @media (min-width: 90rem) {
     .search-results-section {
-        padding: 4rem 8rem;
+        padding: 4rem 12rem;
     }
 
     .search-results-body {

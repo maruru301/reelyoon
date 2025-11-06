@@ -8,7 +8,9 @@ const SearchResultsBody = ({ results, currentPage, totalPages, blockSize, onPage
 
             <div className="search-results-grid">
                 {results.map((result) => (
-                    <ContentCard key={result.id} content={result} mediaType={result.media_type} />
+                    <div key={result.id}>
+                        <ContentCard content={result} mediaType={result.media_type} />
+                    </div>
                 ))}
             </div>
 
