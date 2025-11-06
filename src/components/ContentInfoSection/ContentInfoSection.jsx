@@ -6,6 +6,7 @@ import Star from '../../assets/star.svg';
 import TrailerButton from '../Trailer/TrailerButton';
 import { formatContentData } from '../../utils/formatContentData';
 import { getDDay } from '../../utils/getDDay';
+import { slugify } from '../../utils/slugify';
 import { useNavigate } from 'react-router-dom';
 
 const ContentInfoSection = ({ details, openTrailer, type }) => {
@@ -64,7 +65,7 @@ const ContentInfoSection = ({ details, openTrailer, type }) => {
                                             key={g.id}
                                             className="genre-badge"
                                             onClick={() =>
-                                                navigate(`/${type}/genre/${g.id}`, {
+                                                navigate(`/${type}/genre/${g.id}/${slugify(g.name)}`, {
                                                     state: { genreName: g.name },
                                                 })
                                             }

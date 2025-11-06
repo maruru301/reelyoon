@@ -27,7 +27,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/search" element={<SearchResults />} />
                 <Route path="/:type/:id" element={<ContentDetail />} />
-                <Route path="/:mediaType/genre/:genreId" element={<GenreContents />} />
+                <Route path="/:mediaType/genre/:genreId/:genreSlug" element={<GenreContents />} />
             </Routes>
 
             <Footer />

@@ -6,10 +6,10 @@ import Pagination from '../components/Pagination/Pagination';
 import { fetchContentsByGenre } from '../api/listApi';
 
 const GenreContents = () => {
-    const { mediaType, genreId } = useParams();
+    const { mediaType, genreId, genreSlug } = useParams();
     const { state } = useLocation();
 
-    const genreName = state?.genreName;
+    const genreName = state?.genreName ?? genreSlug.replace(/-and-/g, ' & ');
 
     const [contents, setContents] = useState([]);
     const [loading, setLoading] = useState(true);
