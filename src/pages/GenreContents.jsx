@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 
+import ContentCard from '../components/common/ContentCard';
 import { fetchContentsByGenre } from '../api/listApi';
 
 const GenreContents = () => {
-    const { genreId } = useParams();
+    const { mediaType, genreId } = useParams();
     const { state } = useLocation();
 
     const genreName = state?.genreName;
@@ -17,10 +18,10 @@ const GenreContents = () => {
             try {
                 setLoading(true);
 
-                const data = await fetchContentsByGenre('movie', genreId);
+                const data = await fetchContentsByGenre(mediaType, genreId);
                 setContents(data);
             } catch (err) {
-                console.error(err);
+                console.error('장르별 콘텐츠 가져오기 실패', err);
             } finally {
                 setLoading(false);
             }
@@ -33,7 +34,7 @@ const GenreContents = () => {
 
     return (
         <div style={{ padding: '10rem' }}>
-            <h1>{genreName}</h1>
+            <h1 className="content-title gradient-text">"{genreName}" 장르</h1>
 
             {contents.length === 0 ? (
                 <p>표시할 콘텐츠가 없습니다.</p>
@@ -47,12 +48,7 @@ const GenreContents = () => {
                 >
                     {contents.map((content) => (
                         <div key={content.id}>
-                            <img
-                                src={`https://image.tmdb.org/t/p/w300${content.poster_path}`}
-                                alt={content.title || content.name}
-                                style={{ width: '100%' }}
-                            />
-                            <p>{content.title || content.name}</p>
+                            <ContentCard content={content} mediaType={mediaType} />
                         </div>
                     ))}
                 </div>

@@ -8,7 +8,7 @@ import { formatContentData } from '../../utils/formatContentData';
 import { getDDay } from '../../utils/getDDay';
 import { useNavigate } from 'react-router-dom';
 
-const ContentInfoSection = ({ details, openTrailer }) => {
+const ContentInfoSection = ({ details, openTrailer, type }) => {
     const navigate = useNavigate();
 
     const { genres, overview, vote_average, tagline, ratingKR } = details;
@@ -63,7 +63,11 @@ const ContentInfoSection = ({ details, openTrailer }) => {
                                         <div
                                             key={g.id}
                                             className="genre-badge"
-                                            onClick={() => navigate(`/genre/${g.id}`, { state: { genreName: g.name } })}
+                                            onClick={() =>
+                                                navigate(`/${type}/genre/${g.id}`, {
+                                                    state: { genreName: g.name },
+                                                })
+                                            }
                                         >
                                             {g.name}
                                         </div>
