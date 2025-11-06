@@ -23,3 +23,10 @@ export const fetchTrendingContents = async (mediaType = 'movie', timeWindow = 'd
 
     return data.results;
 };
+
+// discover - 장르별 콘텐츠
+export const fetchContentsByGenre = async (mediaType = 'movie', genreId, page = 1) => {
+    const url = `${BASE_URL}/discover/${mediaType}?language=ko&with_genres=${genreId}&page=${page}&sort_by=popularity.desc`;
+    const data = await fetchFromApi(url);
+    return data.results ?? [];
+};
