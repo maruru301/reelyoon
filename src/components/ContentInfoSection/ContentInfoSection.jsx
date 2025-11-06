@@ -63,7 +63,7 @@ const ContentInfoSection = ({ details, openTrailer }) => {
                                         <div
                                             key={g.id}
                                             className="genre-badge"
-                                            onClick={() => navigate(`/genre/${g.id}`)}
+                                            onClick={() => navigate(`/genre/${g.id}`, { state: { genreName: g.name } })}
                                         >
                                             {g.name}
                                         </div>
