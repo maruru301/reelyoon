@@ -35,7 +35,7 @@ export const fetchContentsByGenre = async (mediaType = 'movie', genreId, page = 
 
     return {
         results: data.results ?? [],
-        page: data.page ?? page,
+        currentPage: data.page ?? page,
         totalPages: data.total_pages ?? 0,
         totalResults: data.total_results ?? 0,
     };
