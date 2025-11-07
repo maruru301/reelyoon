@@ -20,15 +20,18 @@ const GenreContents = () => {
 
     const [blockSize, setBlockSize] = useState(5);
 
+    const [sortBy, setSortBy] = useState('popularity.desc');
+
     // 장르별 콘텐츠 불러오기
-    const loadContents = async (page = 1) => {
+    const loadContents = async (page = 1, sortOption = sortBy) => {
         try {
             setLoading(true);
 
             const { results, currentPage, totalPages, totalResults } = await fetchContentsByGenre(
                 mediaType,
                 genreId,
-                page
+                page,
+                sortOption
             );
 
             setContents(results);
@@ -42,10 +45,10 @@ const GenreContents = () => {
         }
     };
 
-    // 첫 로드
+    // 첫 로드 & 정렬 변경 시
     useEffect(() => {
-        if (genreId) loadContents(1);
-    }, [genreId, mediaType]);
+        if (genreId) loadContents(1, sortBy);
+    }, [genreId, mediaType, sortBy]);
 
     // 페이지 변경 핸들러
     const onPageChange = (newPage) => {
@@ -54,6 +57,11 @@ const GenreContents = () => {
 
             window.scrollTo({ top: 0, behavior: 'smooth' }); // 페이지 바뀔 때 위로 스크롤
         }
+    };
+
+    const onSortChange = (e) => {
+        setSortBy(e.target.value);
+        setCurrentPage(1); // 첫 페이지로 리셋
     };
 
     // 반응형 blockSize
@@ -73,6 +81,13 @@ const GenreContents = () => {
                     <h1 className="content-title gradient-text">"{genreName}" 장르</h1>
 
                     <div>총 {totalResults} 개의 결과</div>
+
+                    <select className="sort-select" value={sortBy} onChange={onSortChange}>
+                        <option value="popularity.desc">인기순</option>
+                        <option value="release_date.desc">최신순</option>
+                        <option value="release_date.asc">오래된순</option>
+                        <option value="vote_average.desc">평점순</option>
+                    </select>
                 </div>
             </div>
 

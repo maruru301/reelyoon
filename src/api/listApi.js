@@ -25,12 +25,12 @@ export const fetchTrendingContents = async (mediaType = 'movie', timeWindow = 'd
 };
 
 // discover - 장르별 콘텐츠
-export const fetchContentsByGenre = async (mediaType = 'movie', genreId, page = 1) => {
+export const fetchContentsByGenre = async (mediaType = 'movie', genreId, page = 1, sortBy = 'popularity.desc') => {
     if (!genreId) {
         return { results: [], page: 0, total_pages: 0, total_results: 0 };
     }
 
-    const url = `${BASE_URL}/discover/${mediaType}?language=ko&with_genres=${genreId}&page=${page}&sort_by=popularity.desc`;
+    const url = `${BASE_URL}/discover/${mediaType}?language=ko&with_genres=${genreId}&page=${page}&sort_by=${sortBy}`;
     const data = await fetchFromApi(url);
 
     return {
