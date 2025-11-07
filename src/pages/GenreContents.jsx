@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
-import ContentCard from '../components/common/ContentCard';
-import Pagination from '../components/Pagination/Pagination';
+import ContentResultsSection from '../components/common/ContentResultsSection';
 import { fetchContentsByGenre } from '../api/listApi';
 
 const GenreContents = () => {
@@ -18,8 +17,6 @@ const GenreContents = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [totalResults, setTotalResults] = useState(0);
-
-    const [blockSize, setBlockSize] = useState(5);
 
     const [sortBy, setSortBy] = useState('popularity.desc');
 
@@ -67,70 +64,29 @@ const GenreContents = () => {
         }
     };
 
-    const onSortChange = (e) => {
-        setSortBy(e.target.value);
+    const onSortChange = (value) => {
+        setSortBy(value);
         setCurrentPage(1); // 첫 페이지로 리셋
     };
 
-    // 반응형 blockSize
-    useEffect(() => {
-        const updateBlockSize = () => setBlockSize(window.innerWidth >= 1024 ? 10 : 5);
-        updateBlockSize();
-        window.addEventListener('resize', updateBlockSize);
-        return () => window.removeEventListener('resize', updateBlockSize);
-    }, []);
-
-    if (loading) return <div style={{ padding: '10rem' }}>로딩 중...</div>;
-
     return (
-        <div className="search-results-section">
-            <div className="search-results-header">
-                <div className="search-results-title-tabs">
-                    <h1 className="content-title gradient-text">"{genreName}" 장르</h1>
-
-                    <div>총 {totalResults} 개의 결과</div>
-
-                    <div className="search-results-tabs">
-                        <button className={mediaType === 'movie' ? 'active' : ''} onClick={() => onTabChange('movie')}>
-                            영화
-                        </button>
-                        <button className={mediaType === 'tv' ? 'active' : ''} onClick={() => onTabChange('tv')}>
-                            TV
-                        </button>
-                    </div>
-                </div>
-
-                <select className="sort-select" value={sortBy} onChange={onSortChange}>
-                    <option value="popularity.desc">인기순</option>
-                    <option value="release_date.desc">최신순</option>
-                    <option value="release_date.asc">오래된순</option>
-                    <option value="vote_average.desc">평점순</option>
-                </select>
-            </div>
-
-            <div className="search-results-body">
-                <div className="pagination-info">{`${currentPage}/${totalPages} 페이지`}</div>
-
-                {contents.length === 0 ? (
-                    <p>표시할 콘텐츠가 없습니다.</p>
-                ) : (
-                    <div className="search-results-grid">
-                        {contents.map((content) => (
-                            <div key={content.id}>
-                                <ContentCard content={content} mediaType={mediaType} />
-                            </div>
-                        ))}
-                    </div>
-                )}
-
-                <Pagination
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                    onPageChange={onPageChange}
-                    blockSize={blockSize}
-                />
-            </div>
-        </div>
+        <ContentResultsSection
+            title={`"${genreName}" 장르`}
+            totalResults={totalResults}
+            tabs={[
+                { label: '영화', value: 'movie' },
+                { label: 'TV', value: 'tv' },
+            ]}
+            activeTab={mediaType}
+            onTabChange={onTabChange}
+            sortOption={sortBy}
+            onSortChange={onSortChange}
+            contents={contents}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={onPageChange}
+            loading={loading}
+        />
     );
 };
 

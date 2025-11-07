@@ -2,15 +2,13 @@ import './SearchResultsSection.css';
 
 import { useEffect, useMemo, useState } from 'react';
 
-import SearchResultsBody from './SearchResultsBody';
-import SearchResultsHeader from './SearchResultsHeader';
+import ContentResultsSection from '../common/ContentResultsSection';
 import useSearchResults from '../../hooks/useSearchResults';
 import useSearchState from '../../hooks/useSearchState';
 
 const SearchResultsSection = () => {
     const { query, filter, currentPage, updateFilter, updatePage } = useSearchState();
-    const [blockSize, setBlockSize] = useState(5);
-    const [sortOption, setSortOption] = useState('latest'); // 정렬 상태
+    const [sortOption, setSortOption] = useState('release_date.desc'); // 정렬 상태
 
     const { results, totalMovieResults, totalTvResults, totalPages } = useSearchResults(query, filter, currentPage);
 
@@ -19,17 +17,24 @@ const SearchResultsSection = () => {
         if (!results) return [];
 
         const sorted = [...results];
-        if (sortOption === 'latest') {
-            sorted.sort((a, b) => {
-                // 최신순
-                const dateA = new Date(a.release_date || a.first_air_date || 0);
-                const dateB = new Date(b.release_date || b.first_air_date || 0);
-                return dateB - dateA;
-            });
-        } else if (sortOption === 'rating') {
+        if (sortOption === 'release_date.desc') {
+            // 인기순
+            sorted.sort(
+                (a, b) =>
+                    new Date(b.release_date || b.first_air_date || 0) -
+                    new Date(a.release_date || a.first_air_date || 0)
+            );
+        } else if (sortOption === 'release_date.asc') {
+            // 최신순
+            sorted.sort(
+                (a, b) =>
+                    new Date(a.release_date || a.first_air_date || 0) -
+                    new Date(b.release_date || b.first_air_date || 0)
+            );
+        } else if (sortOption === 'vote_average.desc') {
             // 평점순
             sorted.sort((a, b) => b.vote_average - a.vote_average);
-        } else if (sortOption === 'popularity') {
+        } else if (sortOption === 'popularity.desc') {
             // 인기순
             sorted.sort((a, b) => b.popularity - a.popularity);
         }
@@ -45,16 +50,8 @@ const SearchResultsSection = () => {
 
     // query 또는 filter가 변경되면 정렬 옵션 초기화
     useEffect(() => {
-        setSortOption('latest');
+        setSortOption('release_date.desc');
     }, [query, filter]);
-
-    // 반응형 blockSize
-    useEffect(() => {
-        const updateBlockSize = () => setBlockSize(window.innerWidth >= 1024 ? 10 : 5);
-        updateBlockSize();
-        window.addEventListener('resize', updateBlockSize);
-        return () => window.removeEventListener('resize', updateBlockSize);
-    }, []);
 
     // 페이지 또는 검색어 변경 시 스크롤 위로
     useEffect(() => {
@@ -62,27 +59,23 @@ const SearchResultsSection = () => {
     }, [currentPage, query]);
 
     return (
-        <div className="search-results-section">
-            {/* header - 제목 + 필터 탭 */}
-            <SearchResultsHeader
-                query={query}
-                filter={filter}
-                onFilterChange={updateFilter}
-                totalMovieResults={totalMovieResults}
-                totalTvResults={totalTvResults}
-                sortOption={sortOption}
-                onSortChange={onSortChange}
-            />
-
-            {/* body - 콘텐츠 + Pagination */}
-            <SearchResultsBody
-                results={sortedResults}
-                currentPage={currentPage}
-                totalPages={totalPages}
-                blockSize={blockSize}
-                onPageChange={updatePage}
-            />
-        </div>
+        <ContentResultsSection
+            title={`"${query}" 검색 결과`}
+            totalResults={totalMovieResults + totalTvResults}
+            tabs={[
+                { label: `전체 (${totalMovieResults + totalTvResults})`, value: 'all' },
+                { label: `영화 (${totalMovieResults})`, value: 'movie' },
+                { label: `TV (${totalTvResults})`, value: 'tv' },
+            ]}
+            activeTab={filter}
+            onTabChange={updateFilter}
+            sortOption={sortOption}
+            onSortChange={onSortChange}
+            contents={sortedResults}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={updatePage}
+        />
     );
 };
 
