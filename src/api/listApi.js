@@ -32,7 +32,10 @@ export const fetchContentsByGenre = async (mediaType = 'movie', genreId, page = 
 
     const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD 형식
 
-    const url = `${BASE_URL}/discover/${mediaType}?language=ko&with_genres=${genreId}&page=${page}&sort_by=${sortBy}&primary_release_date.lte=${today}`;
+    const sortParam = mediaType === 'tv' ? sortBy.replace('release_date', 'first_air_date') : sortBy;
+    const dateParam = mediaType === 'movie' ? `primary_release_date.lte=${today}` : `first_air_date.lte=${today}`;
+
+    const url = `${BASE_URL}/discover/${mediaType}?language=ko&with_genres=${genreId}&page=${page}&sort_by=${sortParam}&${dateParam}`;
     const data = await fetchFromApi(url);
 
     return {
