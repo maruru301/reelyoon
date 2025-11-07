@@ -1,3 +1,5 @@
+import './ContentResultsSection.css';
+
 import { useEffect, useState } from 'react';
 
 import ContentCard from './ContentCard';
@@ -30,16 +32,16 @@ const ContentResultsSection = ({
     if (loading) return <div style={{ padding: '10rem' }}>로딩 중...</div>;
 
     return (
-        <div className="search-results-section">
+        <div className="content-results-section">
             {/* header */}
-            <div className="search-results-header">
-                <div className="search-results-title-tabs">
+            <div className="content-results-header">
+                <div className="content-results-title-tabs">
                     <h1 className="content-title gradient-text">{title}</h1>
 
                     {totalResults !== undefined && <div>총 {totalResults}개의 결과</div>}
 
                     {tabs?.length > 0 && (
-                        <div className="search-results-tabs">
+                        <div className="content-results-tabs">
                             {tabs.map((tab) => (
                                 <button
                                     key={tab.value}
@@ -54,7 +56,11 @@ const ContentResultsSection = ({
                 </div>
 
                 {onSortChange && (
-                    <select className="sort-select" value={sortOption} onChange={(e) => onSortChange?.(e.target.value)}>
+                    <select
+                        className="content-sort-select"
+                        value={sortOption}
+                        onChange={(e) => onSortChange?.(e.target.value)}
+                    >
                         <option value="popularity.desc">인기순</option>
                         <option value="release_date.desc">최신순</option>
                         <option value="release_date.asc">오래된순</option>
@@ -64,14 +70,14 @@ const ContentResultsSection = ({
             </div>
 
             {/* body */}
-            <div className="search-results-body">
+            <div className="content-results-body">
                 {contents.length === 0 ? (
                     <p>{'표시할 콘텐츠가 없습니다.'}</p>
                 ) : (
                     <>
-                        <div className="pagination-info">{`${currentPage}/${totalPages} 페이지`}</div>
+                        <div className="content-pagination-info">{`${currentPage}/${totalPages} 페이지`}</div>
 
-                        <div className="search-results-grid">
+                        <div className="content-results-grid">
                             {contents.map((content) => (
                                 <div key={content.id}>
                                     <ContentCard content={content} mediaType={content.media_type || activeTab} />
