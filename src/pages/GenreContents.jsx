@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import ContentCard from '../components/common/ContentCard';
 import Pagination from '../components/Pagination/Pagination';
@@ -8,6 +8,7 @@ import { fetchContentsByGenre } from '../api/listApi';
 const GenreContents = () => {
     const { mediaType, genreId, genreSlug } = useParams();
     const { state } = useLocation();
+    const navigate = useNavigate();
 
     const genreName = state?.genreName ?? genreSlug.replace(/-and-/g, ' & ');
 
@@ -21,6 +22,13 @@ const GenreContents = () => {
     const [blockSize, setBlockSize] = useState(5);
 
     const [sortBy, setSortBy] = useState('popularity.desc');
+
+    // 탭 전환
+    const onTabChange = (type) => {
+        if (type !== mediaType) {
+            navigate(`/${type}/genre/${genreId}/${genreSlug}`, { state }); // URL 변경
+        }
+    };
 
     // 장르별 콘텐츠 불러오기
     const loadContents = async (page = 1, sortOption = sortBy) => {
@@ -81,6 +89,15 @@ const GenreContents = () => {
                     <h1 className="content-title gradient-text">"{genreName}" 장르</h1>
 
                     <div>총 {totalResults} 개의 결과</div>
+
+                    <div className="search-results-tabs">
+                        <button className={mediaType === 'movie' ? 'active' : ''} onClick={() => onTabChange('movie')}>
+                            영화
+                        </button>
+                        <button className={mediaType === 'tv' ? 'active' : ''} onClick={() => onTabChange('tv')}>
+                            TV
+                        </button>
+                    </div>
 
                     <select className="sort-select" value={sortBy} onChange={onSortChange}>
                         <option value="popularity.desc">인기순</option>
