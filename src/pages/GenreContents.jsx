@@ -98,14 +98,14 @@ const GenreContents = () => {
                             TV
                         </button>
                     </div>
-
-                    <select className="sort-select" value={sortBy} onChange={onSortChange}>
-                        <option value="popularity.desc">인기순</option>
-                        <option value="release_date.desc">최신순</option>
-                        <option value="release_date.asc">오래된순</option>
-                        <option value="vote_average.desc">평점순</option>
-                    </select>
                 </div>
+
+                <select className="sort-select" value={sortBy} onChange={onSortChange}>
+                    <option value="popularity.desc">인기순</option>
+                    <option value="release_date.desc">최신순</option>
+                    <option value="release_date.asc">오래된순</option>
+                    <option value="vote_average.desc">평점순</option>
+                </select>
             </div>
 
             <div className="search-results-body">
