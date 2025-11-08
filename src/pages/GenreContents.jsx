@@ -72,7 +72,11 @@ const GenreContents = () => {
     return (
         <ContentResultsSection
             title={`"${genreName}" 장르`}
-            totalResults={totalResults}
+            totalResults={{
+                all: totalResults, // 혹시나 내부에서 all 탭 대비용
+                movie: mediaType === 'movie' ? totalResults : 0,
+                tv: mediaType === 'tv' ? totalResults : 0,
+            }}
             tabs={[
                 { label: '영화', value: 'movie' },
                 { label: 'TV', value: 'tv' },

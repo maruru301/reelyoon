@@ -59,7 +59,11 @@ const SearchResults = () => {
     return (
         <ContentResultsSection
             title={`"${query}" 검색 결과`}
-            totalResults={totalMovieResults + totalTvResults}
+            totalResults={{
+                all: totalMovieResults + totalTvResults,
+                movie: totalMovieResults,
+                tv: totalTvResults,
+            }}
             tabs={[
                 { label: `전체 (${totalMovieResults + totalTvResults})`, value: 'all' },
                 { label: `영화 (${totalMovieResults})`, value: 'movie' },

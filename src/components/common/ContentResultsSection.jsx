@@ -38,7 +38,12 @@ const ContentResultsSection = ({
                 <div className="content-results-title-tabs">
                     <h1 className="content-title gradient-text">{title}</h1>
 
-                    {totalResults !== undefined && <div>총 {totalResults}개의 결과</div>}
+                    {totalResults && (
+                        <div>
+                            총 {totalResults[activeTab] ?? totalResults.all}개의{' '}
+                            {activeTab === 'movie' ? '영화' : activeTab === 'tv' ? 'TV' : ''} 결과
+                        </div>
+                    )}
 
                     {tabs?.length > 0 && (
                         <div className="content-results-tabs">
