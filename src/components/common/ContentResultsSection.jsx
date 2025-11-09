@@ -3,6 +3,7 @@ import './ContentResultsSection.css';
 import { useEffect, useState } from 'react';
 
 import ContentCard from './ContentCard';
+import ContentResultsSkeleton from '../Skeleton/ContentResultsSkeleton';
 import Pagination from '../Pagination/Pagination';
 
 const ContentResultsSection = ({
@@ -29,7 +30,7 @@ const ContentResultsSection = ({
         return () => window.removeEventListener('resize', updateBlockSize);
     }, []);
 
-    if (loading) return <div style={{ padding: '10rem' }}>로딩 중...</div>;
+    if (loading) return <ContentResultsSkeleton />;
 
     return (
         <div className="content-results-section">
@@ -77,7 +78,7 @@ const ContentResultsSection = ({
             {/* body */}
             <div className="content-results-body">
                 {contents.length === 0 ? (
-                    <p>{'표시할 콘텐츠가 없습니다.'}</p>
+                    <p className="empty-message">{'표시할 콘텐츠가 없습니다.'}</p>
                 ) : (
                     <>
                         <div className="content-pagination-info">{`${currentPage}/${totalPages} 페이지`}</div>
