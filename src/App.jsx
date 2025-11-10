@@ -5,6 +5,7 @@ import * as React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import ContentDetail from './pages/ContentDetail';
+import ContentListPage from './pages/ViewAllPage';
 import Footer from './components/layout/Footer/Footer';
 import GenreContents from './pages/GenreContents';
 import Header from './components/layout/Header/Header';
@@ -26,8 +27,9 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/search" element={<SearchResults />} />
-                <Route path="/:type/:id" element={<ContentDetail />} />
+                <Route path="/detail/:type/:id" element={<ContentDetail />} />
                 <Route path="/:mediaType/genre/:genreId/:genreSlug" element={<GenreContents />} />
+                <Route path="/:mediaType/:category" element={<ContentListPage />} />
             </Routes>
 
             <Footer />

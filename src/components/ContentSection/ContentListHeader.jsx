@@ -1,9 +1,16 @@
 import ContentToggleButton from './ContentToggleButton';
+import { useNavigate } from 'react-router-dom';
 
-const ContentListHeader = ({ title, state, actions, options }) => {
+const ContentListHeader = ({ title, state, actions, options, category }) => {
+    const navigate = useNavigate();
     const { mediaType, timeWindow } = state;
     const { setMediaType, setTimeWindow } = actions;
     const { showMediaType, showTimeWindow } = options;
+
+    const handleViewAll = () => {
+        if (!mediaType || !category) return;
+        navigate(`/${mediaType}/${category}`);
+    };
 
     return (
         <div className="content-list-header">
@@ -36,7 +43,9 @@ const ContentListHeader = ({ title, state, actions, options }) => {
             </div>
 
             <div className="header-right">
-                <button className="view-all-btn">전체보기</button>
+                <button className="view-all-btn" onClick={handleViewAll}>
+                    전체보기
+                </button>
             </div>
         </div>
     );

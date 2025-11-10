@@ -3,7 +3,7 @@ import ContentSwiper from './ContentSwiper';
 import useContents from '../../hooks/useContents';
 import useSwiperNavigation from '../../hooks/useSwiperNavigation';
 
-const ContentList = ({ title, contentsFetcher, showMediaType = false, showTimeWindow = false }) => {
+const ContentList = ({ title, contentsFetcher, showMediaType = false, showTimeWindow = false, category }) => {
     const { swiperRef, prevRef, nextRef } = useSwiperNavigation();
 
     const {
@@ -19,6 +19,7 @@ const ContentList = ({ title, contentsFetcher, showMediaType = false, showTimeWi
                 state={{ mediaType, timeWindow }}
                 actions={{ setMediaType, setTimeWindow }}
                 options={{ showMediaType, showTimeWindow }}
+                category={category}
             />
 
             <ContentSwiper
