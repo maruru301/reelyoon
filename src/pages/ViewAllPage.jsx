@@ -1,11 +1,12 @@
 import { fetchPopularContents, fetchTopRatedContents } from '../api/listApi';
 import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import ContentResultsSection from '../components/common/ContentResultsSection';
-import { useParams } from 'react-router-dom';
 
 const ViewAllPage = () => {
     const { mediaType, category } = useParams();
+    const navigate = useNavigate();
 
     const [contents, setContents] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -37,6 +38,13 @@ const ViewAllPage = () => {
         }
     };
 
+    // 탭 전환
+    const onTabChange = (type) => {
+        if (type !== mediaType) {
+            navigate(`/${type}/${category}`); // URL 변경
+        }
+    };
+
     useEffect(() => {
         fetchContents();
     }, [mediaType, category, currentPage]);
@@ -55,7 +63,7 @@ const ViewAllPage = () => {
                     { label: 'TV', value: 'tv' },
                 ]}
                 activeTab={mediaType}
-                onTabChange={() => {}}
+                onTabChange={onTabChange}
                 contents={contents}
                 totalResults={{ all: totalResults }}
                 currentPage={currentPage}
