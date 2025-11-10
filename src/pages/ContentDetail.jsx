@@ -53,7 +53,11 @@ const ContentDetail = () => {
 
     return (
         <>
-            <ContentInfoSection details={details} openTrailer={trailerKey ? () => openTrailer(trailerKey) : null} />
+            <ContentInfoSection
+                details={details}
+                openTrailer={trailerKey ? () => openTrailer(trailerKey) : null}
+                type={type}
+            />
 
             <Tabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
 

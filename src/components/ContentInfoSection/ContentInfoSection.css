@@ -108,13 +108,20 @@
     display: flex;
 }
 
-.content-container .genres div {
+.genres .genre-badge {
     background-color: var(--white-30);
     padding: 0.3rem 0.5rem;
     border-radius: 0.3rem;
     box-shadow: 0 0 10px var(--bg-color-50);
     font-size: 0.9rem;
     margin-right: 0.5rem;
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.genres .genre-badge:hover {
+    background-color: var(--white-50);
 }
 
 .content-container .overview {

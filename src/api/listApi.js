@@ -23,3 +23,25 @@ export const fetchTrendingContents = async (mediaType = 'movie', timeWindow = 'd
 
     return data.results;
 };
+
+// discover - 장르별 콘텐츠
+export const fetchContentsByGenre = async (mediaType = 'movie', genreId, page = 1, sortBy = 'popularity.desc') => {
+    if (!genreId) {
+        return { results: [], page: 0, total_pages: 0, total_results: 0 };
+    }
+
+    const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD 형식
+
+    const sortParam = mediaType === 'tv' ? sortBy.replace('release_date', 'first_air_date') : sortBy;
+    const dateParam = mediaType === 'movie' ? `primary_release_date.lte=${today}` : `first_air_date.lte=${today}`;
+
+    const url = `${BASE_URL}/discover/${mediaType}?language=ko&with_genres=${genreId}&page=${page}&sort_by=${sortParam}&${dateParam}`;
+    const data = await fetchFromApi(url);
+
+    return {
+        results: data.results ?? [],
+        currentPage: data.page ?? page,
+        totalPages: data.total_pages ?? 0,
+        totalResults: data.total_results ?? 0,
+    };
+};

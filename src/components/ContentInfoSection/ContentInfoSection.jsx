@@ -6,10 +6,13 @@ import Star from '../../assets/star.svg';
 import TrailerButton from '../Trailer/TrailerButton';
 import { formatContentData } from '../../utils/formatContentData';
 import { getDDay } from '../../utils/getDDay';
+import { slugify } from '../../utils/slugify';
+import { useNavigate } from 'react-router-dom';
 
-const ContentInfoSection = ({ details, openTrailer }) => {
+const ContentInfoSection = ({ details, openTrailer, type }) => {
+    const navigate = useNavigate();
+
     const { genres, overview, vote_average, tagline, ratingKR } = details;
-
     const { displayTitle, rawDate, displayDate, displayRuntime, backdropUrl, posterUrl } = formatContentData(details);
 
     const dDay = getDDay(rawDate);
@@ -56,7 +59,20 @@ const ContentInfoSection = ({ details, openTrailer }) => {
                             </div>
 
                             <div className="genres">
-                                {genres?.length > 0 && genres.map((g) => <div key={g.id}>{g.name}</div>)}
+                                {genres?.length > 0 &&
+                                    genres.map((g) => (
+                                        <div
+                                            key={g.id}
+                                            className="genre-badge"
+                                            onClick={() =>
+                                                navigate(`/${type}/genre/${g.id}/${slugify(g.name)}`, {
+                                                    state: { genreName: g.name },
+                                                })
+                                            }
+                                        >
+                                            {g.name}
+                                        </div>
+                                    ))}
                             </div>
                         </div>
 

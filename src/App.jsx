@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import ContentDetail from './pages/ContentDetail';
 import Footer from './components/layout/Footer/Footer';
+import GenreContents from './pages/GenreContents';
 import Header from './components/layout/Header/Header';
 import Home from './pages/Home';
 import { Reset } from 'styled-reset';
@@ -26,6 +27,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/search" element={<SearchResults />} />
                 <Route path="/:type/:id" element={<ContentDetail />} />
+                <Route path="/:mediaType/genre/:genreId/:genreSlug" element={<GenreContents />} />
             </Routes>
 
             <Footer />
