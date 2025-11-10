@@ -43,9 +43,11 @@ const ContentListHeader = ({ title, state, actions, options, category }) => {
             </div>
 
             <div className="header-right">
-                <button className="view-all-btn" onClick={handleViewAll}>
-                    전체보기
-                </button>
+                {category !== 'trending' && (
+                    <button className="view-all-btn" onClick={handleViewAll}>
+                        전체보기
+                    </button>
+                )}
             </div>
         </div>
     );

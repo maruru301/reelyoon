@@ -10,7 +10,7 @@ const useBannerMovies = () => {
     useEffect(() => {
         const fetchMovies = async () => {
             try {
-                const popularMovies = await fetchPopularContents();
+                const { results: popularMovies } = await fetchPopularContents();
 
                 const moviePromises = popularMovies.map(async (movie) => {
                     // 트레일러 가져오기

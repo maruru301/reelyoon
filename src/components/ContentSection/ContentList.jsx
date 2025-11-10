@@ -23,7 +23,7 @@ const ContentList = ({ title, contentsFetcher, showMediaType = false, showTimeWi
             />
 
             <ContentSwiper
-                data={{ contents, SKELETON_COUNT }}
+                data={{ contents: contents || [], SKELETON_COUNT }}
                 state={{ mediaType, loading }}
                 refs={{ swiperRef, prevRef, nextRef }}
             />
