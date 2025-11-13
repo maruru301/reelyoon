@@ -14,6 +14,11 @@ const ViewAllPage = () => {
     const [totalPages, setTotalPages] = useState(0);
     const [totalResults, setTotalResults] = useState(0);
 
+    const categoryMap = {
+        popular: 'Popular',
+        'top-rated': 'Top Rated',
+    };
+
     const fetcherMap = {
         popular: fetchPopularContents,
         'top-rated': fetchTopRatedContents,
@@ -57,7 +62,7 @@ const ViewAllPage = () => {
     return (
         <div className="view-all-page">
             <ContentResultsSection
-                title={category}
+                title={categoryMap[category]}
                 tabs={[
                     { label: '영화', value: 'movie' },
                     { label: 'TV', value: 'tv' },
