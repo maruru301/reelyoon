@@ -5,8 +5,13 @@
 
 .content-list-header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 1rem;
+}
+
+.content-list-header .header-left {
+    display: flex;
+    flex-direction: column;
 }
 
 .content-title {
@@ -19,6 +24,12 @@
 .content-title::before {
     content: '|';
     padding-right: 0.5rem;
+}
+
+.toggle-btn-container {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
 }
 
 .content-header-btn {
@@ -92,6 +103,20 @@
     background: var(--primary-gradient);
 }
 
+.view-all-btn {
+    padding: 0.5rem 1rem;
+    background-color: inherit;
+    color: inherit;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.view-all-btn:hover {
+    background-color: #535353;
+}
+
 @media (min-width: 40rem) {
     .content-list {
         margin: 2rem;
@@ -101,6 +126,11 @@
 @media (min-width: 48rem) {
     .content-list {
         margin: 3.5rem;
+    }
+
+    .content-list-header .header-left {
+        flex-direction: row;
+        gap: 1rem;
     }
 
     .content-header-btn button {
@@ -126,6 +156,10 @@
 
     .content-title {
         font-size: 1.8rem;
+    }
+
+    .view-all-btn {
+        font-size: 1rem;
     }
 
     .prev-btn,

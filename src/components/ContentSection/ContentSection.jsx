@@ -12,9 +12,20 @@ const ContentSection = () => {
                 contentsFetcher={fetchTrendingContents}
                 showMediaType={true}
                 showTimeWindow={true}
+                category="trending"
             />
-            <ContentList title="Top Rated" contentsFetcher={fetchTopRatedContents} showMediaType={true} />
-            <ContentList title="Popular" contentsFetcher={fetchPopularContents} showMediaType={true} />
+            <ContentList
+                title="Top Rated"
+                contentsFetcher={fetchTopRatedContents}
+                showMediaType={true}
+                category="top-rated"
+            />
+            <ContentList
+                title="Popular"
+                contentsFetcher={fetchPopularContents}
+                showMediaType={true}
+                category="popular"
+            />
         </section>
     );
 };

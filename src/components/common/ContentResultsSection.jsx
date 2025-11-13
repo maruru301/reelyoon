@@ -30,6 +30,12 @@ const ContentResultsSection = ({
         return () => window.removeEventListener('resize', updateBlockSize);
     }, []);
 
+    // 총 개수 및 페이지 수 표시용 계산
+    const total = totalResults?.[activeTab] ?? totalResults?.all ?? 0;
+    const formattedTotal = total >= 10000 ? '10,000+' : total.toLocaleString();
+
+    const formattedPages = totalPages >= 500 ? '500+' : totalPages;
+
     if (loading) return <ContentResultsSkeleton />;
 
     return (
@@ -41,8 +47,8 @@ const ContentResultsSection = ({
 
                     {totalResults && (
                         <div>
-                            총 {totalResults[activeTab] ?? totalResults.all}개의{' '}
-                            {activeTab === 'movie' ? '영화' : activeTab === 'tv' ? 'TV' : ''} 결과
+                            총 {formattedTotal}개의 {activeTab === 'movie' ? '영화' : activeTab === 'tv' ? 'TV' : ''}{' '}
+                            결과
                         </div>
                     )}
 
@@ -81,7 +87,7 @@ const ContentResultsSection = ({
                     <p className="empty-message">{'표시할 콘텐츠가 없습니다.'}</p>
                 ) : (
                     <>
-                        <div className="content-pagination-info">{`${currentPage}/${totalPages} 페이지`}</div>
+                        <div className="content-pagination-info">{`${currentPage}/${formattedPages} 페이지`}</div>
 
                         <div className="content-results-grid">
                             {contents.map((content) => (

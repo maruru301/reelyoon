@@ -21,7 +21,7 @@ const ContentCard = ({ content, mediaType }) => {
     // 카드 클릭 시 상세 페이지 이동
     const handleClick = () => {
         if (!type || !content.id) return;
-        navigate(`/${type}/${content.id}`);
+        navigate(`/detail/${type}/${content.id}`);
     };
 
     return (

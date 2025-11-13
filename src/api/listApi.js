@@ -5,7 +5,12 @@ export const fetchTopRatedContents = async (mediaType = 'movie', page = 1) => {
     const url = `${BASE_URL}/${mediaType}/top_rated?language=ko&page=${page}`;
     const data = await fetchFromApi(url);
 
-    return data.results;
+    return {
+        results: data.results ?? [],
+        currentPage: data.page ?? page,
+        totalPages: data.total_pages ?? 0,
+        totalResults: data.total_results ?? 0,
+    };
 };
 
 // Popular
@@ -13,7 +18,12 @@ export const fetchPopularContents = async (mediaType = 'movie', page = 1) => {
     const url = `${BASE_URL}/${mediaType}/popular?language=ko&page=${page}`;
     const data = await fetchFromApi(url);
 
-    return data.results;
+    return {
+        results: data.results ?? [],
+        currentPage: data.page ?? page,
+        totalPages: data.total_pages ?? 0,
+        totalResults: data.total_results ?? 0,
+    };
 };
 
 // Trending (day / week)
@@ -21,7 +31,12 @@ export const fetchTrendingContents = async (mediaType = 'movie', timeWindow = 'd
     const url = `${BASE_URL}/trending/${mediaType}/${timeWindow}?language=ko`;
     const data = await fetchFromApi(url);
 
-    return data.results;
+    return {
+        results: data.results ?? [],
+        currentPage: 1,
+        totalPages: 1,
+        totalResults: 20,
+    };
 };
 
 // discover - 장르별 콘텐츠

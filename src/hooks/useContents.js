@@ -16,7 +16,7 @@ const useContents = (title, contentsFetcher) => {
                     title === 'Trending'
                         ? await contentsFetcher(mediaType, timeWindow)
                         : await contentsFetcher(mediaType);
-                setContents(data);
+                setContents(data.results);
             } catch (err) {
                 console.error(`${title} 영화 데이터 불러오기 실패`, err);
             } finally {

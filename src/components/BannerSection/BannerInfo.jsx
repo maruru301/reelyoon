@@ -32,7 +32,7 @@ const BannerInfo = ({ movie, openTrailer }) => {
 
             <div className="button-section">
                 <TrailerButton trailerKey={movie.trailerKey} onClick={openTrailer} />
-                <button className="common-btn" onClick={() => navigate(`/movie/${movie.id}`)}>
+                <button className="common-btn" onClick={() => navigate(`/detail/movie/${movie.id}`)}>
                     <img src={Info} alt="정보 버튼" />
                     <span>더보기</span>
                 </button>
