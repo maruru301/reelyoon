@@ -3,14 +3,21 @@ import ContentSwiper from './ContentSwiper';
 import useContents from '../../../hooks/useContents';
 import useSwiperNavigation from '../../../hooks/useSwiperNavigation';
 
-const ContentList = ({ title, contentsFetcher, showMediaType = false, showTimeWindow = false, category }) => {
+const ContentList = ({
+    title,
+    contentsFetcher,
+    showMediaType = false,
+    showTimeWindow = false,
+    category,
+    initialMediaType = 'movie',
+}) => {
     const { swiperRef, prevRef, nextRef } = useSwiperNavigation();
 
     const {
         data: { contents, SKELETON_COUNT },
         state: { loading, mediaType, timeWindow },
         actions: { setMediaType, setTimeWindow },
-    } = useContents(title, contentsFetcher);
+    } = useContents(title, contentsFetcher, initialMediaType);
 
     return (
         <div className="content-list">

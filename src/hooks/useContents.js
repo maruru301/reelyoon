@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react';
 
-const useContents = (title, contentsFetcher) => {
+const useContents = (title, contentsFetcher, initialMediaType = 'movie') => {
     const [contents, setContents] = useState([]);
-    const [mediaType, setMediaType] = useState('movie'); // 'movie' or 'tv'
+    const [mediaType, setMediaType] = useState(initialMediaType); // 'movie' or 'tv'
     const [timeWindow, setTimeWindow] = useState('day'); // 'day' or 'week'
     const [loading, setLoading] = useState(true);
 
     const SKELETON_COUNT = 6; // 로딩 상태에서 표시할 스켈레톤 카드 개수
+
+    useEffect(() => {
+        setMediaType(initialMediaType);
+    }, [initialMediaType]);
 
     useEffect(() => {
         const fetchData = async () => {
