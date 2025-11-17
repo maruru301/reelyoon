@@ -1,0 +1,31 @@
+.content-grid-section {
+    padding: 4rem;
+}
+
+.content-grid-section h2 {
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1.5rem;
+}
+
+@media (min-width: 64rem) {
+    .content-grid-section {
+        padding: 4rem 6rem;
+    }
+
+    .content-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 2rem;
+    }
+}
+
+@media (min-width: 90rem) {
+    .content-grid-section {
+        padding: 4rem 10rem;
+    }
+}

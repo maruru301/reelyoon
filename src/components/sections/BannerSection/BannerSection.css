@@ -1,0 +1,139 @@
+/* BannerSection, BannerSlide, BannerInfo */
+
+/* BannerSection */
+.banner-section .banner-swiper {
+    --swiper-pagination-bullet-size: 12px;
+    --swiper-pagination-color: rgb(255, 255, 255);
+    --swiper-pagination-bullet-inactive-color: var(--white-30);
+}
+.banner-section .swiper-pagination-bullet-active {
+    width: 20px;
+    border-radius: 0.5rem;
+}
+
+.banner-swiper-slide {
+    position: relative;
+}
+
+/* BannerSlide */
+.banner-img-container {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.banner-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* BannerInfo */
+.banner-info {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    padding-bottom: 5rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.movie-logo {
+    width: 18rem;
+    object-fit: contain;
+    margin-bottom: 1rem;
+}
+
+.banner-info h2 {
+    font-size: 2rem;
+    font-weight: 900;
+    text-shadow: 2px 2px 4px rgba(var(--color-primary-start-rgb), 1);
+}
+
+.banner-info .movie-stats {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.banner-info p {
+    width: 100%;
+    line-height: 1.6rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.banner-info .button-section {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+@media (min-width: 40rem) {
+    .banner-img-container {
+        aspect-ratio: 4 / 5;
+    }
+
+    .banner-info {
+        padding: 3rem;
+        padding-bottom: 6rem;
+    }
+
+    .banner-info p {
+        width: 80%;
+    }
+
+    .banner-info h2 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (min-width: 48rem) {
+    .banner-img-container {
+        aspect-ratio: 1;
+    }
+
+    .banner-info {
+        padding: 6rem;
+        padding-bottom: 6rem;
+    }
+
+    .banner-info p {
+        width: 70%;
+    }
+}
+
+@media (min-width: 64rem) {
+    .banner-img-container {
+        aspect-ratio: 14 / 9;
+    }
+}
+
+@media (min-width: 90rem) {
+    .banner-img-container {
+        aspect-ratio: 16 / 9;
+    }
+
+    .banner-info .movie-logo {
+        width: 24rem;
+    }
+
+    .banner-info {
+        padding: 10rem;
+        padding-bottom: 6rem;
+    }
+
+    .banner-info h2 {
+        font-size: 2.8rem;
+        text-shadow: 2.5px 2.5px 4px rgba(var(--color-primary-start-rgb), 1);
+    }
+}

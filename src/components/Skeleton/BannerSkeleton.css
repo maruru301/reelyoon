@@ -1,0 +1,68 @@
+.banner-skeleton {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    aspect-ratio: 3 / 5;
+}
+
+.banner-info-skeleton .title-skeleton {
+    height: 2rem;
+}
+
+.banner-info-skeleton .overview-skeleton {
+    width: 100%;
+}
+
+.banner-info-skeleton .btn-skeleton {
+    margin-top: 0.5rem;
+}
+
+.banner-skeleton .react-loading-skeleton {
+    --base-color: var(--skeleton-bg-base);
+    --highlight-color: var(--skeleton-bg-highlight);
+}
+
+.banner-info-skeleton .react-loading-skeleton {
+    --base-color: var(--skeleton-content-base);
+    --highlight-color: var(--skeleton-content-highlight);
+}
+
+@media (min-width: 40rem) {
+    .banner-skeleton {
+        aspect-ratio: 4 / 5;
+    }
+
+    .banner-info-skeleton .overview-skeleton {
+        width: 80%;
+    }
+
+    .banner-info-skeleton .title-skeleton {
+        height: 2.5rem;
+    }
+}
+
+@media (min-width: 48rem) {
+    .banner-skeleton {
+        aspect-ratio: 1;
+    }
+
+    .banner-info-skeleton .overview-skeleton {
+        width: 70%;
+    }
+}
+
+@media (min-width: 64rem) {
+    .banner-skeleton {
+        aspect-ratio: 14 / 9;
+    }
+
+    .banner-info-skeleton .title-skeleton {
+        height: 3rem;
+    }
+}
+
+@media (min-width: 90rem) {
+    .banner-skeleton {
+        aspect-ratio: 16 / 9;
+    }
+}

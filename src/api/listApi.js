@@ -1,0 +1,62 @@
+import { BASE_URL, fetchFromApi } from './tmdbCommon.js';
+
+// Top Rated
+export const fetchTopRatedContents = async (mediaType = 'movie', page = 1) => {
+    const url = `${BASE_URL}/${mediaType}/top_rated?language=ko&page=${page}`;
+    const data = await fetchFromApi(url);
+
+    return {
+        results: data.results ?? [],
+        currentPage: data.page ?? page,
+        totalPages: data.total_pages ?? 0,
+        totalResults: data.total_results ?? 0,
+    };
+};
+
+// Popular
+export const fetchPopularContents = async (mediaType = 'movie', page = 1) => {
+    const url = `${BASE_URL}/${mediaType}/popular?language=ko&page=${page}`;
+    const data = await fetchFromApi(url);
+
+    return {
+        results: data.results ?? [],
+        currentPage: data.page ?? page,
+        totalPages: data.total_pages ?? 0,
+        totalResults: data.total_results ?? 0,
+    };
+};
+
+// Trending (day / week)
+export const fetchTrendingContents = async (mediaType = 'movie', timeWindow = 'day') => {
+    const url = `${BASE_URL}/trending/${mediaType}/${timeWindow}?language=ko`;
+    const data = await fetchFromApi(url);
+
+    return {
+        results: data.results ?? [],
+        currentPage: 1,
+        totalPages: 1,
+        totalResults: 20,
+    };
+};
+
+// discover - 장르별 콘텐츠
+export const fetchContentsByGenre = async (mediaType = 'movie', genreId, page = 1, sortBy = 'popularity.desc') => {
+    if (!genreId) {
+        return { results: [], page: 0, total_pages: 0, total_results: 0 };
+    }
+
+    const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD 형식
+
+    const sortParam = mediaType === 'tv' ? sortBy.replace('release_date', 'first_air_date') : sortBy;
+    const dateParam = mediaType === 'movie' ? `primary_release_date.lte=${today}` : `first_air_date.lte=${today}`;
+
+    const url = `${BASE_URL}/discover/${mediaType}?language=ko&with_genres=${genreId}&page=${page}&sort_by=${sortParam}&${dateParam}`;
+    const data = await fetchFromApi(url);
+
+    return {
+        results: data.results ?? [],
+        currentPage: data.page ?? page,
+        totalPages: data.total_pages ?? 0,
+        totalResults: data.total_results ?? 0,
+    };
+};
