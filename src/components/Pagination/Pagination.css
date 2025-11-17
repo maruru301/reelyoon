@@ -35,3 +35,18 @@
 .pagination-next::after {
     content: ' >';
 }
+
+.pagination-first {
+    margin-right: 10px;
+}
+
+.pagination-last {
+    margin-left: 10px;
+}
+
+.pagination-ellipsis {
+    display: inline-block;
+    color: #eee;
+    font-weight: bold;
+    user-select: none;
+}
