@@ -18,15 +18,14 @@ const useBannerMovies = () => {
                     if (!trailers.length) return null;
                     const trailerKey = trailers[0].key;
 
-                    // 상세 정보 가져오기
-                    const details = await fetchMovieDetails(movie.id);
-
                     // 로고 이미지 가져오기
                     const images = await fetchMovieImages(movie.id);
                     const logoUrl = images.logos?.[0]?.file_path || '';
-
                     // 로고가 없으면 제외
                     if (!logoUrl) return null;
+
+                    // 상세 정보 가져오기
+                    const details = await fetchMovieDetails(movie.id);
 
                     return { ...movie, ...details, trailerKey, logoUrl };
                 });

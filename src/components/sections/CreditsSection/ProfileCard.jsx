@@ -1,6 +1,6 @@
 import './ProfileCard.css';
 
-import ProfileCardSkeleton from '../Skeleton/ProfileCardSkeleton';
+import ProfileCardSkeleton from '../../Skeleton/ProfileCardSkeleton';
 import { useState } from 'react';
 
 const ProfileCard = ({ profile_path, name, original_name, role }) => {

@@ -27,6 +27,17 @@ const Pagination = ({ currentPage, totalPages, onPageChange, blockSize = 5 }) =>
                 </button>
             )}
 
+            {/* 맨 첫 페이지 */}
+            {hasPrevBlock && startPage > 1 && (
+                <div>
+                    <button className="pagination-first" onClick={() => onPageChange(1)}>
+                        1
+                    </button>
+
+                    <span className="pagination-ellipsis">…</span>
+                </div>
+            )}
+
             {/* 페이지 번호 */}
             {pages.map((page) => {
                 return (
@@ -39,6 +50,17 @@ const Pagination = ({ currentPage, totalPages, onPageChange, blockSize = 5 }) =>
                     </button>
                 );
             })}
+
+            {/* 맨 끝 페이지 */}
+            {hasNextBlock && endPage < totalPages && (
+                <div>
+                    <span className="pagination-ellipsis">…</span>
+
+                    <button className="pagination-last" onClick={() => onPageChange(totalPages)}>
+                        {totalPages}
+                    </button>
+                </div>
+            )}
 
             {/* 다음 버튼 - 이동 가능한 경우에만 표시 */}
             {hasNextBlock && (

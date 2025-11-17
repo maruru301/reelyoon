@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import ContentGridSection from '../common/ContentGridSection';
-import { fetchMovieCollection } from '../../api/detailsApi';
+import ContentGridSection from '../../common/ContentGridSection';
+import { fetchMovieCollection } from '../../../api/detailsApi';
 
 const CollectionSection = ({ id }) => {
     const [collection, setCollection] = useState(null);

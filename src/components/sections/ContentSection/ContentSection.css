@@ -1,6 +1,7 @@
 /* ContentList */
 .content-list {
     margin: 1rem;
+    padding-top: 1.5rem;
 }
 
 .content-list-header {

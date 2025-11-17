@@ -1,6 +1,6 @@
 import './ContentSection.css';
 
-import { fetchPopularContents, fetchTopRatedContents, fetchTrendingContents } from '../../api/listApi';
+import { fetchPopularContents, fetchTopRatedContents, fetchTrendingContents } from '../../../api/listApi';
 
 import ContentList from './ContentList';
 

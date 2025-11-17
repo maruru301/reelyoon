@@ -1,12 +1,12 @@
 import './ContentInfoSection.css';
 
-import Clock from '../../assets/clock.svg';
-import MetaItem from '../common/MetaItem';
-import Star from '../../assets/star.svg';
-import TrailerButton from '../Trailer/TrailerButton';
-import { formatContentData } from '../../utils/formatContentData';
-import { getDDay } from '../../utils/getDDay';
-import { slugify } from '../../utils/slugify';
+import Clock from '../../../assets/clock.svg';
+import MetaItem from '../../common/MetaItem';
+import Star from '../../../assets/star.svg';
+import TrailerButton from '../../Trailer/TrailerButton';
+import { formatContentData } from '../../../utils/formatContentData';
+import { getDDay } from '../../../utils/getDDay';
+import { slugify } from '../../../utils/slugify';
 import { useNavigate } from 'react-router-dom';
 
 const ContentInfoSection = ({ details, openTrailer, type }) => {

@@ -1,5 +1,5 @@
 import BannerInfo from './BannerInfo';
-import { formatContentData } from '../../utils/formatContentData';
+import { formatContentData } from '../../../utils/formatContentData';
 
 const BannerSlide = ({ movie, openTrailer }) => {
     const { displayTitle, backdropUrl } = formatContentData(movie);

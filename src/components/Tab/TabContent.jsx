@@ -1,6 +1,6 @@
-import CollectionSection from '../CollectionSection/CollectionSection';
-import CreditsSection from '../CreditsSection/CreditsSection';
-import RecommendedSection from '../RecommendedSection/RecommendedSection';
+import CollectionSection from '../sections/CollectionSection/CollectionSection';
+import CreditsSection from '../sections/CreditsSection/CreditsSection';
+import RecommendedSection from '../sections/RecommendedSection/RecommendedSection';
 
 const TabContent = ({ activeTab, details, id, type }) => {
     switch (activeTab) {
