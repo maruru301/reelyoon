@@ -1,7 +1,7 @@
 import ContentListHeader from './ContentListHeader';
 import ContentSwiper from './ContentSwiper';
-import useContents from '../../hooks/useContents';
-import useSwiperNavigation from '../../hooks/useSwiperNavigation';
+import useContents from '../../../hooks/useContents';
+import useSwiperNavigation from '../../../hooks/useSwiperNavigation';
 
 const ContentList = ({ title, contentsFetcher, showMediaType = false, showTimeWindow = false, category }) => {
     const { swiperRef, prevRef, nextRef } = useSwiperNavigation();

@@ -2,7 +2,7 @@ import { fetchMovieDetails, fetchMovieVideos, fetchTvDetails, fetchTvVideos } fr
 import { useEffect, useState } from 'react';
 
 import ContentDetailSkeleton from '../components/Skeleton/ContentDetailSkeleton';
-import ContentInfoSection from '../components/ContentInfoSection/ContentInfoSection';
+import ContentInfoSection from '../components/sections/ContentInfoSection/ContentInfoSection';
 import TabContent from '../components/Tab/TabContent';
 import Tabs from '../components/Tab/Tabs';
 import TrailerModal from '../components/Trailer/TrailerModal';

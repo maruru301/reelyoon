@@ -1,7 +1,7 @@
-import { fetchRecommendedMovie, fetchRecommendedTv } from '../../api/detailsApi';
+import { fetchRecommendedMovie, fetchRecommendedTv } from '../../../api/detailsApi';
 import { useEffect, useState } from 'react';
 
-import ContentGridSection from '../common/ContentGridSection';
+import ContentGridSection from '../../common/ContentGridSection';
 
 const RecommendedSection = ({ id, type }) => {
     const [recommendedContents, setRecommendedContents] = useState([]);

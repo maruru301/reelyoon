@@ -1,9 +1,9 @@
-import Clock from '../../assets/clock.svg';
-import Info from '../../assets/info.svg';
-import MetaItem from '../common/MetaItem';
-import Star from '../../assets/star.svg';
-import TrailerButton from '../Trailer/TrailerButton';
-import { formatContentData } from '../../utils/formatContentData';
+import Clock from '../../../assets/clock.svg';
+import Info from '../../../assets/info.svg';
+import MetaItem from '../../common/MetaItem';
+import Star from '../../../assets/star.svg';
+import TrailerButton from '../../Trailer/TrailerButton';
+import { formatContentData } from '../../../utils/formatContentData';
 import { useNavigate } from 'react-router-dom';
 
 const BannerInfo = ({ movie, openTrailer }) => {

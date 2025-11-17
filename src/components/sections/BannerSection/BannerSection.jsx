@@ -1,11 +1,11 @@
 import './BannerSection.css';
 
-import BannerSkeleton from '../Skeleton/BannerSkeleton';
+import BannerSkeleton from '../../Skeleton/BannerSkeleton';
 import BannerSwiper from './BannerSwiper';
-import TrailerModal from '../Trailer/TrailerModal';
-import useBannerMovies from '../../hooks/useBannerMovies';
+import TrailerModal from '../../Trailer/TrailerModal';
+import useBannerMovies from '../../../hooks/useBannerMovies';
 import { useRef } from 'react';
-import useTrailer from '../../hooks/useTrailer';
+import useTrailer from '../../../hooks/useTrailer';
 
 const BannerSection = () => {
     const swiperRef = useRef(null);
